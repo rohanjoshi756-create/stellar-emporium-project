@@ -77,14 +77,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Nakshatra Store — Sacred Rudraksha, Mala & Yantras" },
+      { name: "description", content: "Original Nepali Rudraksha, gemstone bracelets, malas and yantras — lab tested, puja energised, delivered across India." },
+      { property: "og:title", content: "Nakshatra Store — Sacred Rudraksha, Mala & Yantras" },
+      { property: "og:description", content: "Lab-certified, puja-energised spiritual products. Honestly sourced from Nepal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
