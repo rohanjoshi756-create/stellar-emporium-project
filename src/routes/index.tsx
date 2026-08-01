@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import logoAsset from "@/assets/nakshatra-logo.jpg.asset.json";
 import heroImg from "@/assets/hero-zodiac.jpg";
 import heroRud from "@/assets/hero-rudraksha.jpg";
 import catBracelets from "@/assets/cat-bracelets.jpg";
