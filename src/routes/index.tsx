@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import logoAsset from "@/assets/nakshatra-logo.jpg.asset.json";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
+import { bestSellers, zodiacNew, rudraksha, womens, karungali, domeTrees, collections, type P } from "@/data/catalog";
 import heroImg from "@/assets/hero-zodiac.jpg";
 import heroRud from "@/assets/hero-rudraksha.jpg";
 import catBracelets from "@/assets/cat-bracelets.jpg";
@@ -36,38 +37,6 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-type P = { name: string; price: string; old: string; reviews: number; img: string; tag?: string };
-
-const announcements = [
-  "Monsoon Sale — Extra 26% OFF 🤩",
-  "💖 Explore Women's Jewellery To Attract Wealth, Love & Luck ✨",
-  "Step into Harmony — Discover Our Vastu Collection",
-  "Checkout our exclusive Siddh 1–14 Mukhi Rudraksha Mala 🙏",
-  "Check out our newly launched pyramid range ✨💎",
-  "✨ Discover our powerful Karungali collection ✨",
-  "Get 10x Powerful Bracelets Energised on Purnima",
-];
-
-const crystals = [
-  { name: "Pyrite", img: cPyrite },
-  { name: "Garnet", img: cRose },
-  { name: "Citrine", img: cCitrine },
-  { name: "Tiger Eye", img: cTiger },
-  { name: "Rose Quartz", img: cRose },
-  { name: "Lapis Lazuli", img: cJade },
-  { name: "Amethyst", img: cAmethyst },
-  { name: "Selenite", img: catGems },
-];
-
-const bestSellers: P[] = [
-  { name: "Metal Dhan Yog Bracelet for Women", price: "₹899", old: "₹1,400", reviews: 1654, img: catBracelets },
-  { name: "Dhan Yog Bracelet (Lab Certified)", price: "₹699", old: "₹1,999", reviews: 1623, img: cPyrite },
-  { name: "Gemini (मिथुन राशि) Zodiac Green Aventurine & Milky Quartz Bracelet", price: "₹899", old: "₹2,800", reviews: 1980, img: cJade },
-  { name: "Metal Dhan Yog Bracelet - Silver", price: "₹999", old: "₹1,700", reviews: 741, img: catBracelets },
-  { name: "7 Horses on Raw Pyrite Frame", price: "₹999", old: "₹2,900", reviews: 809, img: catYantra },
-  { name: "Raw Pyrite Anklet", price: "₹899", old: "₹1,400", reviews: 1531, img: cPyrite },
-];
-
 const purposes = [
   { name: "Wealth", img: cPyrite },
   { name: "Love", img: cRose },
@@ -77,63 +46,6 @@ const purposes = [
   { name: "Peace", img: cAmethyst },
   { name: "Luck", img: cJade },
   { name: "Gifting", img: catBracelets },
-];
-
-const planets = [
-  { name: "Sun (Surya)", img: cCitrine },
-  { name: "Moon (Chandra)", img: catGems },
-  { name: "Mangal/Manglik", img: cRose },
-  { name: "Mercury (Budh)", img: cJade },
-  { name: "Jupiter (Guru)", img: cCitrine },
-  { name: "Venus (Shukra)", img: cRose },
-  { name: "Shani", img: cBlack },
-  { name: "Rahu", img: cTiger },
-  { name: "Ketu", img: cAmethyst },
-];
-
-const zodiacNew: P[] = [
-  { name: "Libra Zodiac Metal Bracelet", price: "₹999", old: "₹1,700", reviews: 103, img: catBracelets },
-  { name: "Taurus Zodiac Metal Bracelet", price: "₹999", old: "₹1,700", reviews: 151, img: catBracelets },
-  { name: "Aries (मेष राशि) Zodiac Red Jasper & Tiger Eye Bracelet", price: "₹899", old: "₹2,800", reviews: 210, img: cTiger, tag: "Selling Fast" },
-  { name: "Pisces (मीन राशि) Zodiac Citrine & Tiger Eye Bracelet", price: "₹899", old: "₹2,800", reviews: 188, img: cCitrine },
-  { name: "Taurus (वृषभ राशि) Zodiac Sunstone & Carnelian Bracelet", price: "₹899", old: "₹2,800", reviews: 174, img: cCitrine },
-  { name: "Cancer (कर्क राशि) Zodiac Moonstone Bracelet", price: "₹899", old: "₹2,800", reviews: 141, img: catGems },
-];
-
-const rudraksha: P[] = [
-  { name: "7 Mukhi Rudraksha Bracelet", price: "₹799", old: "₹2,499", reviews: 629, img: heroRud },
-  { name: "Shiv Rudraksha Mala with Om Shiva Trishul Pendant", price: "₹999", old: "₹1,700", reviews: 147, img: catMala },
-  { name: "Nepal Origin 7 Mukhi Rudraksha - 17mm to 22mm", price: "₹799", old: "₹1,700", reviews: 332, img: heroRud },
-  { name: "Divya Shankh Rudraksha Mala", price: "₹999", old: "₹1,700", reviews: 139, img: catMala },
-  { name: "Surya Shakti Rudraksha Mala", price: "₹999", old: "₹1,700", reviews: 144, img: catMala },
-  { name: "5 Mukhi Rudraksha Bracelet", price: "₹499", old: "₹1,999", reviews: 512, img: heroRud },
-];
-
-const womens: P[] = [
-  { name: "Metal Dhan Yog Bracelet for Women", price: "₹899", old: "₹1,400", reviews: 1654, img: catBracelets },
-  { name: "Pyrite Sun Ring", price: "₹699", old: "₹1,300", reviews: 1214, img: cPyrite },
-  { name: "Dhan Yog Necklace", price: "₹999", old: "₹1,700", reviews: 1001, img: catGems },
-  { name: "Pyrite Tortoise Pendant", price: "₹799", old: "₹1,400", reviews: 100, img: cPyrite },
-  { name: "Love & Money Metal Bracelet for Women", price: "₹999", old: "₹1,700", reviews: 1261, img: cRose },
-  { name: "Raw Pyrite Anklet", price: "₹899", old: "₹1,400", reviews: 1531, img: cPyrite },
-];
-
-const karungali: P[] = [
-  { name: "Divya Raksha Rudraksha & Karungali Mala with Gold Capping", price: "₹799", old: "₹1,300", reviews: 113, img: cBlack },
-  { name: "Karungali Malai 8mm – 108+1 Authentic Ebony Wood Beads (Govt. Certified)", price: "₹799", old: "₹1,600", reviews: 176, img: cBlack },
-  { name: "Karungali Murugan Raksha Mala", price: "₹999", old: "₹1,700", reviews: 188, img: catMala },
-  { name: "Karungali Malai with Copper Wire – 8mm (54+1 Beads)", price: "₹999", old: "₹2,000", reviews: 112, img: cBlack },
-  { name: "Silver Capped Karungali Malai – with Free Karungali Bracelet", price: "₹899", old: "₹2,800", reviews: 117, img: cBlack },
-  { name: "Metal Karungali Bracelet - Silver", price: "₹899", old: "₹1,700", reviews: 205, img: catBracelets },
-];
-
-const domeTrees: P[] = [
-  { name: "Pyrite Dome Tree", price: "₹999", old: "₹2,499", reviews: 103, img: cPyrite },
-  { name: "7 Chakra Dome Tree", price: "₹999", old: "₹2,499", reviews: 1044, img: catGems },
-  { name: "Evil Eye Dome Tree", price: "₹999", old: "₹2,499", reviews: 1017, img: cJade },
-  { name: "Citrine Dome Tree", price: "₹999", old: "₹2,499", reviews: 1180, img: cCitrine },
-  { name: "Love Attraction Dome Tree", price: "₹999", old: "₹2,499", reviews: 1119, img: cRose },
-  { name: "Amethyst Dome Tree", price: "₹999", old: "₹2,499", reviews: 1214, img: cAmethyst },
 ];
 
 const ourProducts = [
@@ -149,14 +61,6 @@ const ourProducts = [
   { name: "Black Obsidian Pyramid with Free Raw Square Selenite Plate", price: 999, old: 2500, img: cBlack },
   { name: "Rose Quartz Pyramid with Free Raw Square Selenite Plate", price: 999, old: 3099, img: cRose },
   { name: "Citrine Pyramid with Free Raw Square Selenite Plate", price: 999, old: 2500, img: cCitrine },
-];
-
-const banners = [
-  { title: "Rinmukteshwar Siddhi", sub: "Energised in Kashi by Vedic priests", img: heroRud },
-  { title: "Karungali Collection", sub: "Original Govt. certified ebony wood", img: cBlack },
-  { title: "Vastu Collection", sub: "Harmony for home & office", img: catYantra },
-  { title: "Crystal Dome Trees", sub: "Wealth, luck & positivity", img: cAmethyst },
-  { title: "Gifting Collection", sub: "Sacred gifts for every occasion", img: catBracelets },
 ];
 
 const whyUs = [
@@ -183,75 +87,6 @@ const faqs = [
   { q: "Q6: What are the benefits of a Tiger Eye bracelet?", a: "Tiger Eye bracelet boosts self-confidence, courage, and mental clarity. It protects the wearer and attracts success in career and business." },
   { q: "Q7: What are the benefits of a Lapis Lazuli bracelet?", a: "Lapis Lazuli enhances wisdom, communication & intellectual ability. It stimulates the Third Eye Chakra and is ideal for students & professionals." },
 ];
-
-const footerPurpose = [
-  "Karungali Mala For Protection", "Pyrite Stone for Money", "Raw Pyrite Bracelet For Success",
-  "Raw Pyrite Anklet For Wealth", "7 Mukhi Rudraksha For Shani Dosh", "5 Mukhi Rudraksha For Peace",
-  "Tiger Eye Bracelet For Confidence", "Rose Quartz Bracelet For Love", "Zodiac Bracelet For Your Rashi",
-  "Vastu Products For Home Harmony", "Money Magnet Bracelet For Money", "Rudraksha Bracelet For Men",
-];
-const footerCollections = [
-  "Best Sellers", "Karungali", "Anklet For Women", "Money", "Love", "Zodiac", "Vastu Tortoise",
-  "Rudraksha", "Crystal Dome Trees", "Murti", "Pyrite", "Selenite", "Frames", "Gemstones",
-];
-const footerBenefits = [
-  "Karungali Mala Benefits", "Pyrite Stone Benefits", "Dhan Yog Bracelet Benefits",
-  "Rudraksha Benefits", "Tiger Eye Benefits", "Rose Quartz Benefits", "Amethyst Benefits",
-];
-
-function ProductCard({ p }: { p: P }) {
-  return (
-    <div className="group min-w-[220px] w-[220px] md:min-w-0 md:w-auto bg-card rounded-2xl border border-border overflow-hidden hover:shadow-[var(--shadow-warm)] transition">
-      <div className="relative aspect-square overflow-hidden bg-muted">
-        <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        {p.tag && (
-          <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider bg-[color:var(--maroon)] text-primary-foreground px-2 py-1 rounded-full">{p.tag}</span>
-        )}
-      </div>
-      <div className="p-3">
-        <div className="text-[13px] font-medium line-clamp-2 min-h-[2.5rem]">{p.name}</div>
-        <div className="mt-1 text-[11px] text-muted-foreground">★★★★★ <span className="opacity-80">{p.reviews} reviews</span></div>
-        <div className="flex items-center gap-2 mt-1">
-          <span className="font-serif text-lg text-[color:var(--maroon)]">{p.price}</span>
-          <span className="text-xs text-muted-foreground line-through">{p.old}</span>
-        </div>
-        <button className="mt-3 w-full text-xs rounded-full border border-foreground py-2 hover:bg-foreground hover:text-background transition">Add</button>
-      </div>
-    </div>
-  );
-}
-
-function ProductRow({ title, items }: { title: string; items: P[] }) {
-  return (
-    <section className="mx-auto max-w-[1400px] px-4 py-12">
-      <h2 className="font-serif text-3xl md:text-4xl text-center mb-8">{title}</h2>
-      <div className="flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 lg:grid-cols-6 md:overflow-visible">
-        {items.map((p) => <ProductCard key={p.name} p={p} />)}
-      </div>
-      <div className="text-center mt-8">
-        <a href="#" className="inline-block rounded-full border border-foreground px-8 py-2.5 text-sm hover:bg-foreground hover:text-background transition">View All</a>
-      </div>
-    </section>
-  );
-}
-
-function TileGrid({ title, items, cols }: { title: string; items: { name: string; img: string }[]; cols: string }) {
-  return (
-    <section className="mx-auto max-w-[1400px] px-4 py-12">
-      <h2 className="font-serif text-3xl md:text-4xl text-center mb-8">{title}</h2>
-      <div className={`grid grid-cols-3 ${cols} gap-4`}>
-        {items.map((c) => (
-          <a key={c.name} href="#" className="group flex flex-col items-center gap-3">
-            <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
-              <img src={c.img} alt={c.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-            </div>
-            <div className="text-xs md:text-sm font-medium text-center">{c.name}</div>
-          </a>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function Index() {
   return (

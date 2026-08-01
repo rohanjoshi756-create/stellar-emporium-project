@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { collections } from "@/data/catalog";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 
-export const Route = createFileRoute("/collections")({
+export const Route = createFileRoute("/collections/")({
   component: CollectionsIndex,
   head: () => ({
     meta: [
