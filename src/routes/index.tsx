@@ -271,7 +271,7 @@ function Index() {
       <header className="bg-background sticky top-0 z-40 border-b border-border">
         <div className="mx-auto max-w-[1400px] px-4 py-3 flex items-center gap-6">
           <a href="/" className="flex items-center gap-2 shrink-0">
-            <span className="h-10 w-10 rounded-full grid place-items-center bg-[image:var(--gradient-gold)] text-primary-foreground font-serif text-lg shadow-[var(--shadow-soft)]">ॐ</span>
+            <img src={logoAsset.url} alt="Nakshatra Store logo" width={40} height={40} className="h-10 w-10 rounded-full object-cover shadow-[var(--shadow-soft)]" />
             <span className="font-serif text-2xl tracking-tight">Nakshatra</span>
           </a>
           <nav className="hidden lg:flex flex-1 items-center justify-center gap-6 text-[13px]">
@@ -481,7 +481,7 @@ function Index() {
         <div className="mx-auto max-w-[1400px] px-4 py-14 grid md:grid-cols-4 gap-10 text-sm">
           <div>
             <div className="flex items-center gap-2">
-              <span className="h-9 w-9 rounded-full grid place-items-center bg-[image:var(--gradient-gold)] text-primary-foreground font-serif">ॐ</span>
+              <img src={logoAsset.url} alt="Nakshatra Store logo" width={36} height={36} loading="lazy" className="h-9 w-9 rounded-full object-cover" />
               <span className="font-serif text-xl">Nakshatra</span>
             </div>
             <p className="mt-3 text-muted-foreground text-[13px] leading-relaxed">Nakshatra Store is India's most trusted destination for original spiritual and healing products — Karungali Mala, Pyrite, Rudraksha, Zodiac bracelets, Yantras and Vastu products.</p>
