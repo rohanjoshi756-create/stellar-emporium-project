@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { collections, collectionBySlug } from "@/data/catalog";
+import { collections, collectionBySlug, type P } from "@/data/catalog";
 import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/collections/$slug")({
@@ -81,7 +81,7 @@ function CollectionPage() {
           <div className="text-xs text-muted-foreground">Free shipping · 7-day returns · Energised before dispatch</div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
-          {collection.products.map((p) => <ProductCard key={p.name} p={p} />)}
+          {collection.products.map((p: P) => <ProductCard key={p.name} p={p} />)}
         </div>
       </section>
 
