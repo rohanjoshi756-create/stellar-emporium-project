@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import logoAsset from "@/assets/nakshatra-logo.jpg.asset.json";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
+import { bestSellers, zodiacNew, rudraksha, womens, karungali, domeTrees, collections, type P } from "@/data/catalog";
 import heroImg from "@/assets/hero-zodiac.jpg";
 import heroRud from "@/assets/hero-rudraksha.jpg";
 import catBracelets from "@/assets/cat-bracelets.jpg";
@@ -36,104 +37,15 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-type P = { name: string; price: string; old: string; reviews: number; img: string; tag?: string };
-
-const announcements = [
-  "Monsoon Sale — Extra 26% OFF 🤩",
-  "💖 Explore Women's Jewellery To Attract Wealth, Love & Luck ✨",
-  "Step into Harmony — Discover Our Vastu Collection",
-  "Checkout our exclusive Siddh 1–14 Mukhi Rudraksha Mala 🙏",
-  "Check out our newly launched pyramid range ✨💎",
-  "✨ Discover our powerful Karungali collection ✨",
-  "Get 10x Powerful Bracelets Energised on Purnima",
-];
-
-const crystals = [
-  { name: "Pyrite", img: cPyrite },
-  { name: "Garnet", img: cRose },
-  { name: "Citrine", img: cCitrine },
-  { name: "Tiger Eye", img: cTiger },
-  { name: "Rose Quartz", img: cRose },
-  { name: "Lapis Lazuli", img: cJade },
-  { name: "Amethyst", img: cAmethyst },
-  { name: "Selenite", img: catGems },
-];
-
-const bestSellers: P[] = [
-  { name: "Metal Dhan Yog Bracelet for Women", price: "₹899", old: "₹1,400", reviews: 1654, img: catBracelets },
-  { name: "Dhan Yog Bracelet (Lab Certified)", price: "₹699", old: "₹1,999", reviews: 1623, img: cPyrite },
-  { name: "Gemini (मिथुन राशि) Zodiac Green Aventurine & Milky Quartz Bracelet", price: "₹899", old: "₹2,800", reviews: 1980, img: cJade },
-  { name: "Metal Dhan Yog Bracelet - Silver", price: "₹999", old: "₹1,700", reviews: 741, img: catBracelets },
-  { name: "7 Horses on Raw Pyrite Frame", price: "₹999", old: "₹2,900", reviews: 809, img: catYantra },
-  { name: "Raw Pyrite Anklet", price: "₹899", old: "₹1,400", reviews: 1531, img: cPyrite },
-];
-
 const purposes = [
-  { name: "Wealth", img: cPyrite },
-  { name: "Love", img: cRose },
-  { name: "Protection", img: cBlack },
-  { name: "Shop by Rashi", img: cTiger },
-  { name: "Courage", img: cCitrine },
-  { name: "Peace", img: cAmethyst },
-  { name: "Luck", img: cJade },
-  { name: "Gifting", img: catBracelets },
-];
-
-const planets = [
-  { name: "Sun (Surya)", img: cCitrine },
-  { name: "Moon (Chandra)", img: catGems },
-  { name: "Mangal/Manglik", img: cRose },
-  { name: "Mercury (Budh)", img: cJade },
-  { name: "Jupiter (Guru)", img: cCitrine },
-  { name: "Venus (Shukra)", img: cRose },
-  { name: "Shani", img: cBlack },
-  { name: "Rahu", img: cTiger },
-  { name: "Ketu", img: cAmethyst },
-];
-
-const zodiacNew: P[] = [
-  { name: "Libra Zodiac Metal Bracelet", price: "₹999", old: "₹1,700", reviews: 103, img: catBracelets },
-  { name: "Taurus Zodiac Metal Bracelet", price: "₹999", old: "₹1,700", reviews: 151, img: catBracelets },
-  { name: "Aries (मेष राशि) Zodiac Red Jasper & Tiger Eye Bracelet", price: "₹899", old: "₹2,800", reviews: 210, img: cTiger, tag: "Selling Fast" },
-  { name: "Pisces (मीन राशि) Zodiac Citrine & Tiger Eye Bracelet", price: "₹899", old: "₹2,800", reviews: 188, img: cCitrine },
-  { name: "Taurus (वृषभ राशि) Zodiac Sunstone & Carnelian Bracelet", price: "₹899", old: "₹2,800", reviews: 174, img: cCitrine },
-  { name: "Cancer (कर्क राशि) Zodiac Moonstone Bracelet", price: "₹899", old: "₹2,800", reviews: 141, img: catGems },
-];
-
-const rudraksha: P[] = [
-  { name: "7 Mukhi Rudraksha Bracelet", price: "₹799", old: "₹2,499", reviews: 629, img: heroRud },
-  { name: "Shiv Rudraksha Mala with Om Shiva Trishul Pendant", price: "₹999", old: "₹1,700", reviews: 147, img: catMala },
-  { name: "Nepal Origin 7 Mukhi Rudraksha - 17mm to 22mm", price: "₹799", old: "₹1,700", reviews: 332, img: heroRud },
-  { name: "Divya Shankh Rudraksha Mala", price: "₹999", old: "₹1,700", reviews: 139, img: catMala },
-  { name: "Surya Shakti Rudraksha Mala", price: "₹999", old: "₹1,700", reviews: 144, img: catMala },
-  { name: "5 Mukhi Rudraksha Bracelet", price: "₹499", old: "₹1,999", reviews: 512, img: heroRud },
-];
-
-const womens: P[] = [
-  { name: "Metal Dhan Yog Bracelet for Women", price: "₹899", old: "₹1,400", reviews: 1654, img: catBracelets },
-  { name: "Pyrite Sun Ring", price: "₹699", old: "₹1,300", reviews: 1214, img: cPyrite },
-  { name: "Dhan Yog Necklace", price: "₹999", old: "₹1,700", reviews: 1001, img: catGems },
-  { name: "Pyrite Tortoise Pendant", price: "₹799", old: "₹1,400", reviews: 100, img: cPyrite },
-  { name: "Love & Money Metal Bracelet for Women", price: "₹999", old: "₹1,700", reviews: 1261, img: cRose },
-  { name: "Raw Pyrite Anklet", price: "₹899", old: "₹1,400", reviews: 1531, img: cPyrite },
-];
-
-const karungali: P[] = [
-  { name: "Divya Raksha Rudraksha & Karungali Mala with Gold Capping", price: "₹799", old: "₹1,300", reviews: 113, img: cBlack },
-  { name: "Karungali Malai 8mm – 108+1 Authentic Ebony Wood Beads (Govt. Certified)", price: "₹799", old: "₹1,600", reviews: 176, img: cBlack },
-  { name: "Karungali Murugan Raksha Mala", price: "₹999", old: "₹1,700", reviews: 188, img: catMala },
-  { name: "Karungali Malai with Copper Wire – 8mm (54+1 Beads)", price: "₹999", old: "₹2,000", reviews: 112, img: cBlack },
-  { name: "Silver Capped Karungali Malai – with Free Karungali Bracelet", price: "₹899", old: "₹2,800", reviews: 117, img: cBlack },
-  { name: "Metal Karungali Bracelet - Silver", price: "₹899", old: "₹1,700", reviews: 205, img: catBracelets },
-];
-
-const domeTrees: P[] = [
-  { name: "Pyrite Dome Tree", price: "₹999", old: "₹2,499", reviews: 103, img: cPyrite },
-  { name: "7 Chakra Dome Tree", price: "₹999", old: "₹2,499", reviews: 1044, img: catGems },
-  { name: "Evil Eye Dome Tree", price: "₹999", old: "₹2,499", reviews: 1017, img: cJade },
-  { name: "Citrine Dome Tree", price: "₹999", old: "₹2,499", reviews: 1180, img: cCitrine },
-  { name: "Love Attraction Dome Tree", price: "₹999", old: "₹2,499", reviews: 1119, img: cRose },
-  { name: "Amethyst Dome Tree", price: "₹999", old: "₹2,499", reviews: 1214, img: cAmethyst },
+  { name: "Wealth", slug: "pyrite", img: cPyrite },
+  { name: "Love", slug: "gemstones", img: cRose },
+  { name: "Protection", slug: "karungali", img: cBlack },
+  { name: "Shop by Rashi", slug: "zodiac", img: cTiger },
+  { name: "Courage", slug: "gemstones", img: cCitrine },
+  { name: "Peace", slug: "rudraksha", img: cAmethyst },
+  { name: "Luck", slug: "dome-trees", img: cJade },
+  { name: "Gifting", slug: "gifting", img: catBracelets },
 ];
 
 const ourProducts = [
@@ -149,14 +61,6 @@ const ourProducts = [
   { name: "Black Obsidian Pyramid with Free Raw Square Selenite Plate", price: 999, old: 2500, img: cBlack },
   { name: "Rose Quartz Pyramid with Free Raw Square Selenite Plate", price: 999, old: 3099, img: cRose },
   { name: "Citrine Pyramid with Free Raw Square Selenite Plate", price: 999, old: 2500, img: cCitrine },
-];
-
-const banners = [
-  { title: "Rinmukteshwar Siddhi", sub: "Energised in Kashi by Vedic priests", img: heroRud },
-  { title: "Karungali Collection", sub: "Original Govt. certified ebony wood", img: cBlack },
-  { title: "Vastu Collection", sub: "Harmony for home & office", img: catYantra },
-  { title: "Crystal Dome Trees", sub: "Wealth, luck & positivity", img: cAmethyst },
-  { title: "Gifting Collection", sub: "Sacred gifts for every occasion", img: catBracelets },
 ];
 
 const whyUs = [
@@ -184,44 +88,33 @@ const faqs = [
   { q: "Q7: What are the benefits of a Lapis Lazuli bracelet?", a: "Lapis Lazuli enhances wisdom, communication & intellectual ability. It stimulates the Third Eye Chakra and is ideal for students & professionals." },
 ];
 
-const footerPurpose = [
-  "Karungali Mala For Protection", "Pyrite Stone for Money", "Raw Pyrite Bracelet For Success",
-  "Raw Pyrite Anklet For Wealth", "7 Mukhi Rudraksha For Shani Dosh", "5 Mukhi Rudraksha For Peace",
-  "Tiger Eye Bracelet For Confidence", "Rose Quartz Bracelet For Love", "Zodiac Bracelet For Your Rashi",
-  "Vastu Products For Home Harmony", "Money Magnet Bracelet For Money", "Rudraksha Bracelet For Men",
-];
-const footerCollections = [
-  "Best Sellers", "Karungali", "Anklet For Women", "Money", "Love", "Zodiac", "Vastu Tortoise",
-  "Rudraksha", "Crystal Dome Trees", "Murti", "Pyrite", "Selenite", "Frames", "Gemstones",
-];
-const footerBenefits = [
-  "Karungali Mala Benefits", "Pyrite Stone Benefits", "Dhan Yog Bracelet Benefits",
-  "Rudraksha Benefits", "Tiger Eye Benefits", "Rose Quartz Benefits", "Amethyst Benefits",
+
+const crystals = [
+  { name: "Pyrite", slug: "pyrite", img: cPyrite },
+  { name: "Garnet", slug: "gemstones", img: cRose },
+  { name: "Citrine", slug: "gemstones", img: cCitrine },
+  { name: "Tiger Eye", slug: "gemstones", img: cTiger },
+  { name: "Rose Quartz", slug: "gemstones", img: cRose },
+  { name: "Lapis Lazuli", slug: "gemstones", img: cJade },
+  { name: "Amethyst", slug: "gemstones", img: cAmethyst },
+  { name: "Selenite", slug: "vastu", img: catGems },
 ];
 
-function ProductCard({ p }: { p: P }) {
-  return (
-    <div className="group min-w-[220px] w-[220px] md:min-w-0 md:w-auto bg-card rounded-2xl border border-border overflow-hidden hover:shadow-[var(--shadow-warm)] transition">
-      <div className="relative aspect-square overflow-hidden bg-muted">
-        <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        {p.tag && (
-          <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider bg-[color:var(--maroon)] text-primary-foreground px-2 py-1 rounded-full">{p.tag}</span>
-        )}
-      </div>
-      <div className="p-3">
-        <div className="text-[13px] font-medium line-clamp-2 min-h-[2.5rem]">{p.name}</div>
-        <div className="mt-1 text-[11px] text-muted-foreground">★★★★★ <span className="opacity-80">{p.reviews} reviews</span></div>
-        <div className="flex items-center gap-2 mt-1">
-          <span className="font-serif text-lg text-[color:var(--maroon)]">{p.price}</span>
-          <span className="text-xs text-muted-foreground line-through">{p.old}</span>
-        </div>
-        <button className="mt-3 w-full text-xs rounded-full border border-foreground py-2 hover:bg-foreground hover:text-background transition">Add</button>
-      </div>
-    </div>
-  );
-}
+const planets = [
+  { name: "Sun (Surya)", slug: "gemstones", img: cCitrine },
+  { name: "Moon (Chandra)", slug: "gemstones", img: catGems },
+  { name: "Mangal/Manglik", slug: "gemstones", img: cRose },
+  { name: "Mercury (Budh)", slug: "gemstones", img: cJade },
+  { name: "Jupiter (Guru)", slug: "rudraksha", img: cCitrine },
+  { name: "Venus (Shukra)", slug: "womens-jewellery", img: cRose },
+  { name: "Shani", slug: "karungali", img: cBlack },
+  { name: "Rahu", slug: "karungali", img: cTiger },
+  { name: "Ketu", slug: "rudraksha", img: cAmethyst },
+];
 
-function ProductRow({ title, items }: { title: string; items: P[] }) {
+const banners = collections.slice(0, 6).map((c) => ({ title: c.title, sub: c.tagline, img: c.hero, slug: c.slug }));
+
+function ProductRow({ title, items, slug }: { title: string; items: P[]; slug: string }) {
   return (
     <section className="mx-auto max-w-[1400px] px-4 py-12">
       <h2 className="font-serif text-3xl md:text-4xl text-center mb-8">{title}</h2>
@@ -229,24 +122,24 @@ function ProductRow({ title, items }: { title: string; items: P[] }) {
         {items.map((p) => <ProductCard key={p.name} p={p} />)}
       </div>
       <div className="text-center mt-8">
-        <a href="#" className="inline-block rounded-full border border-foreground px-8 py-2.5 text-sm hover:bg-foreground hover:text-background transition">View All</a>
+        <Link to="/collections/$slug" params={{ slug }} className="inline-block rounded-full border border-foreground px-8 py-2.5 text-sm hover:bg-foreground hover:text-background transition">View All</Link>
       </div>
     </section>
   );
 }
 
-function TileGrid({ title, items, cols }: { title: string; items: { name: string; img: string }[]; cols: string }) {
+function TileGrid({ title, items, cols }: { title: string; items: { name: string; slug: string; img: string }[]; cols: string }) {
   return (
     <section className="mx-auto max-w-[1400px] px-4 py-12">
       <h2 className="font-serif text-3xl md:text-4xl text-center mb-8">{title}</h2>
       <div className={`grid grid-cols-3 ${cols} gap-4`}>
         {items.map((c) => (
-          <a key={c.name} href="#" className="group flex flex-col items-center gap-3">
+          <Link key={c.name} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-3">
             <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
               <img src={c.img} alt={c.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="text-xs md:text-sm font-medium text-center">{c.name}</div>
-          </a>
+          </Link>
         ))}
       </div>
     </section>
@@ -256,46 +149,7 @@ function TileGrid({ title, items, cols }: { title: string; items: { name: string
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Announcement bar */}
-      <div className="bg-foreground text-background text-xs">
-        <div className="mx-auto max-w-[1400px] px-4 h-9 flex items-center gap-4">
-          <div className="flex-1 overflow-hidden">
-            <div className="flex whitespace-nowrap animate-marquee gap-16">
-              {[...announcements, ...announcements].map((a, i) => <span key={i} className="opacity-90">{a}</span>)}
-            </div>
-          </div>
-          <span className="opacity-70 shrink-0">◎ Instagram</span>
-        </div>
-      </div>
-
-      {/* Header */}
-      <header className="bg-background sticky top-0 z-40 border-b border-border">
-        <div className="mx-auto max-w-[1400px] px-4 py-3 flex items-center gap-6">
-          <a href="/" className="flex items-center gap-2 shrink-0">
-            <img src={logoAsset.url} alt="Nakshatra Store logo" width={40} height={40} className="h-10 w-10 rounded-full object-cover shadow-[var(--shadow-soft)]" />
-            <span className="font-serif text-2xl tracking-tight">Nakshatra</span>
-          </a>
-          <nav className="hidden lg:flex flex-1 items-center justify-center gap-6 text-[13px]">
-            {["Products","Shop By Purpose","Shop By Planet","Calculators","Siddh Collection","Gemstones","Spiritual Jewellery","Rudraksha"].map(l => (
-              <a key={l} href="#" className="hover:text-primary transition-colors flex items-center gap-1">{l}<span className="text-[10px] opacity-60">▾</span></a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-4 shrink-0">
-            <button aria-label="search" className="h-9 w-9 rounded-full hover:bg-muted grid place-items-center">🔍</button>
-            <button aria-label="account" className="h-9 w-9 rounded-full hover:bg-muted grid place-items-center">👤</button>
-            <button aria-label="cart" className="h-9 w-9 rounded-full hover:bg-muted grid place-items-center relative">
-              🛍<span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-primary-foreground text-[10px] grid place-items-center">0</span>
-            </button>
-          </div>
-        </div>
-        <div className="hidden lg:block border-t border-border">
-          <div className="mx-auto max-w-[1400px] px-4 h-10 flex items-center justify-center gap-8 text-[12px] text-muted-foreground">
-            {["Kashi Siddh Rudraksha","Dhan Yog","Pyrite","Rudraksha","Karungali","Gifting","Vastu","Blogs","Contact us"].map(l=>(
-              <a key={l} href="#" className="hover:text-primary flex items-center gap-1">{l}<span className="text-[10px] opacity-60">▾</span></a>
-            ))}
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
@@ -305,7 +159,7 @@ function Index() {
           <div className="max-w-xl">
             <h1 className="font-serif text-5xl md:text-7xl leading-[0.95] tracking-tight">Zodiac<br/>Collection</h1>
             <p className="mt-6 font-serif text-2xl md:text-3xl text-foreground/80">Choose Your Zodiac,<br/>Wear Your Energy</p>
-            <a href="#bestsellers" className="mt-10 inline-flex rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-10 py-4 text-base font-semibold shadow-[var(--shadow-warm)] hover:brightness-110 transition">SHOP NOW</a>
+            <Link to="/collections/$slug" params={{ slug: "zodiac" }} className="mt-10 inline-flex rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-10 py-4 text-base font-semibold shadow-[var(--shadow-warm)] hover:brightness-110 transition">SHOP NOW</Link>
           </div>
         </div>
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
@@ -317,14 +171,14 @@ function Index() {
       <section className="mx-auto max-w-[1400px] px-4 py-10">
         <div className="flex gap-4 overflow-x-auto pb-2">
           {banners.map(b=>(
-            <a key={b.title} href="#" className="group relative min-w-[320px] h-[180px] rounded-2xl overflow-hidden">
+            <Link key={b.title} to="/collections/$slug" params={{ slug: b.slug }} className="group relative min-w-[320px] h-[180px] rounded-2xl overflow-hidden">
               <img src={b.img} alt={b.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-r from-foreground/75 to-transparent" />
               <div className="absolute inset-0 p-5 flex flex-col justify-center">
                 <div className="font-serif text-2xl text-background">{b.title}</div>
                 <div className="text-xs text-background/80 mt-1 max-w-[60%]">{b.sub}</div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
@@ -349,7 +203,7 @@ function Index() {
       <TileGrid title="Shop by Crystals" items={crystals} cols="md:grid-cols-8" />
 
       <div id="bestsellers" className="bg-secondary/40 border-y border-border">
-        <ProductRow title="Best Sellers" items={bestSellers} />
+        <ProductRow slug="best-sellers" title="Best Sellers" items={bestSellers} />
       </div>
 
       <TileGrid title="Shop by Purpose" items={purposes} cols="md:grid-cols-8" />
@@ -358,15 +212,15 @@ function Index() {
         <TileGrid title="Shop by Planet" items={planets} cols="md:grid-cols-9" />
       </div>
 
-      <ProductRow title="Zodiac New Launches" items={zodiacNew} />
+      <ProductRow slug="zodiac" title="Zodiac New Launches" items={zodiacNew} />
       <div className="bg-secondary/40 border-y border-border">
-        <ProductRow title="Rudraksha" items={rudraksha} />
+        <ProductRow slug="rudraksha" title="Rudraksha" items={rudraksha} />
       </div>
-      <ProductRow title="Women's Jewellery" items={womens} />
+      <ProductRow slug="womens-jewellery" title="Women's Jewellery" items={womens} />
       <div className="bg-secondary/40 border-y border-border">
-        <ProductRow title="Sacred Karungali Collection" items={karungali} />
+        <ProductRow slug="karungali" title="Sacred Karungali Collection" items={karungali} />
       </div>
-      <ProductRow title="Vastu Crystal Dome Trees For Wealth & Luck" items={domeTrees} />
+      <ProductRow slug="dome-trees" title="Vastu Crystal Dome Trees For Wealth & Luck" items={domeTrees} />
 
       {/* Why us */}
       <section className="bg-secondary/40 border-y border-border">
@@ -432,7 +286,7 @@ function Index() {
           })}
         </div>
         <div className="text-center mt-10">
-          <a href="#" className="inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-10 py-3 text-sm font-semibold">View More</a>
+          <Link to="/collections" className="inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-10 py-3 text-sm font-semibold">View More</Link>
         </div>
       </section>
 
@@ -458,7 +312,7 @@ function Index() {
           <div className="text-xs tracking-[0.25em] uppercase text-[color:var(--gold)]">Nakshatra Foundation</div>
           <h2 className="mt-3 font-serif text-3xl md:text-5xl">One Purchase. &nbsp;&nbsp;One Promise.</h2>
           <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base opacity-90">With every purchase, we contribute towards educating and empowering underprivileged children, helping them grow into confident and capable individuals.</p>
-          <a href="#" className="mt-8 inline-block rounded-full bg-background text-foreground px-8 py-3 text-sm font-semibold">Read More</a>
+          <Link to="/collections" className="mt-8 inline-block rounded-full bg-background text-foreground px-8 py-3 text-sm font-semibold">Read More</Link>
         </div>
       </section>
 
@@ -477,47 +331,7 @@ function Index() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-card border-t border-border">
-        <div className="mx-auto max-w-[1400px] px-4 py-14 grid md:grid-cols-4 gap-10 text-sm">
-          <div>
-            <div className="flex items-center gap-2">
-              <img src={logoAsset.url} alt="Nakshatra Store logo" width={36} height={36} loading="lazy" className="h-9 w-9 rounded-full object-cover" />
-              <span className="font-serif text-xl">Nakshatra</span>
-            </div>
-            <p className="mt-3 text-muted-foreground text-[13px] leading-relaxed">Nakshatra Store is India's most trusted destination for original spiritual and healing products — Karungali Mala, Pyrite, Rudraksha, Zodiac bracelets, Yantras and Vastu products.</p>
-            <p className="mt-3 text-muted-foreground text-[13px] leading-relaxed">Trusted by 5 lakh+ customers. Government-certified. 7-day return policy. Support Mon–Sat, 10AM–7PM.</p>
-            <div className="mt-4 flex gap-3">
-              {["◎","f","▶","in"].map(i=>(<span key={i} className="h-9 w-9 grid place-items-center rounded-full border border-border">{i}</span>))}
-            </div>
-            <div className="mt-4 space-y-1 text-muted-foreground">
-              <div><a href="#" className="hover:text-primary">How to wear?</a></div>
-              <div><a href="#" className="hover:text-primary">Contact Support</a></div>
-              <div><a href="#" className="hover:text-primary">Track your order</a></div>
-            </div>
-          </div>
-          {[
-            { t: "Shop By Purpose", l: footerPurpose },
-            { t: "Collections", l: footerCollections },
-            { t: "Benefits", l: footerBenefits },
-          ].map(c=>(
-            <div key={c.t}>
-              <div className="font-medium mb-3">{c.t}</div>
-              <ul className="space-y-2 text-muted-foreground text-[13px]">
-                {c.l.map(i=><li key={i}><a href="#" className="hover:text-primary">{i}</a></li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="border-t border-border">
-          <div className="mx-auto max-w-[1400px] px-4 py-5 text-xs text-muted-foreground flex flex-wrap justify-between gap-2">
-            <div>© {new Date().getFullYear()} Nakshatra Store. All rights reserved.</div>
-            <div>Made with 🪔 in Bharat</div>
-          </div>
-        </div>
-      </footer>
-
-      <a href="#" aria-label="WhatsApp" className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-[oklch(0.7_0.18_150)] text-white grid place-items-center shadow-[var(--shadow-warm)] hover:scale-105 transition text-2xl">✆</a>
+      <SiteFooter />
     </div>
   );
 }
