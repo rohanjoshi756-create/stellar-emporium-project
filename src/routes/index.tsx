@@ -89,8 +89,6 @@ const faqs = [
 ];
 
 
-const bySlug = (slug: string) => collections.find((c) => c.slug === slug)!;
-
 const crystals = [
   { name: "Pyrite", slug: "pyrite", img: cPyrite },
   { name: "Garnet", slug: "gemstones", img: cRose },
