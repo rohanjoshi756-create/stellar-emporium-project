@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
-import { bestSellers, bracelets, mala, rudraksha, karungali, crystalTrees, statues, yantras, collections, type P } from "@/data/catalog";
+import { allProducts, bestSellers, bracelets, mala, rudraksha, karungali, crystalTrees, statues, yantras, collections, type P } from "@/data/catalog";
 import heroImg from "@/assets/hero-zodiac.jpg";
 import heroRud from "@/assets/hero-rudraksha.jpg";
 import catBracelets from "@/assets/cat-bracelets.jpg";
@@ -110,30 +110,27 @@ function Index() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <img src={heroImg} alt="Zodiac collection" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1200} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, oklch(0.95 0.04 80 / 0.88) 0%, oklch(0.95 0.04 80 / 0.25) 55%, transparent 100%)" }} />
-        <div className="relative mx-auto max-w-[1400px] px-6 py-24 md:py-36 min-h-[520px] flex flex-col justify-center">
+        <img src={heroImg} alt="Nakshatra store spiritual collection" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1200} />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background/85 md:bg-gradient-to-r md:from-background/90 md:via-background/40 md:to-transparent" />
+        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-14 md:py-36 min-h-[340px] md:min-h-[520px] flex flex-col justify-center">
           <div className="max-w-xl">
-            <h1 className="font-serif text-5xl md:text-7xl leading-[0.95] tracking-tight">Zodiac<br/>Collection</h1>
-            <p className="mt-6 font-serif text-2xl md:text-3xl text-foreground/80">Choose Your Zodiac,<br/>Wear Your Energy</p>
-            <Link to="/collections/$slug" params={{ slug: "zodiac" }} className="mt-10 inline-flex rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-10 py-4 text-base font-semibold shadow-[var(--shadow-warm)] hover:brightness-110 transition">SHOP NOW</Link>
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl leading-[1.02] md:leading-[0.95] tracking-tight">Nakshatra<br/>Store</h1>
+            <p className="mt-4 md:mt-6 font-serif text-lg sm:text-2xl md:text-3xl text-foreground/80">Rudraksha, Malas, Karungali &amp; Vastu — energised for you</p>
+            <Link to="/collections/$slug" params={{ slug: "best-sellers" }} className="mt-7 md:mt-10 inline-flex rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-base font-semibold shadow-[var(--shadow-warm)] hover:brightness-110 transition">SHOP NOW</Link>
           </div>
-        </div>
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          {Array.from({length:8}).map((_,i)=>(<span key={i} className={`h-1.5 rounded-full ${i===0?'w-6 bg-foreground':'w-1.5 bg-foreground/40'}`}/>))}
         </div>
       </section>
 
       {/* Banner strip */}
-      <section className="mx-auto max-w-[1400px] px-4 py-10">
-        <div className="flex gap-4 overflow-x-auto pb-2">
-          {banners.map(b=>(
-            <Link key={b.title} to="/collections/$slug" params={{ slug: b.slug }} className="group relative min-w-[320px] h-[180px] rounded-2xl overflow-hidden">
+      <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-6 sm:py-10">
+        <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
+          {banners.map((b) => (
+            <Link key={b.title} to="/collections/$slug" params={{ slug: b.slug }} className="group relative snap-start shrink-0 w-[80vw] max-w-[320px] h-[150px] sm:h-[180px] rounded-2xl overflow-hidden">
               <img src={b.img} alt={b.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-r from-foreground/75 to-transparent" />
-              <div className="absolute inset-0 p-5 flex flex-col justify-center">
-                <div className="font-serif text-2xl text-background">{b.title}</div>
-                <div className="text-xs text-background/80 mt-1 max-w-[60%]">{b.sub}</div>
+              <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-center">
+                <div className="font-serif text-xl sm:text-2xl text-background">{b.title}</div>
+                <div className="text-xs text-background/80 mt-1 max-w-[65%]">{b.sub}</div>
               </div>
             </Link>
           ))}
@@ -142,9 +139,9 @@ function Index() {
 
       {/* Trust marquee */}
       <div className="bg-secondary border-y border-border overflow-hidden">
-        <div className="flex whitespace-nowrap animate-marquee py-3 text-sm">
-          {Array.from({length:8}).map((_,i)=>(
-            <span key={i} className="mx-8 flex items-center gap-2">
+        <div className="flex whitespace-nowrap animate-marquee py-2.5 sm:py-3 text-xs sm:text-sm">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i} className="mx-6 sm:mx-8 flex items-center gap-2">
               <span className="text-primary">✦</span> 100% Natural &amp; Authentic
               <span className="mx-4 text-muted-foreground">·</span>
               <span className="text-primary">✦</span> Energised by Top Astrologers
@@ -153,31 +150,29 @@ function Index() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[1400px] px-4 pt-12 text-center">
-        <p className="font-serif text-2xl md:text-3xl">Shop Karungali, Rudraksha, Pyrite, Zodiac &amp; Vastu Products</p>
+      <div className="mx-auto max-w-[1400px] px-4 pt-8 sm:pt-12 text-center">
+        <p className="font-serif text-xl sm:text-2xl md:text-3xl">Shop Rudraksha, Malas, Karungali, Crystal Trees &amp; Vastu Products</p>
       </div>
 
-      <TileGrid title="Shop by Crystals" items={crystals} cols="md:grid-cols-8" />
+      <TileGrid title="Shop by Category" items={purposes} />
 
       <div id="bestsellers" className="bg-secondary/40 border-y border-border">
         <ProductRow slug="best-sellers" title="Best Sellers" items={bestSellers} />
       </div>
 
-      <TileGrid title="Shop by Purpose" items={purposes} cols="md:grid-cols-8" />
-
+      <ProductRow slug="rudraksha" title="Rudraksha Collections" items={rudraksha} />
       <div className="bg-secondary/40 border-y border-border">
-        <TileGrid title="Shop by Planet" items={planets} cols="md:grid-cols-9" />
+        <ProductRow slug="mala" title="Malas" items={mala} />
       </div>
-
-      <ProductRow slug="zodiac" title="Zodiac New Launches" items={zodiacNew} />
+      <ProductRow slug="bracelets" title="Bracelets" items={bracelets} />
       <div className="bg-secondary/40 border-y border-border">
-        <ProductRow slug="rudraksha" title="Rudraksha" items={rudraksha} />
+        <ProductRow slug="karungali" title="Sacred Karungali Store" items={karungali} />
       </div>
-      <ProductRow slug="womens-jewellery" title="Women's Jewellery" items={womens} />
+      <ProductRow slug="crystal-trees" title="Crystal Trees For Wealth &amp; Luck" items={crystalTrees} />
       <div className="bg-secondary/40 border-y border-border">
-        <ProductRow slug="karungali" title="Sacred Karungali Collection" items={karungali} />
+        <ProductRow slug="yantras" title="Yantras" items={yantras} />
       </div>
-      <ProductRow slug="dome-trees" title="Vastu Crystal Dome Trees For Wealth & Luck" items={domeTrees} />
+      <ProductRow slug="statues" title="Statues Collection" items={statues} />
 
       {/* Why us */}
       <section className="bg-secondary/40 border-y border-border">
@@ -218,31 +213,13 @@ function Index() {
       </section>
 
       {/* Our products */}
-      <section className="mx-auto max-w-[1400px] px-4 py-16">
-        <h2 className="font-serif text-3xl md:text-4xl text-center">Our Products</h2>
-        <p className="text-center text-muted-foreground text-sm mt-2">Browse our collection of products</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-10">
-          {ourProducts.map(p=>{
-            const off = Math.round((1 - p.price / p.old) * 100);
-            return (
-              <div key={p.name} className="group bg-card rounded-2xl border border-border overflow-hidden hover:shadow-[var(--shadow-warm)] transition">
-                <div className="aspect-square overflow-hidden bg-muted">
-                  <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-3">
-                  <h3 className="text-[13px] font-medium line-clamp-2 min-h-[2.5rem]">{p.name}</h3>
-                  <div className="flex items-center gap-2 mt-1 flex-wrap">
-                    <span className="font-serif text-lg text-[color:var(--maroon)]">₹{p.price.toLocaleString("en-IN")}</span>
-                    <span className="text-xs text-muted-foreground line-through">₹{p.old.toLocaleString("en-IN")}</span>
-                    <span className="text-[11px] text-primary font-medium">{off}% OFF</span>
-                  </div>
-                  <button className="mt-3 w-full text-xs rounded-full bg-foreground text-background py-2 hover:opacity-90 transition">Add to Cart</button>
-                </div>
-              </div>
-            );
-          })}
+      <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-10 sm:py-16">
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center">Our Products</h2>
+        <p className="text-center text-muted-foreground text-sm mt-2">Browse our collection of {allProducts.length}+ products</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-10">
+          {allProducts.slice(0, 18).map((p) => <ProductCard key={p.id} p={p} />)}
         </div>
-        <div className="text-center mt-10">
+        <div className="text-center mt-8 sm:mt-10">
           <Link to="/collections" className="inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-10 py-3 text-sm font-semibold">View More</Link>
         </div>
       </section>
