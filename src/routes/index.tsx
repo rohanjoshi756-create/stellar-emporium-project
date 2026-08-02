@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
-import { bestSellers, zodiacNew, rudraksha, womens, karungali, domeTrees, collections, type P } from "@/data/catalog";
+import { bestSellers, bracelets, mala, rudraksha, karungali, crystalTrees, statues, yantras, collections, type P } from "@/data/catalog";
 import heroImg from "@/assets/hero-zodiac.jpg";
 import heroRud from "@/assets/hero-rudraksha.jpg";
 import catBracelets from "@/assets/cat-bracelets.jpg";
@@ -37,31 +37,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const purposes = [
-  { name: "Wealth", slug: "pyrite", img: cPyrite },
-  { name: "Love", slug: "gemstones", img: cRose },
-  { name: "Protection", slug: "karungali", img: cBlack },
-  { name: "Shop by Rashi", slug: "zodiac", img: cTiger },
-  { name: "Courage", slug: "gemstones", img: cCitrine },
-  { name: "Peace", slug: "rudraksha", img: cAmethyst },
-  { name: "Luck", slug: "dome-trees", img: cJade },
-  { name: "Gifting", slug: "gifting", img: catBracelets },
-];
-
-const ourProducts = [
-  { name: "Metal Dhan Yog Bracelet for Women", price: 899, old: 1400, img: catBracelets },
-  { name: "Rinmukteshwar Siddh Pyrite Owl", price: 1399, old: 1700, img: cPyrite },
-  { name: "Rinmukteshwar Siddh Lakshmi Yantra Pyramid", price: 999, old: 2999, img: catYantra },
-  { name: "Rinmukteshwar Siddh Conical Dhan Yog Pyramid With Selenite Base", price: 1099, old: 1700, img: catGems },
-  { name: "Rinmukteshwar Siddh Vastu Dhan Yog Tortoise (Big size)", price: 2599, old: 3400, img: cPyrite },
-  { name: "Rinmukteshwar Siddh 7 Mukhi Rudraksha Bracelet", price: 899, old: 2499, img: heroRud },
-  { name: "Rinmukteshwar Siddh Metal Dhan Yog Bracelet - Black", price: 999, old: 1700, img: cBlack },
-  { name: "Rinmukteshwar Siddh 7 Horses on Raw Pyrite Frame", price: 1099, old: 2900, img: catYantra },
-  { name: "Vastu Pyrite Tortoise Combo – Small Kachhua with Big Kachhua", price: 2899, old: 4999, img: cPyrite },
-  { name: "Black Obsidian Pyramid with Free Raw Square Selenite Plate", price: 999, old: 2500, img: cBlack },
-  { name: "Rose Quartz Pyramid with Free Raw Square Selenite Plate", price: 999, old: 3099, img: cRose },
-  { name: "Citrine Pyramid with Free Raw Square Selenite Plate", price: 999, old: 2500, img: cCitrine },
-];
+const purposes = collections.filter((c) => c.slug !== "best-sellers");
 
 const whyUs = [
   { t: "Charged for you by Top Astros", d: "All our healing stones are sourced and energised by trusted experts and astrologers with pure intentions before delivery." },
@@ -88,29 +64,6 @@ const faqs = [
   { q: "Q7: What are the benefits of a Lapis Lazuli bracelet?", a: "Lapis Lazuli enhances wisdom, communication & intellectual ability. It stimulates the Third Eye Chakra and is ideal for students & professionals." },
 ];
 
-
-const crystals = [
-  { name: "Pyrite", slug: "pyrite", img: cPyrite },
-  { name: "Garnet", slug: "gemstones", img: cRose },
-  { name: "Citrine", slug: "gemstones", img: cCitrine },
-  { name: "Tiger Eye", slug: "gemstones", img: cTiger },
-  { name: "Rose Quartz", slug: "gemstones", img: cRose },
-  { name: "Lapis Lazuli", slug: "gemstones", img: cJade },
-  { name: "Amethyst", slug: "gemstones", img: cAmethyst },
-  { name: "Selenite", slug: "vastu", img: catGems },
-];
-
-const planets = [
-  { name: "Sun (Surya)", slug: "gemstones", img: cCitrine },
-  { name: "Moon (Chandra)", slug: "gemstones", img: catGems },
-  { name: "Mangal/Manglik", slug: "gemstones", img: cRose },
-  { name: "Mercury (Budh)", slug: "gemstones", img: cJade },
-  { name: "Jupiter (Guru)", slug: "rudraksha", img: cCitrine },
-  { name: "Venus (Shukra)", slug: "womens-jewellery", img: cRose },
-  { name: "Shani", slug: "karungali", img: cBlack },
-  { name: "Rahu", slug: "karungali", img: cTiger },
-  { name: "Ketu", slug: "rudraksha", img: cAmethyst },
-];
 
 const banners = collections.slice(0, 6).map((c) => ({ title: c.title, sub: c.tagline, img: c.hero, slug: c.slug }));
 
