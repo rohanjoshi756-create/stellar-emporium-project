@@ -69,29 +69,33 @@ const banners = collections.slice(0, 6).map((c) => ({ title: c.title, sub: c.tag
 
 function ProductRow({ title, items, slug }: { title: string; items: P[]; slug: string }) {
   return (
-    <section className="mx-auto max-w-[1400px] px-4 py-12">
-      <h2 className="font-serif text-3xl md:text-4xl text-center mb-8">{title}</h2>
-      <div className="flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 lg:grid-cols-6 md:overflow-visible">
-        {items.map((p) => <ProductCard key={p.name} p={p} />)}
+    <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
+      <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
+      <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 md:grid md:grid-cols-4 lg:grid-cols-6 md:overflow-visible">
+        {items.slice(0, 12).map((p) => (
+          <div key={p.id} className="snap-start shrink-0 w-[46vw] max-w-[210px] md:w-auto md:max-w-none">
+            <ProductCard p={p} />
+          </div>
+        ))}
       </div>
-      <div className="text-center mt-8">
+      <div className="text-center mt-6 sm:mt-8">
         <Link to="/collections/$slug" params={{ slug }} className="inline-block rounded-full border border-foreground px-8 py-2.5 text-sm hover:bg-foreground hover:text-background transition">View All</Link>
       </div>
     </section>
   );
 }
 
-function TileGrid({ title, items, cols }: { title: string; items: { name: string; slug: string; img: string }[]; cols: string }) {
+function TileGrid({ title, items }: { title: string; items: { title: string; slug: string; hero: string }[] }) {
   return (
-    <section className="mx-auto max-w-[1400px] px-4 py-12">
-      <h2 className="font-serif text-3xl md:text-4xl text-center mb-8">{title}</h2>
-      <div className={`grid grid-cols-3 ${cols} gap-4`}>
+    <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
+      <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
+      <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
         {items.map((c) => (
-          <Link key={c.name} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-3">
+          <Link key={c.slug} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-2 sm:gap-3">
             <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
-              <img src={c.img} alt={c.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <img src={c.hero} alt={c.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
-            <div className="text-xs md:text-sm font-medium text-center">{c.name}</div>
+            <div className="text-[11px] sm:text-sm font-medium text-center leading-tight">{c.title}</div>
           </Link>
         ))}
       </div>
