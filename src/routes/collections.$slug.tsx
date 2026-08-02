@@ -53,13 +53,13 @@ function CollectionPage() {
 
       <section className="relative overflow-hidden">
         <img src={collection.hero} alt={collection.title} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, oklch(0.95 0.04 80 / 0.9) 0%, oklch(0.95 0.04 80 / 0.3) 60%, transparent 100%)" }} />
-        <div className="relative mx-auto max-w-[1400px] px-6 py-20 min-h-[320px] flex flex-col justify-center">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, var(--background) 0%, oklch(from var(--background) l c h / 0.75) 45%, oklch(from var(--background) l c h / 0.35) 100%)" }} />
+        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20 min-h-[200px] sm:min-h-[320px] flex flex-col justify-center">
           <nav className="text-xs text-muted-foreground mb-4">
             <Link to="/" className="hover:text-primary">Home</Link> / <Link to="/collections" className="hover:text-primary">Collections</Link> / {collection.title}
           </nav>
-          <h1 className="font-serif text-4xl md:text-6xl leading-tight max-w-2xl">{collection.title}</h1>
-          <p className="mt-4 font-serif text-xl md:text-2xl text-foreground/80">{collection.tagline}</p>
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl leading-tight max-w-2xl">{collection.title}</h1>
+          <p className="mt-3 sm:mt-4 font-serif text-base sm:text-xl md:text-2xl text-foreground/80">{collection.tagline}</p>
         </div>
       </section>
 
@@ -75,27 +75,27 @@ function CollectionPage() {
         </div>
       </div>
 
-      <section className="mx-auto max-w-[1400px] px-4 py-12">
+      <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
         <div className="flex items-baseline justify-between gap-4 flex-wrap">
-          <h2 className="font-serif text-2xl">{collection.products.length} products</h2>
+          <h2 className="font-serif text-xl sm:text-2xl">{collection.products.length} products</h2>
           <div className="text-xs text-muted-foreground">Free shipping · 7-day returns · Energised before dispatch</div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
-          {collection.products.map((p: P) => <ProductCard key={p.name} p={p} />)}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-8">
+          {collection.products.map((p: P) => <ProductCard key={p.id} p={p} />)}
         </div>
       </section>
 
       <section className="bg-secondary/40 border-y border-border">
-        <div className="mx-auto max-w-[1400px] px-4 py-14">
-          <h2 className="font-serif text-3xl mb-4">About the {collection.title}</h2>
+        <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
+          <h2 className="font-serif text-2xl sm:text-3xl mb-3 sm:mb-4">About the {collection.title}</h2>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">{collection.description}</p>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl mt-4">Every product in this collection is sourced from trusted mines and artisans, verified in government-certified gemology labs, and energised with Vedic mantras by our astrologers before it reaches you.</p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1400px] px-4 py-14">
-        <h2 className="font-serif text-3xl text-center mb-8">Explore more collections</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <section className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
+        <h2 className="font-serif text-2xl sm:text-3xl text-center mb-6 sm:mb-8">Explore more collections</h2>
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {others.map((c) => (
             <Link key={c.slug} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-3">
               <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
