@@ -176,9 +176,9 @@ function Index() {
 
       {/* Why us */}
       <section className="bg-secondary/40 border-y border-border">
-        <div className="mx-auto max-w-[1400px] px-4 py-16">
-          <h2 className="font-serif text-3xl md:text-4xl text-center mb-10">Why Nakshatra?</h2>
-          <div className="grid md:grid-cols-4 gap-6">
+        <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-16">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-10">Why Nakshatra?</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {whyUs.map(w=>(
               <div key={w.t} className="rounded-2xl bg-card border border-border p-6">
                 <div className="h-10 w-10 rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground grid place-items-center mb-4">✦</div>
@@ -192,14 +192,14 @@ function Index() {
 
       {/* Testimonials */}
       <section className="bg-[color:var(--maroon)] text-primary-foreground">
-        <div className="mx-auto max-w-[1400px] px-4 py-16">
+        <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-16">
           <div className="text-center">
             <div className="text-xs tracking-[0.25em] uppercase text-[color:var(--gold)]">Testimonials</div>
-            <h2 className="mt-2 font-serif text-3xl md:text-4xl">What our customers say</h2>
+            <h2 className="mt-2 font-serif text-2xl sm:text-3xl md:text-4xl">What our customers say</h2>
           </div>
-          <div className="flex gap-5 overflow-x-auto mt-10 pb-2">
+          <div className="-mx-4 px-4 flex gap-4 sm:gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory mt-8 sm:mt-10 pb-2">
             {testimonials.map(r=>(
-              <div key={r.n} className="min-w-[300px] w-[300px] rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 p-6">
+              <div key={r.n} className="snap-start shrink-0 w-[82vw] max-w-[300px] rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 p-6">
                 <div className="text-[color:var(--gold)] mb-3">★★★★★</div>
                 <p className="text-sm leading-relaxed opacity-90">"{r.t}"</p>
                 <div className="mt-4 flex items-center gap-3">
@@ -226,8 +226,8 @@ function Index() {
 
       {/* About */}
       <section className="bg-secondary/40 border-y border-border">
-        <div className="mx-auto max-w-[1400px] px-4 py-16">
-          <h2 className="font-serif text-3xl md:text-4xl mb-6">About Nakshatra Store</h2>
+        <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-16">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">About Nakshatra Store</h2>
           <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed max-w-5xl">
             <p>Nakshatra Store is India's most trusted destination for authentic spiritual products. We specialise in original Karungali Mala, Pyrite Stone, Rudraksha, Zodiac bracelets, Vastu products and healing crystal jewellery, all government-certified for authenticity.</p>
             <p>Our Karungali Mala collection features original Black Ebony wood beads certified by government labs. Benefits include protection from negative energy, evil eye and black magic, mental peace and spiritual grounding. Available in 6mm and 8mm with silver and gold capping variants.</p>
@@ -242,17 +242,17 @@ function Index() {
       <section className="relative overflow-hidden">
         <img src={heroRud} alt="Nakshatra Foundation" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-foreground/70" />
-        <div className="relative mx-auto max-w-[1400px] px-4 py-20 text-center text-background">
+        <div className="relative mx-auto max-w-[1400px] px-4 py-14 sm:py-20 text-center text-background">
           <div className="text-xs tracking-[0.25em] uppercase text-[color:var(--gold)]">Nakshatra Foundation</div>
-          <h2 className="mt-3 font-serif text-3xl md:text-5xl">One Purchase. &nbsp;&nbsp;One Promise.</h2>
+          <h2 className="mt-3 font-serif text-2xl sm:text-3xl md:text-5xl">One Purchase. &nbsp;&nbsp;One Promise.</h2>
           <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base opacity-90">With every purchase, we contribute towards educating and empowering underprivileged children, helping them grow into confident and capable individuals.</p>
           <Link to="/collections" className="mt-8 inline-block rounded-full bg-background text-foreground px-8 py-3 text-sm font-semibold">Read More</Link>
         </div>
       </section>
 
       {/* FAQs */}
-      <section className="mx-auto max-w-[900px] px-4 py-16">
-        <h2 className="font-serif text-3xl md:text-4xl text-center mb-8">FAQs</h2>
+      <section className="mx-auto max-w-[900px] px-4 py-10 sm:py-16">
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-8">FAQs</h2>
         <div className="divide-y divide-border border-y border-border">
           {faqs.map(f=>(
             <details key={f.q} className="group py-4">
