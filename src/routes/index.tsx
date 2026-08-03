@@ -33,6 +33,9 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://stellar-emporium-project.lovable.app/" },
+      { property: "og:site_name", content: "Nakshatra Store" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
     ],
     links: [{ rel: "canonical", href: "https://stellar-emporium-project.lovable.app/" }],
     scripts: [
@@ -84,7 +87,7 @@ const banners = collections.slice(0, 6).map((c) => ({ title: c.title, sub: c.tag
 function ProductRow({ title, items, slug }: { title: string; items: P[]; slug: string }) {
   return (
     <section className="cv-auto mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
-      <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
+      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
       <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 md:grid md:grid-cols-4 lg:grid-cols-6 md:overflow-visible">
         {items.slice(0, 12).map((p) => (
           <div key={p.id} className="snap-start shrink-0 w-[46vw] max-w-[210px] md:w-auto md:max-w-none">
@@ -102,7 +105,7 @@ function ProductRow({ title, items, slug }: { title: string; items: P[]; slug: s
 function TileGrid({ title, items }: { title: string; items: { title: string; slug: string; hero: string }[] }) {
   return (
     <section className="cv-auto mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
-      <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
+      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
       <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
         {items.map((c) => (
           <Link key={c.slug} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-2 sm:gap-3">
@@ -128,8 +131,8 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background/85 md:bg-gradient-to-r md:from-background/90 md:via-background/40 md:to-transparent" />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-14 md:py-36 min-h-[340px] md:min-h-[520px] flex flex-col justify-center">
           <div className="max-w-xl">
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl leading-[1.02] md:leading-[0.95] tracking-tight">Nakshatra<br/>Store</h1>
-            <p className="mt-4 md:mt-6 font-serif text-lg sm:text-2xl md:text-3xl text-foreground/80">Rudraksha, Malas, Karungali &amp; Vastu — energised for you</p>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-7xl leading-[1.02] md:leading-[0.95] tracking-tight">Nakshatra<br/>Store</h1>
+            <p className="mt-4 md:mt-6 font-display text-lg sm:text-2xl md:text-3xl text-foreground/80">Rudraksha, Malas, Karungali &amp; Vastu — energised for you</p>
             <Link to="/collections/$slug" params={{ slug: "best-sellers" }} className="mt-7 md:mt-10 inline-flex rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-8 md:px-10 py-3.5 md:py-4 text-sm md:text-base font-semibold shadow-[var(--shadow-warm)] hover:brightness-110 transition">SHOP NOW</Link>
           </div>
         </div>
@@ -143,7 +146,7 @@ function Index() {
               <img src={b.img} alt={b.title} loading="lazy" decoding="async" width={320} height={180} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-r from-foreground/75 to-transparent" />
               <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-center">
-                <div className="font-serif text-xl sm:text-2xl text-background">{b.title}</div>
+                <div className="font-display text-xl sm:text-2xl text-background">{b.title}</div>
                 <div className="text-xs text-background/80 mt-1 max-w-[65%]">{b.sub}</div>
               </div>
             </Link>
@@ -165,7 +168,7 @@ function Index() {
       </div>
 
       <div className="mx-auto max-w-[1400px] px-4 pt-8 sm:pt-12 text-center">
-        <p className="font-serif text-xl sm:text-2xl md:text-3xl">Shop Rudraksha, Malas, Karungali, Crystal Trees &amp; Vastu Products</p>
+        <p className="font-display text-xl sm:text-2xl md:text-3xl">Shop Rudraksha, Malas, Karungali, Crystal Trees &amp; Vastu Products</p>
       </div>
 
       <TileGrid title="Shop by Category" items={purposes} />
@@ -191,7 +194,7 @@ function Index() {
       {/* Why us */}
       <section className="bg-secondary/40 border-y border-border">
         <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-16">
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-10">Why Nakshatra?</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-10">Why Nakshatra?</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {whyUs.map(w=>(
               <div key={w.t} className="rounded-2xl bg-card border border-border p-6">
@@ -209,7 +212,7 @@ function Index() {
         <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-16">
           <div className="text-center">
             <div className="text-xs tracking-[0.25em] uppercase text-[color:var(--gold)]">Testimonials</div>
-            <h2 className="mt-2 font-serif text-2xl sm:text-3xl md:text-4xl">What our customers say</h2>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl md:text-4xl">What our customers say</h2>
           </div>
           <div className="-mx-4 px-4 flex gap-4 sm:gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory mt-8 sm:mt-10 pb-2">
             {testimonials.map(r=>(
@@ -228,7 +231,7 @@ function Index() {
 
       {/* Our products */}
       <section className="cv-auto mx-auto max-w-[1400px] px-3 sm:px-4 py-10 sm:py-16">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center">Our Products</h2>
+        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-center">Our Products</h2>
         <p className="text-center text-muted-foreground text-sm mt-2">Browse our collection of {allProducts.length}+ products</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-10">
           {allProducts.slice(0, 18).map((p) => <ProductCard key={p.id} p={p} />)}
@@ -241,7 +244,7 @@ function Index() {
       {/* About */}
       <section className="bg-secondary/40 border-y border-border">
         <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-16">
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">About Nakshatra Store</h2>
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6">About Nakshatra Store</h2>
           <div className="space-y-4 text-sm md:text-base text-muted-foreground leading-relaxed max-w-5xl">
             <p>Nakshatra Store is India's most trusted destination for authentic spiritual products. We specialise in original Karungali Mala, Pyrite Stone, Rudraksha, Zodiac bracelets, Vastu products and healing crystal jewellery, all government-certified for authenticity.</p>
             <p>Our Karungali Mala collection features original Black Ebony wood beads certified by government labs. Benefits include protection from negative energy, evil eye and black magic, mental peace and spiritual grounding. Available in 6mm and 8mm with silver and gold capping variants.</p>
@@ -258,7 +261,7 @@ function Index() {
         <div className="absolute inset-0 bg-foreground/70" />
         <div className="relative mx-auto max-w-[1400px] px-4 py-14 sm:py-20 text-center text-background">
           <div className="text-xs tracking-[0.25em] uppercase text-[color:var(--gold)]">Nakshatra Foundation</div>
-          <h2 className="mt-3 font-serif text-2xl sm:text-3xl md:text-5xl">One Purchase. &nbsp;&nbsp;One Promise.</h2>
+          <h2 className="mt-3 font-display text-2xl sm:text-3xl md:text-5xl">One Purchase. &nbsp;&nbsp;One Promise.</h2>
           <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base opacity-90">With every purchase, we contribute towards educating and empowering underprivileged children, helping them grow into confident and capable individuals.</p>
           <Link to="/collections" className="mt-8 inline-block rounded-full bg-background text-foreground px-8 py-3 text-sm font-semibold">Read More</Link>
         </div>
@@ -266,7 +269,7 @@ function Index() {
 
       {/* FAQs */}
       <section className="cv-auto mx-auto max-w-[900px] px-4 py-10 sm:py-16">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-8">FAQs</h2>
+        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-8">FAQs</h2>
         <div className="divide-y divide-border border-y border-border">
           {faqs.map(f=>(
             <details key={f.q} className="group py-4">

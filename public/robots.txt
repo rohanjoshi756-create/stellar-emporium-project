@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://stellar-emporium-project.lovable.app/sitemap.xml

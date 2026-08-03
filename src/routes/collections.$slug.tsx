@@ -1,27 +1,116 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { collections, collectionBySlug, type P } from "@/data/catalog";
+import { collections, collectionBySlug, type P, type Collection } from "@/data/catalog";
+import { seoFor, type CollectionSeo } from "@/data/collection-seo";
 import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
 
+const SITE = "https://stellar-emporium-project.lovable.app";
+
 export const Route = createFileRoute("/collections/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { collection: Collection; seo: CollectionSeo | null } => {
     const collection = collectionBySlug(params.slug);
     if (!collection) throw notFound();
-    return { collection };
+    return { collection, seo: seoFor(params.slug) ?? null };
   },
-  head: ({ loaderData }) => {
+  head: ({ params, loaderData }) => {
     if (!loaderData) {
       return { meta: [{ title: "Collection not found — Nakshatra Store" }, { name: "robots", content: "noindex" }] };
     }
-    const { title, description } = loaderData.collection;
-    const full = `${title} — Nakshatra Store`;
+    const { collection, seo } = loaderData;
+    const url = `${SITE}/collections/${params.slug}`;
+    const title = seo?.seoTitle ?? `${collection.title} — Nakshatra Store`;
+    const description = seo?.seoDescription ?? collection.description;
+    const image = collection.hero;
+    const priceValues = collection.products
+      .map((p) => Number(p.price.replace(/[^0-9.]/g, "")))
+      .filter((n) => Number.isFinite(n) && n > 0);
+
     return {
       meta: [
-        { title: full },
+        { title },
         { name: "description", content: description },
-        { property: "og:title", content: full },
+        { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "website" },
+        { property: "og:url", content: url },
+        { property: "og:site_name", content: "Nakshatra Store" },
+        { property: "og:image", content: image },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: image },
+        { name: "robots", content: "index, follow, max-image-preview:large" },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "CollectionPage",
+                "@id": url,
+                url,
+                name: title,
+                description,
+                isPartOf: { "@type": "WebSite", name: "Nakshatra Store", url: SITE },
+                primaryImageOfPage: image,
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+                  { "@type": "ListItem", position: 2, name: "Collections", item: `${SITE}/collections` },
+                  { "@type": "ListItem", position: 3, name: collection.title, item: url },
+                ],
+              },
+              {
+                "@type": "ItemList",
+                name: collection.title,
+                numberOfItems: collection.products.length,
+                itemListElement: collection.products.slice(0, 30).map((p, i) => ({
+                  "@type": "ListItem",
+                  position: i + 1,
+                  item: {
+                    "@type": "Product",
+                    name: p.name,
+                    image: p.img,
+                    offers: {
+                      "@type": "Offer",
+                      price: p.price.replace(/[^0-9.]/g, ""),
+                      priceCurrency: "INR",
+                      availability:
+                        p.tag === "Sold Out"
+                          ? "https://schema.org/OutOfStock"
+                          : "https://schema.org/InStock",
+                    },
+                  },
+                })),
+              },
+              ...(priceValues.length
+                ? [
+                    {
+                      "@type": "AggregateOffer",
+                      priceCurrency: "INR",
+                      offerCount: priceValues.length,
+                      lowPrice: Math.min(...priceValues),
+                      highPrice: Math.max(...priceValues),
+                    },
+                  ]
+                : []),
+              ...(seo
+                ? [
+                    {
+                      "@type": "FAQPage",
+                      mainEntity: seo.faqs.map((f) => ({
+                        "@type": "Question",
+                        name: f.q,
+                        acceptedAnswer: { "@type": "Answer", text: f.a },
+                      })),
+                    },
+                  ]
+                : []),
+            ],
+          }),
+        },
       ],
     };
   },
@@ -34,7 +123,7 @@ function CollectionNotFound() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <div className="mx-auto max-w-[900px] px-4 py-24 text-center">
-        <h1 className="font-serif text-4xl">Collection not found</h1>
+        <h1 className="font-display text-4xl">Collection not found</h1>
         <p className="mt-3 text-muted-foreground">The collection you are looking for doesn't exist.</p>
         <Link to="/collections" className="mt-8 inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-8 py-3 text-sm font-semibold">Browse all collections</Link>
       </div>
@@ -44,22 +133,29 @@ function CollectionNotFound() {
 }
 
 function CollectionPage() {
-  const { collection } = Route.useLoaderData();
+  const { collection, seo } = Route.useLoaderData();
   const others = collections.filter((c) => c.slug !== collection.slug).slice(0, 6);
+  const inStock = collection.products.filter((p: P) => p.tag !== "Sold Out").length;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
       <section className="relative overflow-hidden">
-        <img src={collection.hero} alt={collection.title} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={collection.hero} alt={`${collection.title} — Nakshatra Store`} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, var(--background) 0%, oklch(from var(--background) l c h / 0.75) 45%, oklch(from var(--background) l c h / 0.35) 100%)" }} />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20 min-h-[200px] sm:min-h-[320px] flex flex-col justify-center">
-          <nav className="text-xs text-muted-foreground mb-4">
-            <Link to="/" className="hover:text-primary">Home</Link> / <Link to="/collections" className="hover:text-primary">Collections</Link> / {collection.title}
+          <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground mb-4">
+            <Link to="/" className="hover:text-primary">Home</Link> / <Link to="/collections" className="hover:text-primary">Collections</Link> / <span className="text-foreground">{collection.title}</span>
           </nav>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl leading-tight max-w-2xl">{collection.title}</h1>
-          <p className="mt-3 sm:mt-4 font-serif text-base sm:text-xl md:text-2xl text-foreground/80">{collection.tagline}</p>
+          <h1 className="font-display text-3xl sm:text-4xl md:text-6xl leading-tight tracking-tight max-w-2xl">{seo?.h1 ?? collection.title}</h1>
+          <p className="mt-3 sm:mt-4 font-display text-base sm:text-xl md:text-2xl text-foreground/80">{collection.tagline}</p>
+          <p className="mt-3 max-w-2xl text-sm sm:text-base text-muted-foreground leading-relaxed">{seo?.intro ?? collection.description}</p>
+          <div className="mt-5 flex flex-wrap gap-2 text-[11px] sm:text-xs">
+            {["Govt. lab certified", "Energised before dispatch", "Free shipping (prepaid)", "7-day returns"].map((t) => (
+              <span key={t} className="rounded-full border border-border bg-background/70 px-3 py-1.5">{t}</span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -77,7 +173,7 @@ function CollectionPage() {
 
       <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
         <div className="flex items-baseline justify-between gap-4 flex-wrap">
-          <h2 className="font-serif text-xl sm:text-2xl">{collection.products.length} products</h2>
+          <h2 className="font-display text-xl sm:text-2xl">{collection.products.length} {collection.title} products{inStock !== collection.products.length ? ` · ${inStock} in stock` : ""}</h2>
           <div className="text-xs text-muted-foreground">Free shipping · 7-day returns · Energised before dispatch</div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-8">
@@ -85,21 +181,51 @@ function CollectionPage() {
         </div>
       </section>
 
-      <section className="bg-secondary/40 border-y border-border">
-        <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
-          <h2 className="font-serif text-2xl sm:text-3xl mb-3 sm:mb-4">About the {collection.title}</h2>
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">{collection.description}</p>
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl mt-4">Every product in this collection is sourced from trusted mines and artisans, verified in government-certified gemology labs, and energised with Vedic mantras by our astrologers before it reaches you.</p>
-        </div>
-      </section>
+      {seo && (
+        <section className="bg-secondary/40 border-y border-border">
+          <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14 grid gap-4 sm:grid-cols-3">
+            {seo.benefits.map((b: { t: string; d: string }) => (
+              <div key={b.t} className="rounded-2xl bg-card border border-border p-5">
+                <div className="font-display text-lg">{b.t}</div>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{b.d}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
-        <h2 className="font-serif text-2xl sm:text-3xl text-center mb-6 sm:mb-8">Explore more collections</h2>
+        <h2 className="font-display text-2xl sm:text-3xl mb-3 sm:mb-4">About the {collection.title}</h2>
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">{collection.description}</p>
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl mt-4">Every product in this collection is sourced from trusted mines and artisans, verified in government-certified gemology labs, and energised with Vedic mantras by our astrologers before it reaches you. Prepaid orders ship free anywhere in India and every item is covered by our 7-day return policy.</p>
+      </section>
+
+      {seo && (
+        <section className="bg-secondary/40 border-y border-border">
+          <div className="mx-auto max-w-[900px] px-4 py-10 sm:py-14">
+            <h2 className="font-display text-2xl sm:text-3xl text-center mb-6">{collection.title} — FAQs</h2>
+            <div className="divide-y divide-border rounded-2xl border border-border bg-card">
+              {seo.faqs.map((f: { q: string; a: string }) => (
+                <details key={f.q} className="group p-4 sm:p-5">
+                  <summary className="cursor-pointer list-none font-medium text-sm sm:text-base flex justify-between gap-4">
+                    {f.q}
+                    <span className="text-primary group-open:rotate-45 transition-transform">+</span>
+                  </summary>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
+        <h2 className="font-display text-2xl sm:text-3xl text-center mb-6 sm:mb-8">Explore more collections</h2>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {others.map((c) => (
             <Link key={c.slug} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-3">
               <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
-                <img src={c.hero} alt={c.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={c.hero} alt={c.title} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="text-xs md:text-sm font-medium text-center">{c.title}</div>
             </Link>
