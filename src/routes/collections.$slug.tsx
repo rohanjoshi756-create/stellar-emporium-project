@@ -52,7 +52,7 @@ function CollectionPage() {
       <SiteHeader />
 
       <section className="relative overflow-hidden">
-        <img src={collection.hero} alt={collection.title} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={collection.hero} alt={collection.title} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, var(--background) 0%, oklch(from var(--background) l c h / 0.75) 45%, oklch(from var(--background) l c h / 0.35) 100%)" }} />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20 min-h-[200px] sm:min-h-[320px] flex flex-col justify-center">
           <nav className="text-xs text-muted-foreground mb-4">

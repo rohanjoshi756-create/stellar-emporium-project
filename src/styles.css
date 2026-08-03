@@ -160,5 +160,13 @@
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Skip layout/paint work for offscreen sections */
+.cv-auto { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  * { scroll-behavior: auto; }
+}
+
 html { -webkit-text-size-adjust: 100%; }
 body { overflow-x: hidden; }

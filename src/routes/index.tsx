@@ -34,6 +34,20 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://stellar-emporium-project.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Store",
+          name: "Nakshatra Store",
+          url: "https://stellar-emporium-project.lovable.app/",
+          description:
+            "Original Karungali Mala, Rudraksha, Pyrite, Zodiac bracelets, Yantras & Vastu products — certified and energised by astrologers.",
+        }),
+      },
+    ],
   }),
 });
 
@@ -69,7 +83,7 @@ const banners = collections.slice(0, 6).map((c) => ({ title: c.title, sub: c.tag
 
 function ProductRow({ title, items, slug }: { title: string; items: P[]; slug: string }) {
   return (
-    <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
+    <section className="cv-auto mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
       <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
       <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 md:grid md:grid-cols-4 lg:grid-cols-6 md:overflow-visible">
         {items.slice(0, 12).map((p) => (
@@ -87,13 +101,13 @@ function ProductRow({ title, items, slug }: { title: string; items: P[]; slug: s
 
 function TileGrid({ title, items }: { title: string; items: { title: string; slug: string; hero: string }[] }) {
   return (
-    <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
+    <section className="cv-auto mx-auto max-w-[1400px] px-3 sm:px-4 py-8 sm:py-12">
       <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-5 sm:mb-8">{title}</h2>
       <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
         {items.map((c) => (
           <Link key={c.slug} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-2 sm:gap-3">
             <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
-              <img src={c.hero} alt={c.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              <img src={c.hero} alt={c.title} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
             <div className="text-[11px] sm:text-sm font-medium text-center leading-tight">{c.title}</div>
           </Link>
@@ -110,7 +124,7 @@ function Index() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <img src={heroImg} alt="Nakshatra store spiritual collection" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1200} />
+        <img src={heroImg} alt="Nakshatra store spiritual collection" fetchPriority="high" decoding="async" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1200} />
         <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background/85 md:bg-gradient-to-r md:from-background/90 md:via-background/40 md:to-transparent" />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-14 md:py-36 min-h-[340px] md:min-h-[520px] flex flex-col justify-center">
           <div className="max-w-xl">
@@ -126,7 +140,7 @@ function Index() {
         <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2">
           {banners.map((b) => (
             <Link key={b.title} to="/collections/$slug" params={{ slug: b.slug }} className="group relative snap-start shrink-0 w-[80vw] max-w-[320px] h-[150px] sm:h-[180px] rounded-2xl overflow-hidden">
-              <img src={b.img} alt={b.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src={b.img} alt={b.title} loading="lazy" decoding="async" width={320} height={180} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-r from-foreground/75 to-transparent" />
               <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-center">
                 <div className="font-serif text-xl sm:text-2xl text-background">{b.title}</div>
@@ -191,7 +205,7 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-[color:var(--maroon)] text-primary-foreground">
+      <section className="cv-auto bg-[color:var(--maroon)] text-primary-foreground">
         <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-16">
           <div className="text-center">
             <div className="text-xs tracking-[0.25em] uppercase text-[color:var(--gold)]">Testimonials</div>
@@ -203,7 +217,7 @@ function Index() {
                 <div className="text-[color:var(--gold)] mb-3">★★★★★</div>
                 <p className="text-sm leading-relaxed opacity-90">"{r.t}"</p>
                 <div className="mt-4 flex items-center gap-3">
-                  <img src={r.img} alt={r.n} loading="lazy" className="h-10 w-10 rounded-full object-cover" />
+                  <img src={r.img} alt={r.n} loading="lazy" decoding="async" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
                   <span className="text-sm font-medium">{r.n}</span>
                 </div>
               </div>
@@ -213,7 +227,7 @@ function Index() {
       </section>
 
       {/* Our products */}
-      <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-10 sm:py-16">
+      <section className="cv-auto mx-auto max-w-[1400px] px-3 sm:px-4 py-10 sm:py-16">
         <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center">Our Products</h2>
         <p className="text-center text-muted-foreground text-sm mt-2">Browse our collection of {allProducts.length}+ products</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-10">
@@ -239,8 +253,8 @@ function Index() {
       </section>
 
       {/* Foundation */}
-      <section className="relative overflow-hidden">
-        <img src={heroRud} alt="Nakshatra Foundation" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+      <section className="cv-auto relative overflow-hidden">
+        <img src={heroRud} alt="Nakshatra Foundation" loading="lazy" decoding="async" width={1600} height={900} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-foreground/70" />
         <div className="relative mx-auto max-w-[1400px] px-4 py-14 sm:py-20 text-center text-background">
           <div className="text-xs tracking-[0.25em] uppercase text-[color:var(--gold)]">Nakshatra Foundation</div>
@@ -251,7 +265,7 @@ function Index() {
       </section>
 
       {/* FAQs */}
-      <section className="mx-auto max-w-[900px] px-4 py-10 sm:py-16">
+      <section className="cv-auto mx-auto max-w-[900px] px-4 py-10 sm:py-16">
         <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-center mb-6 sm:mb-8">FAQs</h2>
         <div className="divide-y divide-border border-y border-border">
           {faqs.map(f=>(
