@@ -34,6 +34,20 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://stellar-emporium-project.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Store",
+          name: "Nakshatra Store",
+          url: "https://stellar-emporium-project.lovable.app/",
+          description:
+            "Original Karungali Mala, Rudraksha, Pyrite, Zodiac bracelets, Yantras & Vastu products — certified and energised by astrologers.",
+        }),
+      },
+    ],
   }),
 });
 
