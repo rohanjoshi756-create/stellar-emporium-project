@@ -90,6 +90,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "preconnect", href: "https://nashatra-s3.s3.ap-south-1.amazonaws.com", crossOrigin: "anonymous" },
+      { rel: "dns-prefetch", href: "https://nashatra-s3.s3.ap-south-1.amazonaws.com" },
     ],
   }),
   shellComponent: RootShell,
