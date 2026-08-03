@@ -45,7 +45,7 @@ export function SiteHeader() {
 
           <Link to="/" className="flex items-center gap-2 shrink-0">
             <img src={logoAsset.url} alt="Nakshatra Store logo" width={40} height={40} className="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover shadow-[var(--shadow-soft)]" />
-            <span className="font-serif text-xl sm:text-2xl tracking-tight">Nakshatra</span>
+            <span className="font-display text-xl sm:text-2xl tracking-tight">Nakshatra</span>
           </Link>
 
           <nav className="hidden lg:flex flex-1 items-center justify-center gap-5 text-[13px]">
@@ -103,7 +103,7 @@ export function SiteFooter() {
           <div>
             <div className="flex items-center gap-2">
               <img src={logoAsset.url} alt="Nakshatra Store logo" width={36} height={36} loading="lazy" className="h-9 w-9 rounded-full object-cover" />
-              <span className="font-serif text-xl">Nakshatra</span>
+              <span className="font-display text-xl">Nakshatra</span>
             </div>
             <p className="mt-3 text-muted-foreground text-[13px] leading-relaxed">Nakshatra Store brings you authentic spiritual products — Rudraksha, Malas, Karungali, Crystal Trees, Yantras, Statues and Vastu items.</p>
             <p className="mt-3 text-muted-foreground text-[13px] leading-relaxed">Energised before dispatch. 7-day return policy. Support Mon–Sat, 10AM–7PM.</p>
@@ -183,7 +183,7 @@ export function ProductCard({ p }: { p: P }) {
       <div className="p-2.5 sm:p-3 flex flex-col flex-1">
         <h3 className="text-[12px] sm:text-[13px] font-medium line-clamp-2 min-h-[2.25rem]">{p.name}</h3>
         <div className="flex items-baseline gap-2 mt-1.5">
-          <span className="font-serif text-base sm:text-lg text-[color:var(--maroon)]">{p.price}</span>
+          <span className="font-display text-base sm:text-lg text-[color:var(--maroon)]">{p.price}</span>
           <span className="text-[11px] text-muted-foreground line-through">{p.old}</span>
         </div>
         <button className="mt-2.5 w-full text-xs rounded-full border border-foreground py-2 hover:bg-foreground hover:text-background transition">Add to cart</button>

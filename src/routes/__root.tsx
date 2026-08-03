@@ -83,6 +83,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Lab-certified, puja-energised spiritual products. Honestly sourced from Nepal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:site_name", content: "Nakshatra Store" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
     ],
     links: [
       {
@@ -90,6 +92,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+      },
       { rel: "preconnect", href: "https://nashatra-s3.s3.ap-south-1.amazonaws.com", crossOrigin: "anonymous" },
       { rel: "dns-prefetch", href: "https://nashatra-s3.s3.ap-south-1.amazonaws.com" },
     ],
