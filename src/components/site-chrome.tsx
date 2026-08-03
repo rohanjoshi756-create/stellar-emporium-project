@@ -163,7 +163,16 @@ export function ProductCard({ p }: { p: P }) {
   return (
     <div className="group flex flex-col bg-card rounded-2xl border border-border overflow-hidden hover:shadow-[var(--shadow-warm)] transition">
       <div className="relative aspect-square overflow-hidden bg-muted">
-        <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <img
+          src={p.img}
+          alt={p.name}
+          loading="lazy"
+          decoding="async"
+          width={400}
+          height={400}
+          sizes="(max-width: 640px) 46vw, (max-width: 1024px) 25vw, 210px"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
         {p.off > 0 && (
           <span className="absolute top-2 left-2 text-[10px] font-semibold bg-[color:var(--maroon)] text-primary-foreground px-2 py-1 rounded-full">{p.off}% OFF</span>
         )}
