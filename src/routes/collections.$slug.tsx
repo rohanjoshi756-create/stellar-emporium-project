@@ -1,12 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { collections, collectionBySlug, type P } from "@/data/catalog";
-import { seoFor } from "@/data/collection-seo";
+import { collections, collectionBySlug, type P, type Collection } from "@/data/catalog";
+import { seoFor, type CollectionSeo } from "@/data/collection-seo";
 import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
 export const Route = createFileRoute("/collections/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { collection: Collection; seo: CollectionSeo | null } => {
     const collection = collectionBySlug(params.slug);
     if (!collection) throw notFound();
     return { collection, seo: seoFor(params.slug) ?? null };
@@ -135,7 +135,7 @@ function CollectionNotFound() {
 function CollectionPage() {
   const { collection, seo } = Route.useLoaderData();
   const others = collections.filter((c) => c.slug !== collection.slug).slice(0, 6);
-  const inStock = collection.products.filter((p) => p.tag !== "Sold Out").length;
+  const inStock = collection.products.filter((p: P) => p.tag !== "Sold Out").length;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -184,7 +184,7 @@ function CollectionPage() {
       {seo && (
         <section className="bg-secondary/40 border-y border-border">
           <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14 grid gap-4 sm:grid-cols-3">
-            {seo.benefits.map((b) => (
+            {seo.benefits.map((b: { t: string; d: string }) => (
               <div key={b.t} className="rounded-2xl bg-card border border-border p-5">
                 <div className="font-display text-lg">{b.t}</div>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{b.d}</p>
@@ -205,7 +205,7 @@ function CollectionPage() {
           <div className="mx-auto max-w-[900px] px-4 py-10 sm:py-14">
             <h2 className="font-display text-2xl sm:text-3xl text-center mb-6">{collection.title} — FAQs</h2>
             <div className="divide-y divide-border rounded-2xl border border-border bg-card">
-              {seo.faqs.map((f) => (
+              {seo.faqs.map((f: { q: string; a: string }) => (
                 <details key={f.q} className="group p-4 sm:p-5">
                   <summary className="cursor-pointer list-none font-medium text-sm sm:text-base flex justify-between gap-4">
                     {f.q}
