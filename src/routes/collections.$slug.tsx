@@ -226,7 +226,7 @@ function CollectionPage() {
         <h2 className="font-display text-2xl sm:text-3xl text-center mb-6 sm:mb-8">Explore more collections</h2>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {others.map((c) => (
-            <Link key={c.slug} to="/collections/$slug" params={{ slug: c.handle }} className="group flex flex-col items-center gap-3">
+            <Link key={c.handle} to="/collections/$slug" params={{ slug: c.handle }} className="group flex flex-col items-center gap-3">
               <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
                 <img src={c.image} alt={c.imageAlt} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
