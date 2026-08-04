@@ -1,13 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { collections, collectionBySlug, type P, type Collection } from "@/data/catalog";
+import { productCollections, collectionByHandle, type Product, type ProductCollection } from "@/data/products";
 import { seoFor, type CollectionSeo } from "@/data/collection-seo";
-import { SiteHeader, SiteFooter, ProductCard } from "@/components/site-chrome";
+import { Header } from "@/components/layout/Header";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { Footer } from "@/components/layout/Footer";
+import { ProductCard } from "@/components/commerce/ProductCard";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
 export const Route = createFileRoute("/collections/$slug")({
-  loader: ({ params }): { collection: Collection; seo: CollectionSeo | null } => {
-    const collection = collectionBySlug(params.slug);
+  loader: ({ params }): { collection: ProductCollection; seo: CollectionSeo | null } => {
+    const collection = collectionByHandle(params.slug);
     if (!collection) throw notFound();
     return { collection, seo: seoFor(params.slug) ?? null };
   },
@@ -19,9 +22,9 @@ export const Route = createFileRoute("/collections/$slug")({
     const url = `${SITE}/collections/${params.slug}`;
     const title = seo?.seoTitle ?? `${collection.title} — Nakshatra Store`;
     const description = seo?.seoDescription ?? collection.description;
-    const image = collection.hero;
+    const image = collection.image;
     const priceValues = collection.products
-      .map((p) => Number(p.price.replace(/[^0-9.]/g, "")))
+      .map((p) => p.price)
       .filter((n) => Number.isFinite(n) && n > 0);
 
     return {
@@ -71,14 +74,14 @@ export const Route = createFileRoute("/collections/$slug")({
                   position: i + 1,
                   item: {
                     "@type": "Product",
-                    name: p.name,
-                    image: p.img,
+                    name: p.title,
+                    image: p.image,
                     offers: {
                       "@type": "Offer",
-                      price: p.price.replace(/[^0-9.]/g, ""),
+                      price: String(p.price),
                       priceCurrency: "INR",
                       availability:
-                        p.tag === "Sold Out"
+                        !p.available
                           ? "https://schema.org/OutOfStock"
                           : "https://schema.org/InStock",
                     },
@@ -121,28 +124,28 @@ export const Route = createFileRoute("/collections/$slug")({
 function CollectionNotFound() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteHeader />
+      <><AnnouncementBar /><Header /></>
       <div className="mx-auto max-w-[900px] px-4 py-24 text-center">
         <h1 className="font-display text-4xl">Collection not found</h1>
         <p className="mt-3 text-muted-foreground">The collection you are looking for doesn't exist.</p>
         <Link to="/collections" className="mt-8 inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-8 py-3 text-sm font-semibold">Browse all collections</Link>
       </div>
-      <SiteFooter />
+      <Footer />
     </div>
   );
 }
 
 function CollectionPage() {
   const { collection, seo } = Route.useLoaderData();
-  const others = collections.filter((c) => c.slug !== collection.slug).slice(0, 6);
-  const inStock = collection.products.filter((p: P) => p.tag !== "Sold Out").length;
+  const others = productCollections.filter((c) => c.handle !== collection.handle).slice(0, 6);
+  const inStock = collection.products.filter((p: Product) => p.available).length;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <SiteHeader />
+      <><AnnouncementBar /><Header /></>
 
       <section className="relative overflow-hidden">
-        <img src={collection.hero} alt={`${collection.title} — Nakshatra Store`} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={collection.image} alt={collection.imageAlt} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, var(--background) 0%, oklch(from var(--background) l c h / 0.75) 45%, oklch(from var(--background) l c h / 0.35) 100%)" }} />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20 min-h-[200px] sm:min-h-[320px] flex flex-col justify-center">
           <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground mb-4">
@@ -177,7 +180,7 @@ function CollectionPage() {
           <div className="text-xs text-muted-foreground">Free shipping · 7-day returns · Energised before dispatch</div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-8">
-          {collection.products.map((p: P) => <ProductCard key={p.id} p={p} />)}
+          {collection.products.map((p: Product) => <ProductCard key={p.id} product={p} />)}
         </div>
       </section>
 
@@ -223,9 +226,9 @@ function CollectionPage() {
         <h2 className="font-display text-2xl sm:text-3xl text-center mb-6 sm:mb-8">Explore more collections</h2>
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {others.map((c) => (
-            <Link key={c.slug} to="/collections/$slug" params={{ slug: c.slug }} className="group flex flex-col items-center gap-3">
+            <Link key={c.handle} to="/collections/$slug" params={{ slug: c.handle }} className="group flex flex-col items-center gap-3">
               <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
-                <img src={c.hero} alt={c.title} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={c.image} alt={c.imageAlt} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="text-xs md:text-sm font-medium text-center">{c.title}</div>
             </Link>
@@ -233,7 +236,7 @@ function CollectionPage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <Footer />
     </div>
   );
 }
