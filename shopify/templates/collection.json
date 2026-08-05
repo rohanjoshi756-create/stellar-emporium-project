@@ -1,0 +1,2 @@
+{ "sections": { "main": { "type": "main-collection" }, "recently-viewed": { "type": "recently-viewed" }, "newsletter": { "type": "newsletter" } },
+  "order": ["main","recently-viewed","newsletter"] }

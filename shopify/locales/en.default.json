@@ -1,0 +1,5 @@
+{
+  "general": { "search": { "placeholder": "Search rudraksha, karungali, pyrite…", "submit": "Search" }, "accessibility": { "skip_to_content": "Skip to content" } },
+  "products": { "product": { "add_to_cart": "Add to cart", "buy_now": "Buy it now", "sold_out": "Sold out", "quantity": "Quantity" } },
+  "cart": { "general": { "title": "Your cart", "subtotal": "Subtotal", "checkout": "Checkout", "empty": "Your cart is empty" } }
+}

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "promo": { "type": "promo-banner" },
+    "categories": { "type": "category-grid" },
+    "bestsellers": { "type": "featured-collection", "settings": { "title": "Best sellers", "collection": "best-sellers", "count": 12 } },
+    "rudraksha": { "type": "featured-collection", "settings": { "title": "Rudraksha Collections", "collection": "rudraksha", "count": 12, "tint": true } },
+    "bracelets": { "type": "featured-collection", "settings": { "title": "Bracelets", "collection": "bracelets", "count": 12 } },
+    "karungali": { "type": "featured-collection", "settings": { "title": "Sacred Karungali Store", "collection": "karungali", "count": 12, "tint": true } },
+    "testimonials": { "type": "testimonials" },
+    "recently-viewed": { "type": "recently-viewed" },
+    "faq": { "type": "faq" },
+    "newsletter": { "type": "newsletter" }
+  },
+  "order": ["hero","promo","categories","bestsellers","rudraksha","bracelets","karungali","testimonials","recently-viewed","faq","newsletter"]
+}
