@@ -1,0 +1,33 @@
+{%- comment -%}
+  cart-drawer.liquid — global slide-out cart. Rendered once in theme.liquid and
+  hydrated by theme.js from /cart.js, so it always matches the real Shopify cart.
+{%- endcomment -%}
+<div class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <h2 class="font-display" style="font-size:1.3rem;margin:0">Your cart</h2>
+      <button class="icon-btn" type="button" data-drawer-close aria-label="Close cart">{% render 'icon', name: 'close' %}</button>
+    </div>
+
+    {%- if settings.free_shipping_threshold > 0 -%}
+      <div style="padding:.9rem 1.15rem;background:var(--secondary);border-bottom:1px solid var(--border)" data-free-shipping>
+        <p style="margin:0;font-size:.78rem" data-free-shipping-text></p>
+        <span class="progress"><span style="width:0%"></span></span>
+      </div>
+    {%- endif -%}
+
+    <ul class="drawer__body" data-cart-lines style="list-style:none;margin:0"></ul>
+
+    <div class="drawer__foot">
+      <div style="display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.75rem">
+        <span>Subtotal</span><strong data-cart-subtotal></strong>
+      </div>
+      <a href="/checkout" class="btn btn-gold btn--block">Checkout</a>
+      <a href="/cart" class="btn btn-outline btn--block" style="margin-top:.5rem">View cart</a>
+      <p style="display:flex;align-items:center;justify-content:center;gap:.4rem;margin:.75rem 0 0;font-size:.7rem;color:var(--muted-foreground)">
+        {% render 'icon', name: 'lock' %} Secure payments · UPI, cards, COD
+      </p>
+    </div>
+  </div>
+</div>

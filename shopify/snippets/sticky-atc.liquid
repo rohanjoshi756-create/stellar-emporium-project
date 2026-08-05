@@ -1,0 +1,26 @@
+{%- comment -%}
+  sticky-atc.liquid — mobile persistent purchase bar. Posts through theme.js to
+  the same variant/quantity as the main product form.
+{%- endcomment -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+<div class="sticky-atc">
+  <div style="min-width:0;flex:1">
+    <p style="margin:0;font-size:.68rem;color:var(--muted-foreground);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ product.title }}</p>
+    <p style="margin:0" class="font-display">
+      <span style="color:var(--maroon);font-size:1.05rem">{{ variant.price | money }}</span>
+      {%- if variant.compare_at_price > variant.price -%}
+        <span class="product-card__compare">{{ variant.compare_at_price | money }}</span>
+      {%- endif -%}
+    </p>
+  </div>
+  <button type="button" class="btn btn-outline" style="padding:.75rem 1.1rem"
+          data-add-to-cart data-open-drawer data-variant-id="{{ variant.id }}" data-quantity="1"
+          {% unless product.available %}disabled{% endunless %}
+          aria-label="Add {{ product.title | escape }} to cart">Add</button>
+  <button type="button" class="btn btn-gold" style="padding:.75rem 1.4rem"
+          data-buy-now data-variant-id="{{ variant.id }}" data-quantity="1"
+          {% unless product.available %}disabled{% endunless %}
+          aria-label="Buy {{ product.title | escape }} now">
+    {% if product.available %}Buy now{% else %}Sold out{% endif %}
+  </button>
+</div>
