@@ -1,0 +1,30 @@
+{%- comment -%} Promotional collection tiles with overlay copy. {%- endcomment -%}
+<section class="section cv-auto reveal">
+  <div class="container-x tiles">
+    {%- for block in section.blocks -%}
+      <a class="tile" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image -%}
+          <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.image_alt | escape }}" width="900" height="506" loading="lazy" decoding="async">
+        {%- endif -%}
+        <span class="tile__body">
+          <span class="font-display" style="font-size:1.5rem">{{ block.settings.title }}</span>
+          <span style="font-size:.8rem;opacity:.85">{{ block.settings.subtitle }}</span>
+          <span style="margin-top:.6rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ block.settings.cta }} →</span>
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Promo banners",
+  "blocks": [ { "type": "banner", "name": "Banner", "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "cta", "label": "CTA label", "default": "Shop now" },
+    { "type": "url", "id": "url", "label": "Link" } ] } ],
+  "presets": [{ "name": "Promo banners" }]
+}
+{% endschema %}

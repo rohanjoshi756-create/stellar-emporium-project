@@ -1,0 +1,29 @@
+{%- comment -%} Shop by category — circular collection tiles. {%- endcomment -%}
+<section class="section cv-auto reveal">
+  <div class="container-x">
+    <p class="center" style="font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-foreground)">{{ section.settings.eyebrow }}</p>
+    <h2 class="center rule-gold" style="margin-top:.4rem">{{ section.settings.title }}</h2>
+    <div class="circles" style="margin-top:1.75rem">
+      {%- for block in section.blocks -%}
+        {%- assign c = collections[block.settings.collection] -%}
+        <a class="circle" href="{{ c.url }}" {{ block.shopify_attributes }}>
+          <span class="circle__media">
+            {%- if c.image -%}<img src="{{ c.image | image_url: width: 300 }}" alt="{{ c.title | escape }} collection" width="150" height="150" loading="lazy" decoding="async">{%- endif -%}
+          </span>
+          <span>{{ c.title }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Category grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Curated ranges" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Shop by Category" }
+  ],
+  "blocks": [ { "type": "category", "name": "Category", "settings": [ { "type": "collection", "id": "collection", "label": "Collection" } ] } ],
+  "presets": [{ "name": "Category grid" }]
+}
+{% endschema %}

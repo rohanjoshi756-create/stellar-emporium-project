@@ -1,0 +1,26 @@
+{%- comment -%} Customer reviews — social proof for paid traffic. {%- endcomment -%}
+<section class="section cv-auto section--tint reveal">
+  <div class="container-x">
+    <h2 class="center rule-gold">{{ section.settings.title }}</h2>
+    <div class="reviews" style="margin-top:1.75rem">
+      {%- for block in section.blocks -%}
+        <blockquote class="card-lux review" {{ block.shopify_attributes }}>
+          <p class="stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p style="font-size:.88rem">{{ block.settings.quote }}</p>
+          <footer style="font-size:.75rem;color:var(--muted-foreground)">— {{ block.settings.author }}, {{ block.settings.city }}</footer>
+        </blockquote>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [ { "type": "text", "id": "title", "label": "Heading", "default": "Loved by 50,000+ customers" } ],
+  "blocks": [ { "type": "review", "name": "Review", "settings": [
+    { "type": "textarea", "id": "quote", "label": "Quote" },
+    { "type": "text", "id": "author", "label": "Author" },
+    { "type": "text", "id": "city", "label": "City" } ] } ],
+  "presets": [{ "name": "Testimonials" }]
+}
+{% endschema %}
