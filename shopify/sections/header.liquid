@@ -1,0 +1,55 @@
+{%- comment -%} Sticky premium header: logo, search, nav, cart trigger, mobile drawer. {%- endcomment -%}
+<header class="header">
+  <div class="container-x header__row">
+    <button class="icon-btn" type="button" data-drawer-open="menu-drawer" aria-label="Open menu">{% render 'icon', name: 'menu' %}</button>
+    <a href="{{ routes.root_url }}" class="header__logo">
+      {%- if section.settings.logo -%}<img src="{{ section.settings.logo | image_url: width: 80 }}" alt="{{ shop.name | escape }} logo" width="40" height="40">{%- endif -%}
+      <span class="header__brand">{{ section.settings.brand_name | default: shop.name }}<small>{{ section.settings.tagline }}</small></span>
+    </a>
+    <form class="header__search" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="site-search">Search products</label>
+      <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted-foreground)">{% render 'icon', name: 'search' %}</span>
+      <input id="site-search" type="search" name="q" placeholder="{{ section.settings.search_placeholder }}" value="{{ search.terms | escape }}">
+    </form>
+    <div class="header__actions">
+      <a class="icon-btn" href="{{ routes.account_url }}" aria-label="Account">{% render 'icon', name: 'user' %}</a>
+      <button class="icon-btn" type="button" data-drawer-open="cart-drawer" aria-label="Open cart" style="position:relative">
+        {% render 'icon', name: 'cart' %}<span class="cart-count" data-cart-count hidden>0</span>
+      </button>
+    </div>
+  </div>
+  <nav class="nav container-x" aria-label="Primary">
+    {%- for link in linklists[section.settings.menu].links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+  </nav>
+  <div class="chips no-scrollbar">
+    {%- for link in linklists[section.settings.menu].links -%}<a class="pill" href="{{ link.url }}" style="white-space:nowrap">{{ link.title }}</a>{%- endfor -%}
+  </div>
+</header>
+<div class="drawer drawer--left" id="menu-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__head"><span class="font-display" style="font-size:1.2rem">Menu</span>
+      <button class="icon-btn" type="button" data-drawer-close aria-label="Close menu">{% render 'icon', name: 'close' %}</button></div>
+    <div class="drawer__body">
+      <form action="{{ routes.search_url }}" method="get" role="search" style="margin-bottom:1.25rem">
+        <label class="visually-hidden" for="drawer-search">Search products</label>
+        <input id="drawer-search" type="search" name="q" placeholder="{{ section.settings.search_placeholder }}" style="width:100%;border:1px solid var(--border);border-radius:var(--radius-full);padding:.8rem 1.1rem">
+      </form>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:.9rem">
+        {%- for link in linklists[section.settings.menu].links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Nakshatra" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Sacred · Certified" },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search rudraksha, karungali, pyrite…" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

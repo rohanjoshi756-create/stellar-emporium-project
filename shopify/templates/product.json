@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "main": { "type": "main-product" },
+    "related": { "type": "featured-collection", "settings": { "title": "You may also like", "count": 6, "tint": true } },
+    "testimonials": { "type": "testimonials" },
+    "recently-viewed": { "type": "recently-viewed" },
+    "faq": { "type": "faq" }
+  },
+  "order": ["main","related","testimonials","recently-viewed","faq"]
+}

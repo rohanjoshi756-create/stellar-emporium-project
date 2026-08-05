@@ -1,0 +1,12 @@
+[
+  { "name": "theme_info", "theme_name": "Nakshatra Luxe", "theme_version": "1.0.0", "theme_author": "Nakshatra Store", "theme_documentation_url": "https://nakshatra.store", "theme_support_url": "https://nakshatra.store" },
+  { "name": "Brand", "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" },
+      { "type": "color", "id": "color_ink", "label": "Ink / primary", "default": "#241f45" },
+      { "type": "color", "id": "color_gold", "label": "Gold accent", "default": "#e8b53c" },
+      { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number (with country code)" }
+  ] },
+  { "name": "Cart", "settings": [
+      { "type": "number", "id": "free_shipping_threshold", "label": "Free shipping threshold (in cents)", "default": 99900 }
+  ] }
+]

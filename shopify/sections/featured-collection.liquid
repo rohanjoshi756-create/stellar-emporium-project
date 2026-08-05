@@ -1,0 +1,28 @@
+{%- comment -%} Featured product row/grid. Reusable for Bestsellers, New arrivals, any collection. {%- endcomment -%}
+<section class="section cv-auto {% if section.settings.tint %}section--tint{% endif %} reveal">
+  <div class="container-x">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <h2 class="font-display">{{ section.settings.title }}</h2>
+      {%- if section.settings.collection != blank -%}
+        <a href="{{ collections[section.settings.collection].url }}" style="font-size:.78rem;color:var(--maroon)">View all →</a>
+      {%- endif -%}
+    </div>
+    <div class="scroll-row no-scrollbar" style="margin-top:1.25rem">
+      {%- for product in collections[section.settings.collection].products limit: section.settings.count -%}
+        {% render 'product-card', product: product, index: forloop.index0 %}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Best sellers" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "count", "min": 4, "max": 24, "step": 2, "default": 12, "label": "Products shown" },
+    { "type": "checkbox", "id": "tint", "label": "Tinted background", "default": false }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

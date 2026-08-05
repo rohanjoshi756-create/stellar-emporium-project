@@ -1,0 +1,20 @@
+{%- comment -%} All collections directory. {%- endcomment -%}
+<section class="section">
+  <div class="container-x">
+    <h1>All collections</h1>
+    <div class="tiles" style="margin-top:1.5rem">
+      {%- for c in collections -%}
+        <a class="tile" href="{{ c.url }}">
+          {%- if c.image -%}<img src="{{ c.image | image_url: width: 900 }}" alt="{{ c.title | escape }} collection" width="900" height="506" loading="lazy">{%- endif -%}
+          <span class="tile__body">
+            <span class="font-display" style="font-size:1.35rem">{{ c.title }}</span>
+            <span style="font-size:.78rem;opacity:.85">{{ c.products_count }} products</span>
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

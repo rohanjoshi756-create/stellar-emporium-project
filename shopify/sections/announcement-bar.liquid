@@ -1,0 +1,26 @@
+{%- comment -%} Scrolling store promises. {%- endcomment -%}
+<div class="announcement">
+  <div class="container-x announcement__inner">
+    <div style="flex:1;overflow:hidden">
+      <div class="marquee">
+        {%- for i in (1..2) -%}{%- for block in section.blocks -%}<span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>{%- endfor -%}{%- endfor -%}
+      </div>
+    </div>
+    {%- if section.settings.link_label != blank -%}<a href="{{ section.settings.link_url }}" style="color:var(--gold);white-space:nowrap">{{ section.settings.link_label }}</a>{%- endif -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "text", "id": "link_label", "label": "Helper link label", "default": "Need help? Chat with us" },
+    { "type": "url", "id": "link_url", "label": "Helper link URL" }
+  ],
+  "blocks": [ { "type": "message", "name": "Message", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Free shipping on prepaid orders" } ] } ],
+  "default": { "blocks": [
+    { "type": "message", "settings": { "text": "Free shipping on prepaid orders" } },
+    { "type": "message", "settings": { "text": "Energised by Vedic priests before dispatch" } },
+    { "type": "message", "settings": { "text": "Original Nepali Rudraksha with silver capping" } },
+    { "type": "message", "settings": { "text": "Govt. certified Karungali collection" } } ] }
+}
+{% endschema %}

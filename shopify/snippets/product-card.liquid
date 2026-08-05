@@ -1,0 +1,71 @@
+{%- comment -%}
+  product-card.liquid
+  Params: product (required), index (optional, for LCP priority), show_atc (default true)
+  Mirrors the React `ProductCard` component 1:1.
+{%- endcomment -%}
+{%- assign show_atc = show_atc | default: true -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- assign loading = 'lazy' -%}
+{%- if index and index < 4 -%}{%- assign loading = 'eager' -%}{%- endif -%}
+
+<article class="card-lux product-card">
+  <a href="{{ product.url }}" class="product-card__media" aria-label="{{ product.title | escape }}">
+    {%- if product.compare_at_price > product.price -%}
+      {%- assign off = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+      <span class="badge">{{ off }}% off</span>
+    {%- endif -%}
+    {%- unless product.available -%}
+      <span class="badge badge--soldout">Sold out</span>
+    {%- else -%}
+      {%- if variant.inventory_management != blank and variant.inventory_quantity == 1 -%}
+        <span class="badge badge--stock">Only 1 left</span>
+      {%- endif -%}
+    {%- endunless -%}
+
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 600 }}"
+           srcset="{{ product.featured_image | image_url: width: 300 }} 300w,
+                   {{ product.featured_image | image_url: width: 600 }} 600w,
+                   {{ product.featured_image | image_url: width: 900 }} 900w"
+           sizes="(max-width: 640px) 46vw, (max-width: 1024px) 25vw, 16vw"
+           alt="{{ product.featured_image.alt | default: product.title | escape }}"
+           width="600" height="600" loading="{{ loading }}" decoding="async"
+           {% if loading == 'eager' %}fetchpriority="high"{% endif %}>
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </a>
+
+  <div class="product-card__body">
+    <h3 class="product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+
+    {%- if product.metafields.reviews.rating.value != blank -%}
+      <p class="stars" aria-label="Rated {{ product.metafields.reviews.rating.value }} out of 5">
+        ★★★★★
+        <span style="color:var(--muted-foreground);font-size:.7rem">
+          {{ product.metafields.reviews.rating.value | round: 1 }} ({{ product.metafields.reviews.rating_count.value }})
+        </span>
+      </p>
+    {%- endif -%}
+
+    <p style="margin:0">
+      <span class="product-card__price">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="product-card__compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </p>
+
+    {%- if show_atc -%}
+      <div class="product-card__cta">
+        {%- if product.available -%}
+          <button type="button" class="btn btn-outline btn--block" style="padding:.6rem 1rem;font-size:.68rem"
+                  data-add-to-cart data-open-drawer
+                  data-variant-id="{{ variant.id }}" data-quantity="1"
+                  aria-label="Add {{ product.title | escape }} to cart">Add to cart</button>
+        {%- else -%}
+          <button type="button" class="btn btn-outline btn--block" style="padding:.6rem 1rem;font-size:.68rem" disabled>Sold out</button>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>

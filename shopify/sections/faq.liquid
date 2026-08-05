@@ -1,0 +1,31 @@
+{%- comment -%} FAQ accordion + FAQPage schema for rich results. {%- endcomment -%}
+<section class="section cv-auto reveal">
+  <div class="container-x">
+    <h2 class="center rule-gold">{{ section.settings.title }}</h2>
+    <div class="faq" style="margin-top:1.5rem">
+      {%- for block in section.blocks -%}
+        <details {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <p>{{ block.settings.answer }}</p>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+  {%- for block in section.blocks -%}
+  { "@type": "Question", "name": {{ block.settings.question | json }},
+    "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} } }{% unless forloop.last %},{% endunless %}
+  {%- endfor -%} ] }
+</script>
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [ { "type": "text", "id": "title", "label": "Heading", "default": "Frequently asked questions" } ],
+  "blocks": [ { "type": "faq", "name": "Question", "settings": [
+    { "type": "text", "id": "question", "label": "Question" },
+    { "type": "textarea", "id": "answer", "label": "Answer" } ] } ],
+  "presets": [{ "name": "FAQ" }]
+}
+{% endschema %}

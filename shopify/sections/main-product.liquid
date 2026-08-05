@@ -1,0 +1,92 @@
+{%- comment -%} Product page: gallery, buy box, trust blocks, sticky ATC. {%- endcomment -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+<div class="container-x" style="padding-top:1rem">
+  <nav aria-label="Breadcrumb" style="font-size:.72rem;color:var(--muted-foreground)">
+    <a href="{{ routes.root_url }}">Home</a> / <span>{{ product.title }}</span>
+  </nav>
+</div>
+<div class="pdp" data-gallery>
+  <div class="pdp__gallery">
+    <div class="pdp__main-image">
+      <img data-gallery-main src="{{ product.featured_image | image_url: width: 1000 }}"
+           alt="{{ product.featured_image.alt | default: product.title | escape }}"
+           width="1000" height="1000" fetchpriority="high" decoding="async">
+    </div>
+    {%- if product.images.size > 1 -%}
+      <div class="pdp__thumbs">
+        {%- for image in product.images limit: 4 -%}
+          <button type="button" data-gallery-thumb="{{ image | image_url: width: 1000 }}"
+                  data-alt="{{ product.title | escape }} — view {{ forloop.index }}"
+                  aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-label="Show image {{ forloop.index }}">
+            <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title | escape }} — view {{ forloop.index }}" width="80" height="80" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div>
+    <h1>{{ product.title }}</h1>
+    <p style="font-size:.75rem;color:var(--muted-foreground);margin-top:.5rem">Certified &amp; energised before dispatch</p>
+    <div class="price-row">
+      <span class="price">{{ variant.price | money }}</span>
+      {%- if variant.compare_at_price > variant.price -%}
+        <span class="price--compare">{{ variant.compare_at_price | money }}</span>
+        {%- assign off = variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round -%}
+        <span class="save">{{ off }}% OFF</span>
+      {%- endif -%}
+    </div>
+    <p style="font-size:.75rem;color:var(--muted-foreground);margin:.35rem 0 0">Inclusive of all taxes · Free shipping on prepaid orders</p>
+    {%- if product.available -%}
+      {%- if variant.inventory_management != blank and variant.inventory_quantity == 1 -%}
+        <p class="stock stock--low">Hurry — only 1 left in stock</p>
+      {%- else -%}
+        <p class="stock">In stock — ships in 24 hours</p>
+      {%- endif -%}
+    {%- else -%}
+      <p class="stock stock--out">Currently sold out</p>
+    {%- endif -%}
+
+    {% render 'product-trust' %}
+
+    {% form 'product', product, data-product-form: true %}
+      <input type="hidden" name="id" value="{{ variant.id }}">
+      {%- if product.variants.size > 1 -%}
+        <div style="margin-top:1.15rem">
+          <label for="variant-select" style="font-size:.78rem">Option</label>
+          <select id="variant-select" data-variant-select style="display:block;margin-top:.4rem;border:1px solid var(--border);border-radius:var(--radius-full);padding:.7rem 1rem">
+            {%- for v in product.variants -%}
+              <option value="{{ v.id }}" {% if v == variant %}selected{% endif %} {% unless v.available %}disabled{% endunless %}>{{ v.title }} — {{ v.price | money }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endif -%}
+      <div class="buybox">
+        <div class="qty">
+          <button type="button" data-qty-step="-1" aria-label="Decrease quantity">−</button>
+          <label class="visually-hidden" for="quantity">Quantity</label>
+          <input id="quantity" name="quantity" value="1" readonly>
+          <button type="button" data-qty-step="1" aria-label="Increase quantity">+</button>
+        </div>
+        <button type="button" class="btn btn-outline" style="flex:1;min-width:180px"
+                data-add-to-cart data-open-drawer data-variant-id="{{ variant.id }}"
+                {% unless product.available %}disabled{% endunless %}>Add to cart</button>
+      </div>
+      <button type="button" class="btn btn-gold btn--block" style="margin-top:.75rem;max-width:460px"
+              data-buy-now data-variant-id="{{ variant.id }}"
+              {% unless product.available %}disabled{% endunless %}>Buy it now</button>
+    {% endform %}
+
+    <div style="margin-top:1.5rem" class="card-lux">
+      <div style="padding:1.15rem">
+        <h2 class="font-display" style="font-size:1.2rem">Product details</h2>
+        <div style="font-size:.86rem;color:var(--muted-foreground);margin-top:.5rem">{{ product.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% render 'sticky-atc', product: product %}
+{% schema %}
+{ "name": "Product", "settings": [] }
+{% endschema %}

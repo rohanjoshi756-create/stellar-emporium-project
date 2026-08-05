@@ -1,0 +1,27 @@
+{%- comment -%} Search results page. {%- endcomment -%}
+<section class="section">
+  <div class="container-x">
+    <h1>{% if search.terms != blank %}Results for “{{ search.terms | escape }}”{% else %}Search the store{% endif %}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" style="margin-top:1.25rem;max-width:520px;display:flex;gap:.5rem">
+      <label class="visually-hidden" for="search-page-input">Search products</label>
+      <input id="search-page-input" type="search" name="q" value="{{ search.terms | escape }}"
+             placeholder="Try “5 mukhi rudraksha” or “pyrite bracelet”"
+             style="flex:1;border:1px solid var(--border);border-radius:var(--radius-full);padding:.85rem 1.2rem">
+      <button type="submit" class="btn btn-gold">Search</button>
+    </form>
+    {%- if search.performed -%}
+      <p style="font-size:.85rem;color:var(--muted-foreground);margin-top:1rem" aria-live="polite">{{ search.results_count }} results found</p>
+      {%- paginate search.results by 24 -%}
+        <div class="grid-products" style="margin-top:1.25rem">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}{% render 'product-card', product: item, index: forloop.index0 %}{%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}<nav class="center" style="margin-top:2rem">{{ paginate | default_pagination }}</nav>{%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}
