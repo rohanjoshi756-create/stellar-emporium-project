@@ -1,0 +1,38 @@
+{%- comment -%} Collection page: SEO hero, product grid, pagination. {%- endcomment -%}
+<section class="hero">
+  <div class="hero__media">
+    {%- if collection.image -%}<img src="{{ collection.image | image_url: width: 1800 }}" alt="{{ collection.title | escape }} collection" width="1800" height="640" fetchpriority="high" decoding="async">{%- endif -%}
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="container-x hero__inner" style="min-height:280px">
+    <nav aria-label="Breadcrumb" style="font-size:.72rem;color:var(--muted-foreground)">
+      <a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.collections_url }}">Collections</a> / <span>{{ collection.title }}</span>
+    </nav>
+    <h1 style="margin-top:.75rem">{{ collection.title }}</h1>
+    <div style="max-width:60ch;margin-top:.75rem;font-size:.92rem;color:var(--muted-foreground)">{{ collection.description }}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem">
+      <span class="pill">Govt. lab certified</span><span class="pill">Energised before dispatch</span>
+      <span class="pill">Free shipping (prepaid)</span><span class="pill">7-day returns</span>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container-x">
+    <h2 class="font-display" style="font-size:1.3rem">{{ collection.products_count }} {{ collection.title }} products</h2>
+    {%- paginate collection.products by 24 -%}
+      <div class="grid-products" style="margin-top:1.25rem">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product, index: forloop.index0 %}
+        {%- else -%}
+          <p>No products in this collection yet.</p>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="center" style="margin-top:2rem" aria-label="Pagination">{{ paginate | default_pagination }}</nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

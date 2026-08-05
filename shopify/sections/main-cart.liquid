@@ -1,0 +1,36 @@
+{%- comment -%} Cart page: lines, free-shipping progress, checkout. {%- endcomment -%}
+<section class="section">
+  <div class="container-x">
+    <h1>Your cart</h1>
+    {%- if cart.item_count == 0 -%}
+      <div class="card-lux center" style="padding:3rem;margin-top:2rem">
+        <p class="font-display" style="font-size:1.5rem;margin:0">Your cart is empty</p>
+        <p style="color:var(--muted-foreground)">Explore our best sellers — every piece is certified and energised.</p>
+        <a class="btn btn-gold" href="{{ routes.all_products_collection_url }}">Shop best sellers</a>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" class="cart-grid" style="margin-top:2rem">
+        <ul data-cart-lines style="list-style:none;margin:0;padding:0"></ul>
+        <aside class="card-lux" style="padding:1.25rem">
+          <h2 class="font-display" style="font-size:1.25rem;margin:0">Order summary</h2>
+          <div style="display:flex;justify-content:space-between;margin-top:1rem;font-size:.9rem">
+            <span>Subtotal</span><strong data-cart-subtotal>{{ cart.total_price | money }}</strong>
+          </div>
+          {%- if settings.free_shipping_threshold > 0 -%}
+            <div data-free-shipping style="margin-top:.9rem">
+              <p style="margin:0;font-size:.75rem" data-free-shipping-text></p>
+              <span class="progress"><span style="width:0%"></span></span>
+            </div>
+          {%- endif -%}
+          <button type="submit" name="checkout" class="btn btn-gold btn--block" style="margin-top:1.1rem">Secure checkout</button>
+          <p style="display:flex;align-items:center;justify-content:center;gap:.4rem;margin:.75rem 0 0;font-size:.7rem;color:var(--muted-foreground)">
+            {% render 'icon', name: 'lock' %} 100% secure payments · UPI, cards, COD
+          </p>
+        </aside>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}
