@@ -1,0 +1,39 @@
+{%- comment -%} Hero banner with CTA hierarchy and trust proof. LCP image is eager. {%- endcomment -%}
+<section class="hero">
+  <div class="hero__media">
+    {%- if section.settings.image -%}<img src="{{ section.settings.image | image_url: width: 1800 }}" alt="{{ section.settings.image_alt | escape }}" width="1800" height="900" fetchpriority="high" decoding="async">{%- endif -%}
+  </div>
+  <div class="hero__scrim"></div>
+  <div class="container-x hero__inner">
+    <p class="hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1 class="hero__title">{{ section.settings.title }}<em>{{ section.settings.title_accent }}</em></h1>
+    <p class="hero__sub">{{ section.settings.subtitle }}</p>
+    <div class="hero__ctas">
+      <a class="btn btn-gold" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+      <a class="btn btn-outline" href="{{ section.settings.cta2_url }}">{{ section.settings.cta2_label }}</a>
+    </div>
+    <div class="hero__proof">
+      <span>{% render 'icon', name: 'shield' %} Govt. lab certified</span>
+      <span>{% render 'icon', name: 'sparkle' %} Energised by astrologers</span>
+      <span>{% render 'icon', name: 'truck' %} Free prepaid shipping</span>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Energised rudraksha and crystal bracelets on silk" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Sacred · Certified · Energised" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Nakshatra" },
+    { "type": "text", "id": "title_accent", "label": "Accent line", "default": "Store" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Rudraksha, Malas, Karungali & Vastu — energised for you" },
+    { "type": "text", "id": "cta_label", "label": "Primary CTA", "default": "Shop now" },
+    { "type": "url", "id": "cta_url", "label": "Primary CTA link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary CTA", "default": "Explore collections" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary CTA link" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}
