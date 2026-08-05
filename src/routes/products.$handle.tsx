@@ -217,6 +217,20 @@ function ProductPage() {
         </section>
       )}
 
+      {/* Social proof + objection handling — the two highest-impact PDP blocks. */}
+      <Testimonials />
+      <FAQ title="Frequently asked questions" items={homeFaqs.slice(0, 5)} />
+
+      {/* Persistent mobile purchase bar */}
+      <StickyBuyBar
+        title={product.title}
+        variantId={variant.id}
+        quantity={quantity}
+        price={variant.price}
+        compareAtPrice={product.compareAtPrice}
+        available={variant.available}
+      />
+
       <Footer />
     </div>
   );
