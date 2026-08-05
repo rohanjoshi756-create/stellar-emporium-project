@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/commerce/ProductCard";
+import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
@@ -143,7 +144,7 @@ function CollectionPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <><AnnouncementBar /><Header /></>
-
+      <main id="main">
       <section className="relative overflow-hidden">
         <img src={collection.image} alt={collection.imageAlt} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, var(--background) 0%, oklch(from var(--background) l c h / 0.75) 45%, oklch(from var(--background) l c h / 0.35) 100%)" }} />
@@ -235,7 +236,8 @@ function CollectionPage() {
           ))}
         </div>
       </section>
-
+      <RecentlyViewed />
+      </main>
       <Footer />
     </div>
   );

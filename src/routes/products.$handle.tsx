@@ -15,7 +15,8 @@ import { QuantitySelector } from "@/components/commerce/QuantitySelector";
 import { StickyBuyBar } from "@/components/commerce/StickyBuyBar";
 import { TrustBadgeGrid, OffersBox, DeliveryPromise } from "@/components/commerce/ProductAssurance";
 import { ProductCard } from "@/components/commerce/ProductCard";
-import { Testimonials } from "@/components/sections/Testimonials";
+import { ReviewsSummary } from "@/components/sections/ReviewsSummary";
+import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import { FAQ } from "@/components/sections/FAQ";
 import { homeFaqs } from "@/data/site-content";
 
@@ -117,7 +118,7 @@ function ProductPage() {
   return (
     <div className="min-h-screen bg-background text-foreground pb-20 lg:pb-0">
       <><AnnouncementBar /><Header /></>
-
+      <main id="main">
       <section className="mx-auto max-w-[1200px] px-4 py-6 sm:py-10">
         <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground mb-5">
           <Link to="/" className="hover:text-primary">Home</Link> /{" "}
@@ -129,17 +130,29 @@ function ProductPage() {
           <span className="text-foreground">{product.title}</span>
         </nav>
 
-        <div className="grid gap-6 sm:gap-10 md:grid-cols-2">
-          <div className="md:sticky md:top-4 md:self-start rounded-2xl overflow-hidden border border-border bg-card">
-            <img
-              src={product.image}
-              alt={product.imageAlt}
-              fetchPriority="high"
-              decoding="async"
-              width={800}
-              height={800}
-              className="w-full h-full object-cover aspect-square"
-            />
+        <div className="grid gap-6 sm:gap-12 md:grid-cols-2">
+          <div className="md:sticky md:top-28 md:self-start">
+            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-[var(--shadow-soft)]">
+              <img
+                src={product.image}
+                alt={product.imageAlt}
+                fetchPriority="high"
+                decoding="async"
+                width={900}
+                height={900}
+                sizes="(max-width: 768px) 100vw, 560px"
+                className="w-full h-full object-cover aspect-square"
+              />
+            </div>
+            {product.images.length > 1 && (
+              <ul className="mt-3 flex gap-3">
+                {product.images.slice(0, 4).map((src: string, i: number) => (
+                  <li key={src} className="h-20 w-20 rounded-xl overflow-hidden border border-border">
+                    <img src={src} alt={`${product.title} — view ${i + 1}`} loading="lazy" width={80} height={80} className="h-full w-full object-cover" />
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div>
@@ -158,8 +171,12 @@ function ProductPage() {
             </div>
             <p className="mt-2 text-xs text-muted-foreground">Inclusive of all taxes · Free shipping on prepaid orders</p>
 
-            <p className={`mt-4 text-sm ${product.available ? "text-foreground" : "text-muted-foreground"}`}>
-              {product.available ? (product.inventoryQty <= 1 ? "Only 1 left in stock" : "In stock — ships in 24 hours") : "Currently sold out"}
+            <p className={`mt-4 text-sm font-medium ${product.available ? (product.inventoryQty <= 1 ? "text-destructive" : "text-[color:var(--success)]") : "text-muted-foreground"}`}>
+              {product.available
+                ? product.inventoryQty <= 1
+                  ? "Hurry — only 1 left in stock"
+                  : "In stock — ships in 24 hours"
+                : "Currently sold out"}
             </p>
 
             <OffersBox />
@@ -169,20 +186,26 @@ function ProductPage() {
               <QuantitySelector value={quantity} max={Math.max(1, Math.min(10, product.inventoryQty))} onChange={setQuantity} />
               <div className="flex-1 min-w-[180px]">
                 <AddToCartButton
-                  className="!py-3 !text-sm"
+                  className="!py-3.5 !text-sm"
                   variantId={variant.id}
                   quantity={quantity}
                   price={variant.price}
                   available={variant.available}
+                  title={product.title}
+                  image={product.image}
+                  imageAlt={product.imageAlt}
                 />
               </div>
             </div>
-            <div className="mt-3 max-w-sm">
+            <div className="mt-3 max-w-md">
               <BuyNowButton
                 variantId={variant.id}
                 quantity={quantity}
                 price={variant.price}
                 available={variant.available}
+                title={product.title}
+                image={product.image}
+                imageAlt={product.imageAlt}
               />
             </div>
 
@@ -209,17 +232,19 @@ function ProductPage() {
       </section>
 
       {related.length > 0 && (
-        <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-10 sm:py-14 border-t border-border">
-          <h2 className="font-display text-2xl sm:text-3xl text-center mb-6 sm:mb-8">You may also like</h2>
+        <section className="container-x py-10 sm:py-14 border-t border-border">
+          <h2 className="font-display text-2xl sm:text-3xl text-center rule-gold mb-6 sm:mb-8">You may also like</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
             {related.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>
         </section>
       )}
 
-      {/* Social proof + objection handling — the two highest-impact PDP blocks. */}
-      <Testimonials />
+      {/* Social proof + objection handling — the highest-impact PDP blocks. */}
+      <ReviewsSummary />
+      <RecentlyViewed currentHandle={product.handle} />
       <FAQ title="Frequently asked questions" items={homeFaqs.slice(0, 5)} />
+      </main>
 
       {/* Persistent mobile purchase bar */}
       <StickyBuyBar
@@ -229,6 +254,8 @@ function ProductPage() {
         price={variant.price}
         compareAtPrice={product.compareAtPrice}
         available={variant.available}
+        image={product.image}
+        imageAlt={product.imageAlt}
       />
 
       <Footer />

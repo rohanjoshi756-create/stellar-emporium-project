@@ -18,3 +18,6 @@ export { Testimonials } from "./Testimonials";
 export { PressBar } from "./PressBar";
 export { AboutStore } from "./AboutStore";
 export { FAQ } from "./FAQ";
+export { NewsletterSection } from "./Newsletter";
+export { RecentlyViewed } from "./RecentlyViewed";
+export { ReviewsSummary } from "./ReviewsSummary";

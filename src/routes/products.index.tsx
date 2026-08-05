@@ -5,6 +5,7 @@ import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/commerce/ProductCard";
+import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
@@ -29,7 +30,8 @@ function ProductsIndex() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <><AnnouncementBar /><Header /></>
-      <section className="mx-auto max-w-[1400px] px-3 sm:px-4 py-10 sm:py-14">
+      <main id="main">
+      <section className="container-x py-10 sm:py-14">
         <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground mb-4">
           <Link to="/" className="hover:text-primary">Home</Link> / Products
         </nav>
@@ -39,6 +41,8 @@ function ProductsIndex() {
           {products.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       </section>
+      <RecentlyViewed />
+      </main>
       <Footer />
     </div>
   );

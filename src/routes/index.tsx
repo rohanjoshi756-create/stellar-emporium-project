@@ -21,6 +21,8 @@ import {
   FAQ,
   Footer,
 } from "@/components/sections";
+import { ReviewsSummary } from "@/components/sections/ReviewsSummary";
+import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import {
   rudrakshaProducts,
   malaProducts,
@@ -78,6 +80,7 @@ function Index() {
       <AnnouncementBar />
       {/* 02 Header + cart trigger */}
       <Header />
+      <main id="main">
       {/* 03 Hero */}
       <Hero />
       {/* 04 Promo banners */}
@@ -106,15 +109,20 @@ function Index() {
       <ShopByPurpose />
       {/* 10 Testimonials */}
       <Testimonials />
+      {/* 10b Aggregate review proof */}
+      <ReviewsSummary />
       {/* 11 Full catalogue grid */}
       <NewArrivals />
+      {/* 11b Recently viewed — returns ad traffic to intent products */}
+      <RecentlyViewed />
       {/* 12 About the store */}
       <AboutStore />
       {/* 13 Foundation CTA */}
       <AstrologerCTA />
       {/* 14 FAQ */}
       <FAQ items={homeFaqs} />
-      {/* 15 Footer */}
+      </main>
+      {/* 15 Footer (includes newsletter lead capture) */}
       <Footer />
     </div>
   );
