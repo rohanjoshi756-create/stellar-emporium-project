@@ -4,13 +4,14 @@
  */
 import { formatPrice, type Product } from "@/data/products";
 import { AddToCartButton } from "./AddToCartButton";
+import { Link } from "@tanstack/react-router";
 
 export function ProductCard({ product }: { product: Product }) {
   const variant = product.variants[0];
 
   return (
     <article className="group flex flex-col bg-card rounded-2xl border border-border overflow-hidden hover:shadow-[var(--shadow-warm)] transition">
-      <div className="relative aspect-square overflow-hidden bg-muted">
+      <Link to="/products/$handle" params={{ handle: product.handle }} className="relative aspect-square overflow-hidden bg-muted block">
         <img
           src={product.image}
           alt={product.imageAlt}
@@ -29,9 +30,13 @@ export function ProductCard({ product }: { product: Product }) {
         {product.badge && (
           <span className="absolute bottom-2 left-2 text-[10px] bg-background/90 px-2 py-1 rounded-full">{product.badge}</span>
         )}
-      </div>
+      </Link>
       <div className="p-2.5 sm:p-3 flex flex-col flex-1">
-        <h3 className="text-[12px] sm:text-[13px] font-medium line-clamp-2 min-h-[2.25rem]">{product.title}</h3>
+        <h3 className="text-[12px] sm:text-[13px] font-medium line-clamp-2 min-h-[2.25rem]">
+          <Link to="/products/$handle" params={{ handle: product.handle }} className="hover:text-primary transition">
+            {product.title}
+          </Link>
+        </h3>
         <div className="flex items-baseline gap-2 mt-1.5">
           <span className="font-display text-base sm:text-lg text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
           {product.compareAtPrice && (
