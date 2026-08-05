@@ -3,13 +3,21 @@
  * Renders entirely from the typed Product model in src/data/products.ts.
  * Maps to Shopify `templates/product.liquid` on migration.
  */
+import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { productByHandle, products, collectionByHandle, formatPrice, type Product } from "@/data/products";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
+import { BuyNowButton } from "@/components/commerce/BuyNowButton";
+import { QuantitySelector } from "@/components/commerce/QuantitySelector";
+import { StickyBuyBar } from "@/components/commerce/StickyBuyBar";
+import { TrustBadgeGrid, OffersBox, DeliveryPromise } from "@/components/commerce/ProductAssurance";
 import { ProductCard } from "@/components/commerce/ProductCard";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQ } from "@/components/sections/FAQ";
+import { homeFaqs } from "@/data/site-content";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
@@ -100,13 +108,14 @@ function ProductNotFound() {
 function ProductPage() {
   const { product } = Route.useLoaderData();
   const variant = product.variants[0];
+  const [quantity, setQuantity] = useState(1);
   const collection = collectionByHandle(product.collectionHandle);
   const related = products
     .filter((p) => p.collectionHandle === product.collectionHandle && p.id !== product.id)
     .slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground pb-20 lg:pb-0">
       <><AnnouncementBar /><Header /></>
 
       <section className="mx-auto max-w-[1200px] px-4 py-6 sm:py-10">
@@ -121,7 +130,7 @@ function ProductPage() {
         </nav>
 
         <div className="grid gap-6 sm:gap-10 md:grid-cols-2">
-          <div className="rounded-2xl overflow-hidden border border-border bg-card">
+          <div className="md:sticky md:top-4 md:self-start rounded-2xl overflow-hidden border border-border bg-card">
             <img
               src={product.image}
               alt={product.imageAlt}
@@ -135,6 +144,9 @@ function ProductPage() {
 
           <div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight">{product.title}</h1>
+            <p className="mt-2 text-xs text-muted-foreground">
+              {collection?.title ?? "Nakshatra"} · Certified &amp; energised before dispatch
+            </p>
             <div className="mt-4 flex items-baseline gap-3">
               <span className="font-display text-3xl text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
               {product.compareAtPrice && (
@@ -150,15 +162,32 @@ function ProductPage() {
               {product.available ? (product.inventoryQty <= 1 ? "Only 1 left in stock" : "In stock — ships in 24 hours") : "Currently sold out"}
             </p>
 
+            <OffersBox />
+
             {/* Cart logic is isolated — swapped for Shopify's cart on migration. */}
-            <div className="mt-5 max-w-xs">
-              <AddToCartButton
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <QuantitySelector value={quantity} max={Math.max(1, Math.min(10, product.inventoryQty))} onChange={setQuantity} />
+              <div className="flex-1 min-w-[180px]">
+                <AddToCartButton
+                  className="!py-3 !text-sm"
+                  variantId={variant.id}
+                  quantity={quantity}
+                  price={variant.price}
+                  available={variant.available}
+                />
+              </div>
+            </div>
+            <div className="mt-3 max-w-sm">
+              <BuyNowButton
                 variantId={variant.id}
-                quantity={1}
+                quantity={quantity}
                 price={variant.price}
                 available={variant.available}
               />
             </div>
+
+            <DeliveryPromise />
+            <TrustBadgeGrid />
 
             <ul className="mt-7 space-y-2 text-sm text-muted-foreground">
               <li>✦ Government lab certified for authenticity</li>
