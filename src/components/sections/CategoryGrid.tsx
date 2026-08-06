@@ -23,7 +23,7 @@ export function CategoryGrid({ title = "Shop by Category" }: { title?: string })
               params={{ slug: c.handle }}
               className="group flex flex-col items-center gap-2.5 sm:gap-3"
             >
-              <div className="relative aspect-square w-full rounded-full overflow-hidden bg-card ring-1 ring-border group-hover:ring-2 group-hover:ring-[color:var(--gold)] transition-all duration-500 shadow-[var(--shadow-soft)]">
+              <div className="relative aspect-square w-full rounded-full overflow-hidden bg-card ring-1 ring-foreground/15 group-hover:ring-2 group-hover:ring-[color:var(--gold)] transition-all duration-500 shadow-[var(--shadow-soft)]">
                 <img
                   src={c.image}
                   alt={c.imageAlt}
@@ -32,10 +32,11 @@ export function CategoryGrid({ title = "Shop by Category" }: { title?: string })
                   width={220}
                   height={220}
                   sizes="(max-width: 640px) 28vw, 160px"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover brightness-95 contrast-110 saturate-110 group-hover:scale-110 group-hover:brightness-100 transition-all duration-700"
                 />
+                <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-t from-foreground/55 via-foreground/10 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
               </div>
-              <div className="text-[11px] sm:text-[13px] font-medium text-center leading-tight group-hover:text-primary transition-colors">
+              <div className="text-[11px] sm:text-[13px] font-semibold text-center leading-tight text-foreground group-hover:text-primary transition-colors">
                 {c.title}
               </div>
             </Link>
