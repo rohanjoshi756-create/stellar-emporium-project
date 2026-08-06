@@ -147,17 +147,17 @@ function CollectionPage() {
       <main id="main">
       <section className="relative overflow-hidden">
         <img src={collection.image} alt={collection.imageAlt} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, var(--background) 0%, oklch(from var(--background) l c h / 0.75) 45%, oklch(from var(--background) l c h / 0.35) 100%)" }} />
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20 min-h-[200px] sm:min-h-[320px] flex flex-col justify-center">
-          <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground mb-4">
-            <Link to="/" className="hover:text-primary">Home</Link> / <Link to="/collections" className="hover:text-primary">Collections</Link> / <span className="text-foreground">{collection.title}</span>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, oklch(from var(--foreground) l c h / 0.92) 0%, oklch(from var(--foreground) l c h / 0.8) 45%, oklch(from var(--foreground) l c h / 0.45) 100%)" }} />
+        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20 min-h-[220px] sm:min-h-[340px] flex flex-col justify-center text-background">
+          <nav aria-label="Breadcrumb" className="text-xs text-background/70 mb-4">
+            <Link to="/" className="hover:text-[color:var(--gold)]">Home</Link> / <Link to="/collections" className="hover:text-[color:var(--gold)]">Collections</Link> / <span className="text-background">{collection.title}</span>
           </nav>
           <h1 className="font-display text-3xl sm:text-4xl md:text-6xl leading-tight tracking-tight max-w-2xl">{seo?.h1 ?? collection.title}</h1>
-          <p className="mt-3 sm:mt-4 font-display text-base sm:text-xl md:text-2xl text-foreground/80">{collection.tagline}</p>
-          <p className="mt-3 max-w-2xl text-sm sm:text-base text-muted-foreground leading-relaxed">{seo?.intro ?? collection.description}</p>
+          <p className="mt-3 sm:mt-4 font-display text-base sm:text-xl md:text-2xl text-[color:var(--gold)]">{collection.tagline}</p>
+          <p className="mt-3 max-w-2xl text-sm sm:text-base text-background/80 leading-relaxed">{seo?.intro ?? collection.description}</p>
           <div className="mt-5 flex flex-wrap gap-2 text-[11px] sm:text-xs">
             {["Govt. lab certified", "Energised before dispatch", "Free shipping (prepaid)", "7-day returns"].map((t) => (
-              <span key={t} className="rounded-full border border-border bg-background/70 px-3 py-1.5">{t}</span>
+              <span key={t} className="rounded-full border border-background/25 bg-background/10 backdrop-blur-sm px-3 py-1.5 text-background/90">{t}</span>
             ))}
           </div>
         </div>
