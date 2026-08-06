@@ -146,7 +146,7 @@ function CollectionPage() {
       <><AnnouncementBar /><Header /></>
       <main id="main">
       <section className="relative overflow-hidden">
-        <img src={collection.image} alt={collection.imageAlt} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={artFor(collection.handle, collection.image)} alt={collection.imageAlt} fetchPriority="high" decoding="async" width={1600} height={640} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, oklch(from var(--foreground) l c h / 0.92) 0%, oklch(from var(--foreground) l c h / 0.8) 45%, oklch(from var(--foreground) l c h / 0.45) 100%)" }} />
         <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 py-12 sm:py-20 min-h-[220px] sm:min-h-[340px] flex flex-col justify-center text-background">
           <nav aria-label="Breadcrumb" className="text-xs text-background/70 mb-4">
