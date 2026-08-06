@@ -2,6 +2,26 @@
 import { Link } from "@tanstack/react-router";
 import { productCollections } from "@/data/products";
 import { categoryStripHeading } from "@/data/site-content";
+import catBracelets from "@/assets/cat-bracelets.jpg";
+import catMala from "@/assets/cat-mala.jpg";
+import catCrystalTree from "@/assets/cat-crystal-tree.jpg";
+import catVastu from "@/assets/cat-vastu.jpg";
+import catRudraksha from "@/assets/cat-rudraksha.jpg";
+import catStatues from "@/assets/cat-statues.jpg";
+import catKarungali from "@/assets/cat-karungali.jpg";
+import catYantra from "@/assets/cat-yantra.jpg";
+
+/** Editorial category imagery — replaces the logo-style source thumbnails. */
+const categoryArt: Record<string, string> = {
+  bracelets: catBracelets,
+  mala: catMala,
+  "crystal-trees": catCrystalTree,
+  vastu: catVastu,
+  rudraksha: catRudraksha,
+  statues: catStatues,
+  karungali: catKarungali,
+  yantras: catYantra,
+};
 
 const categories = productCollections.filter((c) => c.handle !== "best-sellers");
 
@@ -25,7 +45,7 @@ export function CategoryGrid({ title = "Shop by Category" }: { title?: string })
             >
               <div className="relative aspect-square w-full rounded-full overflow-hidden bg-card ring-1 ring-foreground/15 group-hover:ring-2 group-hover:ring-[color:var(--gold)] transition-all duration-500 shadow-[var(--shadow-soft)]">
                 <img
-                  src={c.image}
+                  src={categoryArt[c.handle] ?? c.image}
                   alt={c.imageAlt}
                   loading="lazy"
                   decoding="async"
