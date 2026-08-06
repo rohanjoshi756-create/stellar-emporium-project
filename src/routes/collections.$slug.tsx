@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { productCollections, collectionByHandle, type Product, type ProductCollection } from "@/data/products";
 import { seoFor, type CollectionSeo } from "@/data/collection-seo";
+import { artFor } from "@/data/category-art";
 import { Header } from "@/components/layout/Header";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
