@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { artFor } from "@/data/category-art";
 import { productCollections as collections } from "@/data/products";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
@@ -59,7 +60,7 @@ function CollectionsIndex() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-10">
           {collections.map((c) => (
             <Link key={c.handle} to="/collections/$slug" params={{ slug: c.handle }} className="group relative h-[170px] sm:h-[220px] rounded-2xl overflow-hidden border border-border">
-              <img src={c.image} alt={c.imageAlt} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src={artFor(c.handle, c.image)} alt={c.imageAlt} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/92 via-foreground/45 to-foreground/10" />
               <div className="absolute inset-0 p-5 flex flex-col justify-end text-background">
                 <div className="font-display text-2xl">{c.title}</div>

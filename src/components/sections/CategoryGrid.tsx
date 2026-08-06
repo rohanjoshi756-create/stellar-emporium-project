@@ -2,6 +2,7 @@
 import { Link } from "@tanstack/react-router";
 import { productCollections } from "@/data/products";
 import { categoryStripHeading } from "@/data/site-content";
+import { artFor } from "@/data/category-art";
 
 const categories = productCollections.filter((c) => c.handle !== "best-sellers");
 
@@ -25,7 +26,7 @@ export function CategoryGrid({ title = "Shop by Category" }: { title?: string })
             >
               <div className="relative aspect-square w-full rounded-full overflow-hidden bg-card ring-1 ring-foreground/15 group-hover:ring-2 group-hover:ring-[color:var(--gold)] transition-all duration-500 shadow-[var(--shadow-soft)]">
                 <img
-                  src={c.image}
+                  src={artFor(c.handle, c.image)}
                   alt={c.imageAlt}
                   loading="lazy"
                   decoding="async"
