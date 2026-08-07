@@ -14,6 +14,12 @@ import { BuyNowButton } from "@/components/commerce/BuyNowButton";
 import { QuantitySelector } from "@/components/commerce/QuantitySelector";
 import { StickyBuyBar } from "@/components/commerce/StickyBuyBar";
 import { TrustBadgeGrid, OffersBox, DeliveryPromise } from "@/components/commerce/ProductAssurance";
+import { ProductGallery } from "@/components/product/ProductGallery";
+import { UrgencyStrip } from "@/components/product/UrgencyStrip";
+import { DeliveryEstimate } from "@/components/product/DeliveryEstimate";
+import { FrequentlyBoughtTogether } from "@/components/product/FrequentlyBoughtTogether";
+import { ProductStory } from "@/components/product/ProductStory";
+import { Star } from "lucide-react";
 import { ProductCard } from "@/components/commerce/ProductCard";
 import { ReviewsSummary } from "@/components/sections/ReviewsSummary";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
@@ -131,55 +137,56 @@ function ProductPage() {
         </nav>
 
         <div className="grid gap-6 sm:gap-12 md:grid-cols-2">
-          <div className="md:sticky md:top-28 md:self-start">
-            <div className="rounded-3xl overflow-hidden border border-border bg-card shadow-[var(--shadow-soft)]">
-              <img
-                src={product.image}
-                alt={product.imageAlt}
-                fetchPriority="high"
-                decoding="async"
-                width={900}
-                height={900}
-                sizes="(max-width: 768px) 100vw, 560px"
-                className="w-full h-full object-cover aspect-square"
-              />
-            </div>
-            {product.images.length > 1 && (
-              <ul className="mt-3 flex gap-3">
-                {product.images.slice(0, 4).map((src: string, i: number) => (
-                  <li key={src} className="h-20 w-20 rounded-xl overflow-hidden border border-border">
-                    <img src={src} alt={`${product.title} — view ${i + 1}`} loading="lazy" width={80} height={80} className="h-full w-full object-cover" />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          <ProductGallery
+            title={product.title}
+            images={product.images}
+            imageAlt={product.imageAlt}
+            badge={product.badge}
+            discountPercent={product.discountPercent}
+          />
 
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight">{product.title}</h1>
-            <p className="mt-2 text-xs text-muted-foreground">
-              {collection?.title ?? "Nakshatra"} · Certified &amp; energised before dispatch
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--gold-deep)]">
+              {collection?.title ?? "Nakshatra"}
             </p>
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight">{product.title}</h1>
+            <p className="mt-2 text-sm text-muted-foreground">Certified, energised and dispatched within 24 hours</p>
+
+            <div className="mt-3 flex items-center gap-2 text-sm">
+              <span className="flex gap-0.5 text-[color:var(--gold)]" aria-hidden="true">
+                {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
+              </span>
+              <span className="font-semibold">4.9</span>
+              <a href="#reviews" className="text-muted-foreground underline underline-offset-2">(verified reviews)</a>
+            </div>
+
             <div className="mt-4 flex items-baseline gap-3">
               <span className="font-display text-3xl text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
               {product.compareAtPrice && (
                 <span className="text-sm text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
               )}
-              {product.discountPercent > 0 && (
-                <span className="text-[11px] font-semibold bg-[color:var(--maroon)] text-primary-foreground px-2 py-1 rounded-full">{product.discountPercent}% OFF</span>
+              {product.compareAtPrice && (
+                <span className="text-[11px] font-semibold bg-[color:var(--maroon)] text-primary-foreground px-2 py-1 rounded-full">
+                  Save {formatPrice(product.compareAtPrice - product.price)} ({product.discountPercent}%)
+                </span>
               )}
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">Inclusive of all taxes · Free shipping on prepaid orders</p>
-
-            <p className={`mt-4 text-sm font-medium ${product.available ? (product.inventoryQty <= 1 ? "text-destructive" : "text-[color:var(--success)]") : "text-muted-foreground"}`}>
-              {product.available
-                ? product.inventoryQty <= 1
-                  ? "Hurry — only 1 left in stock"
-                  : "In stock — ships in 24 hours"
-                : "Currently sold out"}
+            <p className="mt-2 text-xs text-muted-foreground">
+              Inclusive of all taxes · Free shipping on prepaid orders · Extra 5% off on UPI
             </p>
 
-            <OffersBox />
+            {product.available ? (
+              <UrgencyStrip productId={product.id} inventoryQty={product.inventoryQty} />
+            ) : (
+              <p className="mt-4 text-sm font-medium text-muted-foreground">Currently sold out</p>
+            )}
+
+            <ul className="mt-5 space-y-1.5 text-sm text-muted-foreground">
+              <li>✓ Hand-selected and lab-verified for authenticity</li>
+              <li>✓ Energised with Vedic mantras before dispatch</li>
+              <li>✓ Original certificate inside every parcel</li>
+              <li>✓ Lifetime authenticity guarantee</li>
+            </ul>
 
             {/* Cart logic is isolated — swapped for Shopify's cart on migration. */}
             <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -191,6 +198,7 @@ function ProductPage() {
                   quantity={quantity}
                   price={variant.price}
                   available={variant.available}
+                  label={`Add to cart · ${formatPrice(variant.price * quantity)}`}
                   title={product.title}
                   image={product.image}
                   imageAlt={product.imageAlt}
@@ -203,21 +211,29 @@ function ProductPage() {
                 quantity={quantity}
                 price={variant.price}
                 available={variant.available}
+                label="⚡ Buy now — priority dispatch"
                 title={product.title}
                 image={product.image}
                 imageAlt={product.imageAlt}
               />
+              <p className="mt-2 text-center text-[11px] text-muted-foreground">
+                🔒 100% secure · Pay on delivery · No hidden charges
+              </p>
             </div>
 
+            <ul className="mt-5 grid grid-cols-3 gap-2 text-center text-[11px]">
+              {[["🛡️", "Money-back"], ["🔒", "Secure checkout"], ["📦", "Discreet packaging"]].map(([icon, label]) => (
+                <li key={label} className="rounded-xl border border-border bg-secondary/50 px-2 py-3">
+                  <span className="block text-base" aria-hidden="true">{icon}</span>
+                  <span className="mt-1 block text-muted-foreground">{label}</span>
+                </li>
+              ))}
+            </ul>
+
+            <DeliveryEstimate />
+            <OffersBox />
             <DeliveryPromise />
             <TrustBadgeGrid />
-
-            <ul className="mt-7 space-y-2 text-sm text-muted-foreground">
-              <li>✦ Government lab certified for authenticity</li>
-              <li>✦ Energised with Vedic mantras before dispatch</li>
-              <li>✦ 7-day easy returns across India</li>
-              <li>✦ Hand-selected by our astrologers</li>
-            </ul>
 
             <div className="mt-7 rounded-2xl border border-border bg-secondary/40 p-5 text-sm leading-relaxed text-muted-foreground">
               <h2 className="font-display text-lg text-foreground mb-2">Product details</h2>
@@ -231,6 +247,9 @@ function ProductPage() {
         </div>
       </section>
 
+      <FrequentlyBoughtTogether main={product} addons={related.slice(0, 2)} />
+      <ProductStory product={product} collectionTitle={collection?.title ?? "Nakshatra"} />
+
       {related.length > 0 && (
         <section className="container-x py-10 sm:py-14 border-t border-border">
           <h2 className="font-display text-2xl sm:text-3xl text-center rule-gold mb-6 sm:mb-8">You may also like</h2>
@@ -241,7 +260,7 @@ function ProductPage() {
       )}
 
       {/* Social proof + objection handling — the highest-impact PDP blocks. */}
-      <ReviewsSummary />
+      <div id="reviews"><ReviewsSummary /></div>
       <RecentlyViewed currentHandle={product.handle} />
       <FAQ title="Frequently asked questions" items={homeFaqs.slice(0, 5)} />
       </main>
