@@ -9,14 +9,14 @@ const categories = productCollections.filter((c) => c.handle !== "best-sellers")
 export function CategoryGrid({ title = "Shop by Category" }: { title?: string }) {
   return (
     <>
-      <div className="container-x pt-10 sm:pt-14 text-center">
-        <p className="font-display text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto leading-snug">{categoryStripHeading}</p>
+      <div className="container-x pt-14 sm:pt-20 text-center">
+        <p className="font-display text-xl sm:text-2xl md:text-[1.9rem] max-w-4xl mx-auto leading-snug">{categoryStripHeading}</p>
       </div>
 
-      <section className="cv-auto container-x py-10 sm:py-14">
+      <section className="cv-auto container-x py-14 sm:py-20">
         <p className="eyebrow text-center">Curated ranges</p>
-        <h2 className="mt-2 font-display text-3xl sm:text-4xl text-center rule-gold mb-7 sm:mb-10">{title}</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-5">
+        <h2 className="mt-3 font-display text-[1.9rem] sm:text-4xl text-center rule-gold mb-9 sm:mb-12">{title}</h2>
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-5 sm:gap-6">
           {categories.map((c) => (
             <Link
               key={c.handle}
