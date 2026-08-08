@@ -19,7 +19,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   const lowStock = product.available && product.inventoryQty <= 1;
 
   return (
-    <article className="card-lux group flex flex-col rounded-2xl overflow-hidden">
+    <article className="card-lux group flex flex-col rounded-[1.25rem] overflow-hidden">
       <Link
         to="/products/$handle"
         params={{ handle: product.handle }}
@@ -40,8 +40,8 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         {/* Subtle luxury vignette on hover */}
         <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         {product.discountPercent > 0 && (
-          <span className="absolute top-2 left-2 text-[10px] font-semibold tracking-wide bg-[color:var(--maroon)] text-primary-foreground px-2 py-1 rounded-full">
-            {product.discountPercent}% OFF
+          <span className="absolute top-2.5 left-2.5 text-[10px] font-bold tracking-[0.06em] bg-[color:var(--maroon)] text-primary-foreground px-2.5 py-1 rounded-full shadow-[var(--shadow-soft)]">
+            −{product.discountPercent}%
           </span>
         )}
         {!product.available && (
@@ -50,12 +50,12 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           </span>
         )}
         {product.badge && product.available && (
-          <span className="absolute bottom-2 left-2 text-[10px] bg-background/90 px-2 py-1 rounded-full border border-border">{product.badge}</span>
+          <span className="absolute bottom-2.5 left-2.5 text-[10px] font-medium bg-background/92 backdrop-blur px-2.5 py-1 rounded-full border border-border">{product.badge}</span>
         )}
       </Link>
 
-      <div className="p-3 flex flex-col flex-1">
-        <h3 className="text-[12px] sm:text-[13px] font-medium leading-snug line-clamp-2 min-h-[2.25rem]">
+      <div className="p-3.5 sm:p-4 flex flex-col flex-1">
+        <h3 className="text-[12.5px] sm:text-[13.5px] font-semibold leading-snug line-clamp-2 min-h-[2.3rem] tracking-[-0.01em]">
           <Link to="/products/$handle" params={{ handle: product.handle }} className="hover:text-primary transition">
             {product.title}
           </Link>
@@ -68,8 +68,8 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           </div>
         )}
 
-        <div className="flex items-baseline gap-2 mt-1.5">
-          <span className="font-display text-base sm:text-lg text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
+        <div className="flex items-baseline gap-2 mt-2">
+          <span className="font-display text-[1.05rem] sm:text-[1.15rem] text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
           {product.compareAtPrice && (
             <span className="text-[11px] text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
           )}
@@ -77,7 +77,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
 
         {lowStock && <p className="mt-1 text-[11px] text-destructive font-medium">Only 1 left</p>}
 
-        <div className="mt-auto pt-2.5">
+        <div className="mt-auto pt-3">
           {/* Cart logic is isolated here — replaced by Shopify's cart on migration. */}
           <AddToCartButton
             variantId={variant.id}
