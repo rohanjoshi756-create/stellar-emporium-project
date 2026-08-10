@@ -270,6 +270,49 @@
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Soft fade on the edges of horizontally scrolling / marquee rows */
+.edge-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
+}
+
+/* Legible scrim for text sitting on top of photography */
+.scrim-tile {
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--foreground) 85%, transparent) 0%,
+    color-mix(in oklab, var(--foreground) 45%, transparent) 45%,
+    color-mix(in oklab, var(--foreground) 5%, transparent) 100%
+  );
+}
+.scrim-banner {
+  background: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--foreground) 90%, transparent) 0%,
+    color-mix(in oklab, var(--foreground) 68%, transparent) 45%,
+    color-mix(in oklab, var(--foreground) 20%, transparent) 100%
+  );
+}
+
+/* Small gold pill used for CTAs inside image cards */
+.chip-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background-image: var(--gradient-gold);
+}
+
+/* Consistent section rhythm */
+.section-y { padding-block: 3.5rem; }
+@media (min-width: 640px) { .section-y { padding-block: 5rem; } }
+
 /* Skip layout/paint work for offscreen sections */
 .cv-auto { content-visibility: auto; contain-intrinsic-size: auto 600px; }
 
