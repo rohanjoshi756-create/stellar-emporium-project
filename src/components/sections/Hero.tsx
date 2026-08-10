@@ -83,7 +83,7 @@ export function Hero() {
       <div aria-hidden="true" className="absolute inset-0 scrim-tile md:hidden" />
       <div aria-hidden="true" className="absolute inset-0 hidden md:block scrim-banner" />
 
-      <div className="relative container-x py-20 md:py-36 pb-28 md:pb-40 min-h-[480px] md:min-h-[640px] flex flex-col justify-center">
+      <div className="relative container-x py-14 pb-20 md:py-36 md:pb-40 min-h-[420px] md:min-h-[620px] flex flex-col justify-center">
         <div key={index} className="max-w-xl text-background">
           <p className="eyebrow animate-fade-up !text-background/70">{slide.eyebrow}</p>
           <h1 className="animate-fade-up delay-1 mt-4 font-display text-[2.5rem] sm:text-6xl md:text-[4.5rem] leading-[1.03] md:leading-[0.98]">
