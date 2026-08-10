@@ -79,9 +79,10 @@ export function Hero() {
         />
       ))}
       {/* Dark scrim keeps headline contrast high on every banner */}
-      <div className="absolute inset-0 bg-gradient-to-b from-foreground/85 via-foreground/60 to-foreground/85 md:bg-gradient-to-r md:from-foreground/92 md:via-foreground/65 md:to-foreground/20" />
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-foreground/88 via-foreground/62 to-foreground/90 md:bg-gradient-to-r md:from-foreground/94 md:via-foreground/68 md:to-foreground/15" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/95 to-transparent" />
 
-      <div className="relative container-x py-20 md:py-40 min-h-[460px] md:min-h-[620px] flex flex-col justify-center">
+      <div className="relative container-x py-20 md:py-36 pb-28 md:pb-40 min-h-[480px] md:min-h-[640px] flex flex-col justify-center">
         <div key={index} className="max-w-xl text-background">
           <p className="eyebrow animate-fade-up !text-background/70">{slide.eyebrow}</p>
           <h1 className="animate-fade-up delay-1 mt-4 font-display text-[2.5rem] sm:text-6xl md:text-[4.5rem] leading-[1.03] md:leading-[0.98]">
@@ -109,10 +110,13 @@ export function Hero() {
             </Link>
           </div>
 
-          <ul className="animate-fade-up delay-3 mt-8 flex flex-wrap gap-x-5 gap-y-2 text-[11px] sm:text-xs text-background/75">
+          <ul className="animate-fade-up delay-3 mt-8 flex flex-wrap gap-2 text-[11px] sm:text-xs text-background/85">
             {proof.map(({ Icon, label }) => (
-              <li key={label} className="flex items-center gap-1.5">
-                <Icon className="h-4 w-4 text-[color:var(--gold)]" aria-hidden="true" />
+              <li
+                key={label}
+                className="flex items-center gap-1.5 rounded-full border border-background/25 bg-background/10 px-3 py-1.5 backdrop-blur-sm"
+              >
+                <Icon className="h-3.5 w-3.5 text-[color:var(--gold)]" aria-hidden="true" />
                 {label}
               </li>
             ))}
@@ -120,34 +124,38 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Slider controls */}
-      <button
-        type="button"
-        onClick={() => go(index - 1)}
-        aria-label="Previous banner"
-        className="hidden md:grid absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 place-items-center rounded-full bg-background/20 text-background backdrop-blur hover:bg-background/35 transition"
-      >
-        <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-      </button>
-      <button
-        type="button"
-        onClick={() => go(index + 1)}
-        aria-label="Next banner"
-        className="hidden md:grid absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 place-items-center rounded-full bg-background/20 text-background backdrop-blur hover:bg-background/35 transition"
-      >
-        <ChevronRight className="h-5 w-5" aria-hidden="true" />
-      </button>
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
-        {slides.map((s, i) => (
+      {/* Slider controls — grouped bottom-right so they never overlap the headline */}
+      <div className="absolute bottom-6 right-4 sm:right-6 flex items-center gap-3">
+        <div className="flex gap-2">
+          {slides.map((s, i) => (
+            <button
+              key={s.image}
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Go to banner ${i + 1}`}
+              aria-current={i === index}
+              className={`h-1.5 rounded-full transition-all ${i === index ? "w-7 bg-[image:var(--gradient-gold)]" : "w-2.5 bg-background/50 hover:bg-background/80"}`}
+            />
+          ))}
+        </div>
+        <div className="hidden sm:flex gap-2">
           <button
-            key={s.image}
             type="button"
-            onClick={() => go(i)}
-            aria-label={`Go to banner ${i + 1}`}
-            aria-current={i === index}
-            className={`h-1.5 rounded-full transition-all ${i === index ? "w-7 bg-[image:var(--gradient-gold)]" : "w-2.5 bg-background/50"}`}
-          />
-        ))}
+            onClick={() => go(index - 1)}
+            aria-label="Previous banner"
+            className="grid h-10 w-10 place-items-center rounded-full border border-background/30 bg-background/15 text-background backdrop-blur hover:bg-background/35 transition"
+          >
+            <ChevronLeft className="h-4.5 w-4.5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => go(index + 1)}
+            aria-label="Next banner"
+            className="grid h-10 w-10 place-items-center rounded-full border border-background/30 bg-background/15 text-background backdrop-blur hover:bg-background/35 transition"
+          >
+            <ChevronRight className="h-4.5 w-4.5" aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </section>
   );

@@ -40,8 +40,8 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         {/* Subtle luxury vignette on hover */}
         <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         {product.discountPercent > 0 && (
-          <span className="absolute top-2.5 left-2.5 text-[10px] font-bold tracking-[0.06em] bg-[color:var(--maroon)] text-primary-foreground px-2.5 py-1 rounded-full shadow-[var(--shadow-soft)]">
-            −{product.discountPercent}%
+          <span className="absolute top-2.5 left-2.5 text-[10px] font-bold tracking-[0.06em] bg-[image:var(--gradient-gold)] text-[color:var(--ink)] px-2.5 py-1 rounded-full shadow-[var(--shadow-soft)]">
+            {product.discountPercent}% OFF
           </span>
         )}
         {!product.available && (
@@ -68,10 +68,15 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           </div>
         )}
 
-        <div className="flex items-baseline gap-2 mt-2">
-          <span className="font-display text-[1.05rem] sm:text-[1.15rem] text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mt-2">
+          <span className="font-display text-[1.15rem] sm:text-[1.25rem] text-foreground">{formatPrice(product.price)}</span>
           {product.compareAtPrice && (
-            <span className="text-[11px] text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
+            <>
+              <span className="text-[11px] text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
+              <span className="text-[11px] font-semibold text-[color:var(--success)]">
+                Save {formatPrice(product.compareAtPrice - product.price)}
+              </span>
+            </>
           )}
         </div>
 
