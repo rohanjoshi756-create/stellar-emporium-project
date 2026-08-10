@@ -79,6 +79,13 @@ export function ProductGallery({ title, images, imageAlt, badge, discountPercent
           </li>
         ))}
       </ul>
+
+      {/* Reassurance block — keeps the sticky column visually anchored on desktop */}
+      <ul className="mt-3 hidden md:grid gap-2 rounded-2xl border border-border bg-secondary/40 p-4 text-xs text-muted-foreground">
+        <li>✓ Free insured shipping on prepaid orders across India</li>
+        <li>✓ Energised with Vedic mantras before dispatch</li>
+        <li>✓ 7-day easy returns · lifetime authenticity guarantee</li>
+      </ul>
     </div>
   );
 }
