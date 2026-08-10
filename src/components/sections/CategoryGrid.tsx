@@ -9,7 +9,7 @@ const categories = productCollections.filter((c) => c.handle !== "best-sellers")
 export function CategoryGrid({ title = "Shop by Category" }: { title?: string }) {
   return (
     <>
-      <div className="container-x pt-12 sm:pt-16 text-center">
+      <div className="container-x pt-12 sm:pt-16 pb-2 text-center">
         <p className="mx-auto max-w-3xl text-sm sm:text-base leading-relaxed text-muted-foreground">{categoryStripHeading}</p>
       </div>
 

@@ -280,17 +280,17 @@
 .scrim-tile {
   background: linear-gradient(
     to top,
-    oklch(from var(--foreground) l c h / 0.88) 0%,
-    oklch(from var(--foreground) l c h / 0.45) 45%,
-    oklch(from var(--foreground) l c h / 0.05) 100%
+    color-mix(in oklab, var(--foreground) 85%, transparent) 0%,
+    color-mix(in oklab, var(--foreground) 45%, transparent) 45%,
+    color-mix(in oklab, var(--foreground) 5%, transparent) 100%
   );
 }
 .scrim-banner {
   background: linear-gradient(
     to right,
-    oklch(from var(--foreground) l c h / 0.92) 0%,
-    oklch(from var(--foreground) l c h / 0.7) 45%,
-    oklch(from var(--foreground) l c h / 0.25) 100%
+    color-mix(in oklab, var(--foreground) 90%, transparent) 0%,
+    color-mix(in oklab, var(--foreground) 68%, transparent) 45%,
+    color-mix(in oklab, var(--foreground) 20%, transparent) 100%
   );
 }
 
