@@ -79,8 +79,9 @@ export function Hero() {
         />
       ))}
       {/* Dark scrim keeps headline contrast high on every banner */}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-foreground/88 via-foreground/62 to-foreground/90 md:bg-gradient-to-r md:from-foreground/94 md:via-foreground/68 md:to-foreground/15" />
-      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background/95 to-transparent" />
+      <div aria-hidden="true" className="absolute inset-0 bg-foreground/40" />
+      <div aria-hidden="true" className="absolute inset-0 scrim-tile md:hidden" />
+      <div aria-hidden="true" className="absolute inset-0 hidden md:block scrim-banner" />
 
       <div className="relative container-x py-20 md:py-36 pb-28 md:pb-40 min-h-[480px] md:min-h-[640px] flex flex-col justify-center">
         <div key={index} className="max-w-xl text-background">
