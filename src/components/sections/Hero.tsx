@@ -91,7 +91,7 @@ export function Hero() {
             <br />
             <span className="bg-[image:var(--gradient-gold)] bg-clip-text text-transparent">{slide.highlight}</span>
           </h1>
-          <p className="animate-fade-up delay-2 mt-5 md:mt-6 text-base sm:text-lg text-background/80 max-w-md leading-relaxed">
+          <p className="animate-fade-up delay-2 mt-5 md:mt-6 text-base sm:text-lg text-background/85 max-w-lg leading-relaxed">
             {slide.subtitle}
           </p>
 
@@ -126,7 +126,7 @@ export function Hero() {
       </div>
 
       {/* Slider controls — grouped bottom-right so they never overlap the headline */}
-      <div className="absolute bottom-6 right-4 sm:right-6 flex items-center gap-3">
+      <div className="absolute bottom-6 left-0 right-0 container-x flex items-center gap-3">
         <div className="flex gap-2">
           {slides.map((s, i) => (
             <button
