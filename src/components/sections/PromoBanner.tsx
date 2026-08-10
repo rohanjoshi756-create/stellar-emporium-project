@@ -13,7 +13,7 @@ export function PromoBanner() {
             key={b.handle}
             to="/collections/$slug"
             params={{ slug: b.handle }}
-            className="group relative snap-start shrink-0 w-[82vw] max-w-[340px] lg:w-auto lg:max-w-none h-[170px] sm:h-[210px] rounded-3xl overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-warm)] transition-shadow"
+            className="group relative snap-start shrink-0 w-[82vw] max-w-[340px] lg:w-auto lg:max-w-none h-[180px] sm:h-[220px] rounded-3xl overflow-hidden ring-1 ring-[color:var(--gold)]/25 hover:ring-[color:var(--gold)]/70 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-warm)] transition-all duration-500"
           >
             <img
               src={b.image}
@@ -25,11 +25,11 @@ export function PromoBanner() {
               sizes="(max-width: 1024px) 82vw, 420px"
               className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-foreground/85 via-foreground/45 to-transparent" />
+            <div aria-hidden="true" className="absolute inset-0 scrim-banner" />
             <div className="absolute inset-0 p-5 sm:p-6 flex flex-col justify-center">
-              <div className="font-display text-2xl sm:text-3xl text-background leading-tight">{b.title}</div>
+              <div className="font-display text-2xl sm:text-[1.9rem] text-background leading-tight max-w-[80%]">{b.title}</div>
               <div className="text-xs sm:text-[13px] text-background/85 mt-1.5 max-w-[70%] leading-snug">{b.tagline}</div>
-              <span className="mt-3 text-[11px] uppercase tracking-[0.18em] text-[color:var(--gold)]">Shop now →</span>
+              <span className="chip-gold mt-4 w-fit group-hover:translate-x-0.5 transition-transform">Shop now →</span>
             </div>
           </Link>
         ))}
