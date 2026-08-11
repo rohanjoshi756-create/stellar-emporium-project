@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { productCollections, collectionByHandle, type Product, type ProductCollection } from "@/data/products";
 import { seoFor, type CollectionSeo } from "@/data/collection-seo";
