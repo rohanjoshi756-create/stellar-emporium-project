@@ -160,20 +160,22 @@ function ProductPage() {
               <a href="#reviews" className="text-muted-foreground underline underline-offset-2">(verified reviews)</a>
             </div>
 
-            <div className="mt-4 flex items-baseline gap-3">
-              <span className="font-display text-3xl text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
-              {product.compareAtPrice && (
-                <span className="text-sm text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
-              )}
-              {product.compareAtPrice && (
-                <span className="text-[11px] font-semibold bg-[color:var(--maroon)] text-primary-foreground px-2 py-1 rounded-full">
-                  Save {formatPrice(product.compareAtPrice - product.price)} ({product.discountPercent}%)
-                </span>
-              )}
+            <div className="mt-5 rounded-2xl border border-border bg-secondary/40 p-4 sm:p-5">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="font-display text-[2rem] leading-none text-[color:var(--maroon)]">{formatPrice(product.price)}</span>
+                {product.compareAtPrice && (
+                  <span className="text-sm text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
+                )}
+                {product.compareAtPrice && (
+                  <span className="rounded-full bg-[color:var(--maroon)] px-2.5 py-1 text-[11px] font-semibold text-primary-foreground">
+                    Save {formatPrice(product.compareAtPrice - product.price)} ({product.discountPercent}%)
+                  </span>
+                )}
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Inclusive of all taxes · Free shipping on prepaid orders · Extra 5% off on UPI
+              </p>
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Inclusive of all taxes · Free shipping on prepaid orders · Extra 5% off on UPI
-            </p>
 
             {product.available ? (
               <UrgencyStrip productId={product.id} inventoryQty={product.inventoryQty} />
@@ -181,11 +183,18 @@ function ProductPage() {
               <p className="mt-4 text-sm font-medium text-muted-foreground">Currently sold out</p>
             )}
 
-            <ul className="mt-5 space-y-1.5 text-sm text-muted-foreground">
-              <li>✓ Hand-selected and lab-verified for authenticity</li>
-              <li>✓ Energised with Vedic mantras before dispatch</li>
-              <li>✓ Original certificate inside every parcel</li>
-              <li>✓ Lifetime authenticity guarantee</li>
+            <ul className="mt-5 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
+              {[
+                "Hand-selected and lab-verified for authenticity",
+                "Energised with Vedic mantras before dispatch",
+                "Original certificate inside every parcel",
+                "Lifetime authenticity guarantee",
+              ].map((line) => (
+                <li key={line} className="flex gap-2 leading-snug">
+                  <span aria-hidden="true" className="mt-0.5 text-[color:var(--gold-deep)]">✓</span>
+                  <span>{line}</span>
+                </li>
+              ))}
             </ul>
 
             {/* Cart logic is isolated — swapped for Shopify's cart on migration. */}
