@@ -26,6 +26,18 @@ export const whyUs = [
 
 export type Testimonial = { name: string; quote: string; image: string; imageAlt: string };
 
+/** Instagram profile used for the video review section CTA. */
+export const instagramProfileUrl = "https://www.instagram.com/nakshatra.store/";
+
+export type InstagramReel = { url: string; caption: string };
+
+/**
+ * Customer video reviews (Instagram reels).
+ * Paste reel permalinks here, e.g.
+ * { url: "https://www.instagram.com/reel/CxxxxxxxxxX/", caption: "Rose quartz bracelet review" }
+ */
+export const instagramReels: InstagramReel[] = [];
+
 export const testimonials: Testimonial[] = [
   { name: "Nikita", quote: "This is my second purchase in two months! I bought the rose quartz pendant and got so many compliments. Ordered the bracelet as well now!", image: cRose, imageAlt: "Rose quartz crystal — reviewed by customer Nikita" },
   { name: "Archita", quote: "Got the rose quartz set as a gift and started to feel more positive and calm after a few days. Ordered another pair for my mother and sister.", image: cRose, imageAlt: "Rose quartz crystal — reviewed by customer Archita" },
