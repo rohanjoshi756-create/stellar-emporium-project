@@ -15,6 +15,7 @@ export { NewArrivals } from "./NewArrivals";
 export { Bestsellers } from "./Bestsellers";
 export { AstrologerCTA } from "./AstrologerCTA";
 export { Testimonials } from "./Testimonials";
+export { VideoReviews } from "./VideoReviews";
 export { PressBar } from "./PressBar";
 export { AboutStore } from "./AboutStore";
 export { FAQ } from "./FAQ";
