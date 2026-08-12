@@ -14,14 +14,13 @@ import {
   Bestsellers,
   FeaturedProducts,
   ShopByPurpose,
-  Testimonials,
+  VideoReviews,
   NewArrivals,
   AboutStore,
   AstrologerCTA,
   FAQ,
   Footer,
 } from "@/components/sections";
-import { ReviewsSummary } from "@/components/sections/ReviewsSummary";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import {
   rudrakshaProducts,
@@ -107,10 +106,8 @@ function Index() {
       <FeaturedProducts title="Statues Collection" products={statueProducts} collectionHandle="statues" />
       {/* 09 Shop by purpose / why us */}
       <ShopByPurpose />
-      {/* 10 Testimonials */}
-      <Testimonials />
-      {/* 10b Aggregate review proof */}
-      <ReviewsSummary />
+      {/* 10 Instagram video reviews */}
+      <VideoReviews />
       {/* 11 Full catalogue grid */}
       <NewArrivals />
       {/* 11b Recently viewed — returns ad traffic to intent products */}
