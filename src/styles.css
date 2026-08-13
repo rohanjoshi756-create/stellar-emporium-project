@@ -165,15 +165,20 @@
 
   h1, h2, h3 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.08;
   }
 
   .font-display {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.08;
   }
+
+  /* Sans face for buttons, nav, badges — keeps UI crisp against the serif */
+  button, .font-ui, nav a { font-family: var(--font-ui); }
 
   /* Visible, on-brand keyboard focus everywhere (a11y). */
   :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
@@ -242,6 +247,18 @@
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--muted-foreground);
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+
+  /* Section header: gold eyebrow + serif title + hairline */
+  .section-head { text-align: center; margin-bottom: 2.25rem; }
+  .section-head .eyebrow { color: var(--gold-deep); }
+  .section-head h2 { margin-top: 0.5rem; }
+
+  .hairline {
+    height: 1px;
+    background: linear-gradient(to right, transparent, color-mix(in oklab, var(--gold) 55%, transparent), transparent);
   }
 
   .rule-gold::after {
