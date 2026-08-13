@@ -85,13 +85,13 @@ export function Hero() {
 
       <div className="relative container-x py-14 pb-20 md:py-36 md:pb-40 min-h-[420px] md:min-h-[620px] flex flex-col justify-center">
         <div key={index} className="max-w-xl text-background">
-          <p className="eyebrow animate-fade-up !text-background/70">{slide.eyebrow}</p>
-          <h1 className="animate-fade-up delay-1 mt-4 font-display text-[2.5rem] sm:text-6xl md:text-[4.5rem] leading-[1.03] md:leading-[0.98]">
+          <p className="eyebrow animate-fade-up !text-[color:var(--gold)]">{slide.eyebrow}</p>
+          <h1 className="animate-fade-up delay-1 mt-4 font-display text-[3rem] sm:text-6xl md:text-[5rem] leading-[1.02] md:leading-[0.96]">
             {slide.title}
             <br />
-            <span className="bg-[image:var(--gradient-gold)] bg-clip-text text-transparent">{slide.highlight}</span>
+            <span className="italic bg-[image:var(--gradient-gold)] bg-clip-text text-transparent">{slide.highlight}</span>
           </h1>
-          <p className="animate-fade-up delay-2 mt-5 md:mt-6 text-base sm:text-lg text-background/85 max-w-lg leading-relaxed">
+          <p className="animate-fade-up delay-2 mt-5 md:mt-6 max-w-lg text-base leading-relaxed text-background/85 sm:text-lg">
             {slide.subtitle}
           </p>
 
@@ -99,13 +99,13 @@ export function Hero() {
             <Link
               to="/collections/$slug"
               params={{ slug: slide.ctaCollection }}
-              className="btn-gold rounded-full px-9 md:px-11 py-4 text-sm md:text-base font-semibold uppercase tracking-[0.1em]"
+              className="btn-gold rounded-full px-9 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--ink)] md:px-11 md:text-sm"
             >
               {slide.ctaLabel}
             </Link>
             <Link
               to="/collections"
-              className="rounded-full border border-background/40 text-background px-8 py-4 text-sm md:text-base hover:bg-background hover:text-foreground transition"
+              className="rounded-full border border-background/40 px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-background transition hover:bg-background hover:text-foreground md:text-sm"
             >
               Explore collections
             </Link>
