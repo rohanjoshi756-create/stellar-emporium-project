@@ -168,6 +168,7 @@
     font-weight: 600;
     letter-spacing: -0.012em;
     line-height: 1.08;
+    font-variant-numeric: lining-nums;
   }
 
   .font-display {
