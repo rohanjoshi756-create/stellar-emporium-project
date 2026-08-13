@@ -17,13 +17,22 @@ export function NewArrivals({
 }) {
   return (
     <section className="cv-auto mx-auto max-w-[1400px] px-3 sm:px-4 py-10 sm:py-16">
-      <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-center">{title}</h2>
-      <p className="text-center text-muted-foreground text-sm mt-2">Browse our collection of {items.length}+ products</p>
+      <div className="section-head">
+        <p className="eyebrow">The full catalogue</p>
+        <h2 className="font-display text-[2rem] leading-tight sm:text-[2.75rem]">{title}</h2>
+        <p className="mt-3 text-sm text-muted-foreground">Browse our collection of {items.length}+ certified, energised pieces</p>
+        <div aria-hidden="true" className="hairline mx-auto mt-5 w-40 sm:w-56" />
+      </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-10">
         {items.slice(0, limit).map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
-      <div className="text-center mt-8 sm:mt-10">
-        <Link to="/collections" className="inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-10 py-3 text-sm font-semibold">View More</Link>
+      <div className="text-center mt-8 sm:mt-12">
+        <Link
+          to="/collections"
+          className="btn-gold inline-flex items-center gap-2 rounded-full px-10 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--ink)]"
+        >
+          View more <span aria-hidden="true">→</span>
+        </Link>
       </div>
     </section>
   );
