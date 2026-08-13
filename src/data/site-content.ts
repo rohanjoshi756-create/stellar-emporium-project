@@ -56,6 +56,19 @@ export const homeFaqs = [
   { question: "Q7: What are the benefits of a Lapis Lazuli bracelet?", answer: "Lapis Lazuli enhances wisdom, communication & intellectual ability. It stimulates the Third Eye Chakra and is ideal for students & professionals." },
 ];
 
+export const serviceFaqs = [
+  { question: "Do you offer free shipping?", answer: "Yes — all prepaid orders across India ship free of charge. There is no minimum order value. Cash on Delivery (COD) is also available on select products for a small convenience fee shown at checkout." },
+  { question: "How long does delivery take?", answer: "We dispatch orders within 24 hours of confirmation. Delivery usually takes 3–5 working days for metro and Tier-2 cities. Remote pincodes may take 5–7 working days. You will receive a tracking link via WhatsApp and email once the order is shipped." },
+  { question: "Is Cash on Delivery available?", answer: "COD is available on most products. A small COD fee may apply depending on your location and will be displayed at checkout before you confirm the order." },
+  { question: "How do I track my order?", answer: "Once dispatched, you will receive an SMS/WhatsApp message and email with the courier tracking number. You can also contact our support team Mon–Sat, 10AM–7PM for order updates." },
+  { question: "Are your products authentic and certified?", answer: "Absolutely. Every Rudraksha, Karungali, Pyrite and crystal product is tested and comes with a government-lab authenticity certificate or a Nakshatra Store authenticity card. We source directly from Nepal, mines and trusted artisans." },
+  { question: "What is the return and refund policy?", answer: "Unused products in original packaging can be returned within 7 days of delivery. Initiate a return via WhatsApp or email; we will arrange a reverse pickup. Refunds are processed within 5–7 business days after the product reaches our centre." },
+  { question: "What if I receive a damaged or wrong product?", answer: "We pack every order carefully, but if a product arrives damaged or incorrect, share an unboxing video and photos within 24 hours. We will replace it free of charge or issue a full refund." },
+  { question: "Do products come energised?", answer: "Yes. Spiritual products are energised with Vedic mantras by experienced astrologers and priests before dispatch, so they reach you ready to wear or place in your sacred space." },
+  { question: "Do you ship internationally?", answer: "Currently we ship across India only. International shipping will be introduced soon. Please follow our Instagram or WhatsApp channel for updates." },
+  { question: "How can I contact customer support?", answer: "Reach us on WhatsApp at +91 99999 99999, email us at support@nakshatrastore.com, or use the chat button on the site. Support hours: Mon–Sat, 10AM–7PM IST." },
+];
+
 export const aboutParagraphs = [
   "Nakshatra Store is India's most trusted destination for authentic spiritual products. We specialise in original Karungali Mala, Pyrite Stone, Rudraksha, Zodiac bracelets, Vastu products and healing crystal jewellery, all government-certified for authenticity.",
   "Our Karungali Mala collection features original Black Ebony wood beads certified by government labs. Benefits include protection from negative energy, evil eye and black magic, mental peace and spiritual grounding. Available in 6mm and 8mm with silver and gold capping variants.",
