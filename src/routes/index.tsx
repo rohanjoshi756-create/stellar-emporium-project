@@ -32,7 +32,7 @@ import {
   yantraProducts,
   statueProducts,
 } from "@/data/products";
-import { homeFaqs } from "@/data/site-content";
+import { homeFaqs, serviceFaqs } from "@/data/site-content";
 
 export const Route = createFileRoute("/")({
   component: Index,
