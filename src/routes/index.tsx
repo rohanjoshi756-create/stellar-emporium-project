@@ -20,6 +20,7 @@ import {
   AstrologerCTA,
   FAQ,
   Footer,
+  TrustBlock,
 } from "@/components/sections";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import {
@@ -31,7 +32,7 @@ import {
   yantraProducts,
   statueProducts,
 } from "@/data/products";
-import { homeFaqs } from "@/data/site-content";
+import { homeFaqs, serviceFaqs } from "@/data/site-content";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -90,6 +91,8 @@ function Index() {
       <CategoryGrid />
       {/* 07 Bestsellers */}
       <Bestsellers />
+      {/* 07a Trust block — shipping, returns, authenticity, delivery */}
+      <TrustBlock />
       {/* 08 Featured collection rows */}
       <FeaturedProducts title="Rudraksha Collections" products={rudrakshaProducts} collectionHandle="rudraksha" />
       <div className="bg-secondary/40 border-y border-border">
@@ -116,7 +119,9 @@ function Index() {
       <AboutStore />
       {/* 13 Foundation CTA */}
       <AstrologerCTA />
-      {/* 14 FAQ */}
+      {/* 14 Service FAQ — shipping, returns, authenticity, delivery */}
+      <FAQ title="Shipping, Returns & Authenticity" items={serviceFaqs} />
+      {/* 15 Product FAQ */}
       <FAQ items={homeFaqs} />
       </main>
       {/* 15 Footer (includes newsletter lead capture) */}
