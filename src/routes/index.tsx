@@ -20,6 +20,7 @@ import {
   AstrologerCTA,
   FAQ,
   Footer,
+  TrustBlock,
 } from "@/components/sections";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import {
