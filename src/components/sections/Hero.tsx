@@ -89,7 +89,7 @@ export function Hero() {
           <h1 className="animate-fade-up delay-1 mt-4 font-display text-[3rem] sm:text-6xl md:text-[5rem] leading-[1.02] md:leading-[0.96]">
             {slide.title}
             <br />
-            <span className="italic bg-[image:var(--gradient-gold)] bg-clip-text text-transparent">{slide.highlight}</span>
+            <span className="bg-[image:var(--gradient-gold)] bg-clip-text text-transparent">{slide.highlight}</span>
           </h1>
           <p className="animate-fade-up delay-2 mt-5 md:mt-6 max-w-lg text-base leading-relaxed text-background/85 sm:text-lg">
             {slide.subtitle}
