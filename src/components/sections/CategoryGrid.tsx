@@ -1,4 +1,4 @@
-/** CategoryGrid — circular "Shop by Category" tiles plus the SEO intro line. */
+/** CategoryGrid — rounded-square "Shop by Category" tiles plus the SEO intro line. */
 import { Link } from "@tanstack/react-router";
 import { productCollections } from "@/data/products";
 import { categoryStripHeading } from "@/data/site-content";
@@ -16,15 +16,15 @@ export function CategoryGrid({ title = "Shop by Category" }: { title?: string })
       <section className="cv-auto container-x pt-8 pb-14 sm:pt-10 sm:pb-20">
         <p className="eyebrow text-center">Curated ranges</p>
         <h2 className="mt-3 font-display text-[1.9rem] sm:text-4xl text-center rule-gold mb-9 sm:mb-12">{title}</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-8 gap-5 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-5">
           {categories.map((c) => (
             <Link
               key={c.handle}
               to="/collections/$slug"
               params={{ slug: c.handle }}
-              className="group flex flex-col items-center gap-2.5 sm:gap-3"
+              className="group flex flex-col overflow-hidden rounded-2xl bg-card ring-1 ring-foreground/10 hover:ring-[color:var(--gold)] hover:-translate-y-1 transition-all duration-500 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-warm)]"
             >
-              <div className="relative aspect-square w-full rounded-full overflow-hidden bg-card ring-1 ring-foreground/10 group-hover:ring-2 group-hover:ring-[color:var(--gold)] group-hover:-translate-y-1 transition-all duration-500 shadow-[var(--shadow-soft)] group-hover:shadow-[var(--shadow-warm)]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
                 <img
                   src={artFor(c.handle, c.image)}
                   alt={c.imageAlt}
@@ -35,9 +35,9 @@ export function CategoryGrid({ title = "Shop by Category" }: { title?: string })
                   sizes="(max-width: 640px) 28vw, 160px"
                   className="w-full h-full object-cover brightness-95 contrast-110 saturate-110 group-hover:scale-110 group-hover:brightness-100 transition-all duration-700"
                 />
-                <span aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-full scrim-tile opacity-70 group-hover:opacity-45 transition-opacity duration-500" />
+                <span aria-hidden="true" className="pointer-events-none absolute inset-0 scrim-tile opacity-70 group-hover:opacity-45 transition-opacity duration-500" />
               </div>
-              <div className="text-[11px] sm:text-[13px] font-semibold text-center leading-tight text-foreground group-hover:text-primary transition-colors">
+              <div className="px-2.5 py-3 text-[12px] sm:text-[13px] font-semibold text-center leading-tight text-foreground group-hover:text-primary transition-colors">
                 {c.title}
               </div>
             </Link>
