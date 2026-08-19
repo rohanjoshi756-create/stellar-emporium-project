@@ -19,11 +19,11 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   const lowStock = product.available && product.inventoryQty <= 1;
 
   return (
-    <article className="card-lux group flex flex-col rounded-[1.25rem] overflow-hidden">
+    <article className="group flex flex-col rounded-[1rem] overflow-hidden bg-secondary/50 border border-border/70 p-2 sm:p-2.5 transition hover:shadow-[var(--shadow-lift)]">
       <Link
         to="/products/$handle"
         params={{ handle: product.handle }}
-        className="relative aspect-square overflow-hidden bg-muted block"
+        className="relative aspect-square overflow-hidden bg-card rounded-[0.75rem] block"
         aria-label={product.title}
       >
         <img
@@ -40,8 +40,9 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         {/* Subtle luxury vignette on hover */}
         <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         {product.discountPercent > 0 && (
-          <span className="absolute top-2.5 left-2.5 text-[10px] font-bold tracking-[0.06em] bg-[image:var(--gradient-gold)] text-[color:var(--ink)] px-2.5 py-1 rounded-full shadow-[var(--shadow-soft)]">
-            {product.discountPercent}% OFF
+          <span className="absolute top-0 left-2.5 flex flex-col items-center leading-none bg-[image:var(--gradient-gold)] text-[color:var(--ink)] px-2 pt-1.5 pb-2.5 text-[10px] font-extrabold [clip-path:polygon(0_0,100%_0,100%_100%,50%_82%,0_100%)]">
+            {product.discountPercent}%
+            <span className="mt-0.5 text-[7px] font-bold tracking-[0.08em]">OFF</span>
           </span>
         )}
         {!product.available && (
@@ -54,41 +55,43 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         )}
       </Link>
 
-      <div className="p-3.5 sm:p-4 flex flex-col flex-1">
-        <h3 className="text-[12.5px] sm:text-[13.5px] font-semibold leading-snug line-clamp-2 min-h-[2.3rem] tracking-[-0.01em]">
+      <div className="px-1.5 pt-3 pb-1 flex flex-col flex-1">
+        <h3 className="font-display text-[15px] sm:text-[16px] font-semibold leading-tight truncate">
           <Link to="/products/$handle" params={{ handle: product.handle }} className="hover:text-primary transition">
             {product.title}
           </Link>
         </h3>
 
         {signal && (
-          <div className="mt-1 flex items-center gap-1 text-[11px] text-muted-foreground">
-            <Star className="h-3 w-3 fill-[color:var(--gold)] text-[color:var(--gold)]" aria-hidden="true" />
-            <span>{signal.rating}{signal.count ? ` (${signal.count})` : ""}</span>
+          <div className="mt-1.5 flex items-center gap-1.5">
+            <span className="flex" aria-hidden="true">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-3.5 w-3.5 fill-[color:var(--gold)] text-[color:var(--gold)]" />
+              ))}
+            </span>
+            <span className="text-[12px] text-muted-foreground font-medium">
+              {signal.count ? `${signal.count} reviews` : signal.rating}
+            </span>
           </div>
         )}
 
-        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mt-2">
-          <span className="font-display text-[1.15rem] sm:text-[1.25rem] text-foreground">{formatPrice(product.price)}</span>
-          {product.compareAtPrice && (
-            <>
-              <span className="text-[11px] text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
-              <span className="text-[11px] font-semibold text-[color:var(--success)]">
-                Save {formatPrice(product.compareAtPrice - product.price)}
-              </span>
-            </>
-          )}
-        </div>
-
         {lowStock && <p className="mt-1 text-[11px] text-destructive font-medium">Only 1 left</p>}
 
-        <div className="mt-auto pt-3">
+        <div className="mt-auto pt-2.5 flex items-center justify-between gap-2">
+          <div className="flex flex-wrap items-baseline gap-x-1.5">
+            <span className="text-[15px] sm:text-[17px] font-extrabold text-foreground">{formatPrice(product.price)}</span>
+            {product.compareAtPrice && (
+              <span className="text-[12px] text-muted-foreground line-through">{formatPrice(product.compareAtPrice)}</span>
+            )}
+          </div>
           {/* Cart logic is isolated here — replaced by Shopify's cart on migration. */}
           <AddToCartButton
             variantId={variant.id}
             quantity={1}
             price={variant.price}
             available={variant.available}
+            label="Add"
+            className="!w-auto shrink-0 !rounded-full !border-transparent !bg-foreground !text-background !px-5 !py-2.5 !text-[13px] !normal-case !tracking-normal hover:!opacity-90"
             title={product.title}
             image={product.image}
             imageAlt={product.imageAlt}
