@@ -280,13 +280,19 @@ function CollectionPage() {
 
       <section className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
         <h2 className="font-display text-2xl sm:text-3xl text-center mb-6 sm:mb-8">Explore more collections</h2>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-8 gap-2.5 sm:gap-3.5">
           {others.map((c) => (
-            <Link key={c.handle} to="/collections/$slug" params={{ slug: c.handle }} className="group flex flex-col items-center gap-3">
-              <div className="aspect-square w-full rounded-full overflow-hidden bg-card border border-border group-hover:shadow-[var(--shadow-warm)] transition">
-                <img src={c.image} alt={c.imageAlt} loading="lazy" decoding="async" width={200} height={200} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <Link
+              key={c.handle}
+              to="/collections/$slug"
+              params={{ slug: c.handle }}
+              className="group flex flex-col overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10 hover:ring-[color:var(--gold)] hover:-translate-y-0.5 transition-all duration-500 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-warm)]"
+            >
+              <div className="relative aspect-square w-full overflow-hidden">
+                <img src={artFor(c.handle, c.image)} alt={c.imageAlt} loading="lazy" decoding="async" width={180} height={180} className="w-full h-full object-cover brightness-95 contrast-110 saturate-110 group-hover:scale-110 transition-all duration-700" />
+                <span aria-hidden="true" className="pointer-events-none absolute inset-0 scrim-tile opacity-70 group-hover:opacity-45 transition-opacity duration-500" />
               </div>
-              <div className="text-xs md:text-sm font-medium text-center">{c.title}</div>
+              <div className="px-1.5 py-2 text-[11px] sm:text-[12px] font-semibold text-center leading-tight text-foreground group-hover:text-primary transition-colors truncate">{c.title}</div>
             </Link>
           ))}
         </div>
