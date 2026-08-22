@@ -1,23 +1,17 @@
 /**
- * ProductStory — the long-form trust and education blocks below the buy box:
- * energisation ritual, benefits, specifications, wearing ritual, authenticity
- * and what's in the box. Pure presentation, driven by the product model.
+ * ProductStory — the long-form trust and education blocks below the buy box.
+ * All copy is category-specific: it comes from src/data/product-content.ts,
+ * keyed by the product's collection, plus attributes derived from the title.
  */
 import type { Product } from "@/data/products";
-
-const benefits = [
-  { icon: "👑", title: "Complete protection", copy: "Aligned to your planetary chart so every energy works in your favour." },
-  { icon: "🪄", title: "Manifestation", copy: "Worn for generations to attract abundance alongside spiritual clarity." },
-  { icon: "🧘", title: "Calm & focus", copy: "Customers report steadier sleep and sharper focus within weeks." },
-  { icon: "🛡️", title: "Negativity shield", copy: "Traditionally used to deflect drishti and stagnant home energy." },
-];
+import { contentForCollection, derivedSpecs } from "@/data/product-content";
 
 export function ProductStory({ product, collectionTitle }: { product: Product; collectionTitle: string }) {
+  const c = contentForCollection(product.collectionHandle);
   const specs: Array<[string, string]> = [
     ["Category", collectionTitle],
-    ["Sourcing", "Nepal & India, hand-selected"],
-    ["Energisation", "Vedic puja before dispatch"],
-    ["Certification", "Govt.-approved lab certificate"],
+    ...derivedSpecs(product.title),
+    ...c.specs,
   ];
 
   return (
@@ -26,16 +20,11 @@ export function ProductStory({ product, collectionTitle }: { product: Product; c
       <section className="cv-auto container-x py-10 sm:py-14 border-t border-border">
         <div className="grid items-center gap-8 rounded-3xl border border-border bg-secondary/40 p-6 sm:p-10 lg:grid-cols-2">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--gold-deep)]">The ritual</p>
-            <h2 className="mt-2 font-display text-2xl sm:text-3xl">See how your {product.title} is energised</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Recorded inside our puja room. Real priests, real mantras, real abhishek — every order is energised
-              before dispatch.
-            </p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--gold-deep)]">{c.eyebrow}</p>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl">{c.ritualTitle}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{c.ritualCopy}</p>
             <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
-              <li>✓ 11-step traditional energisation</li>
-              <li>✓ Personal naam-gotra during puja (optional)</li>
-              <li>✓ Puja video shared on WhatsApp post-dispatch</li>
+              {c.ritualPoints.map((p) => <li key={p}>{p}</li>)}
             </ul>
           </div>
           <div className="relative overflow-hidden rounded-2xl border border-border">
@@ -52,7 +41,7 @@ export function ProductStory({ product, collectionTitle }: { product: Product; c
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--gold-deep)]">Benefits</p>
         <h2 className="mt-2 rule-gold text-center font-display text-2xl sm:text-3xl">Why devotees choose the {product.title}</h2>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {benefits.map((b) => (
+          {c.benefits.map((b) => (
             <li key={b.title} className="card-lux rounded-2xl p-5">
               <span className="text-2xl" aria-hidden="true">{b.icon}</span>
               <h3 className="mt-3 font-display text-lg">{b.title}</h3>
@@ -76,15 +65,15 @@ export function ProductStory({ product, collectionTitle }: { product: Product; c
           </dl>
         </div>
         <div>
-          <h2 className="font-display text-2xl sm:text-3xl">How to wear &amp; activate</h2>
+          <h2 className="font-display text-2xl sm:text-3xl">{c.howToTitle}</h2>
           <ol className="mt-5 space-y-3 text-sm text-muted-foreground">
-            <li><span className="mr-2 font-semibold text-foreground">1.</span>Wear on a Monday morning after a bath.</li>
-            <li><span className="mr-2 font-semibold text-foreground">2.</span>Chant the mantra 11 times before first wear.</li>
-            <li><span className="mr-2 font-semibold text-foreground">3.</span>Treat it as sacred — remove during bath and sleep.</li>
+            {c.howTo.map((step, i) => (
+              <li key={step}><span className="mr-2 font-semibold text-foreground">{i + 1}.</span>{step}</li>
+            ))}
           </ol>
           <div className="mt-5 rounded-2xl border border-[color:var(--gold-deep)]/40 bg-[color:var(--gold)]/12 p-4">
             <p className="text-[11px] font-semibold uppercase tracking-[0.15em]">Activation mantra</p>
-            <p className="mt-1 font-display text-lg">ॐ नमः शिवाय · Om Namah Shivaya</p>
+            <p className="mt-1 font-display text-lg">{c.mantra.script} · {c.mantra.roman}</p>
           </div>
         </div>
       </section>
@@ -120,7 +109,7 @@ export function ProductStory({ product, collectionTitle }: { product: Product; c
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--gold-deep)]">In the box</p>
         <h2 className="mt-2 font-display text-2xl sm:text-3xl">What you&apos;ll receive</h2>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[`1 × ${product.title}`, "Authenticity certificate", "Pooja kit & instructions", "Premium wooden gift box"].map((item, i) => (
+          {[`1 × ${product.title}`, ...c.inTheBox].map((item, i) => (
             <li key={item} className="rounded-2xl border border-border bg-card p-5 text-sm">
               <span className="font-display text-2xl text-[color:var(--gold-deep)]">{i + 1}</span>
               <p className="mt-2 text-muted-foreground">{item}</p>
