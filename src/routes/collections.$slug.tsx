@@ -185,43 +185,8 @@ function CollectionPage() {
           <div className="text-xs text-muted-foreground">Free shipping · 7-day returns · Energised before dispatch</div>
         </div>
 
-        {/* Sticky sort / filter toolbar — presentation-only, sorts the loaded list */}
-        <div className="sticky top-0 z-20 -mx-3 sm:mx-0 mt-5 border-y border-border bg-background/85 px-3 py-2.5 backdrop-blur sm:rounded-full sm:border sm:px-4">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
-            {([
-              ["featured", "Featured"],
-              ["price-asc", "Price: low to high"],
-              ["price-desc", "Price: high to low"],
-              ["discount", "Biggest discount"],
-            ] as const).map(([value, label]) => (
-              <button
-                key={value}
-                type="button"
-                onClick={() => setSort(value)}
-                aria-pressed={sort === value}
-                className={`shrink-0 rounded-full px-3.5 py-1.5 text-[11px] sm:text-xs font-medium transition ${
-                  sort === value
-                    ? "bg-foreground text-background"
-                    : "border border-border bg-secondary/60 text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-            <span aria-hidden="true" className="mx-1 hidden h-4 w-px shrink-0 bg-border sm:block" />
-            <button
-              type="button"
-              onClick={() => setInStockOnly((v) => !v)}
-              aria-pressed={inStockOnly}
-              className={`shrink-0 rounded-full px-3.5 py-1.5 text-[11px] sm:text-xs font-medium transition ${
-                inStockOnly ? "bg-[image:var(--gradient-gold)] text-[color:var(--ink)]" : "border border-border bg-secondary/60 text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              In stock only
-            </button>
-            <span className="ml-auto hidden shrink-0 pl-3 text-[11px] text-muted-foreground sm:block">{visible.length} shown</span>
-          </div>
-        </div>
+        {/* Sticky sort / filter toolbar — sort, price range and availability */}
+        <ProductFilters state={filters} total={collection.products.length} />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6 sm:mt-8">
           {visible.map((p: Product) => <ProductCard key={p.id} product={p} />)}
