@@ -91,7 +91,8 @@ export function ProductCard({ product, priority = false }: { product: Product; p
             price={variant.price}
             available={variant.available}
             label="Add"
-            className="!w-auto shrink-0 !rounded-full !border-transparent !bg-foreground !text-background !px-5 !py-2.5 !text-[13px] !normal-case !tracking-normal hover:!opacity-90"
+            icon={<ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />}
+            className="!w-auto shrink-0 !rounded-lg !border-transparent !bg-foreground !text-background !px-5 !py-2.5 !text-[13px] !normal-case !tracking-normal hover:!opacity-90"
             title={product.title}
             image={product.image}
             imageAlt={product.imageAlt}
