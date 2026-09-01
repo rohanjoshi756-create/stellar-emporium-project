@@ -50,7 +50,8 @@ function SearchPage() {
   const navigate = useNavigate();
   const [term, setTerm] = useState(q);
 
-  const results = q.trim() ? products.filter((p) => score(p.title, q)) : [];
+  const results = useMemo(() => (q.trim() ? products.filter((p) => score(p.title, q)) : []), [q]);
+  const filters = useProductFilters(results);
   const suggestions = productCollections.slice(0, 6);
 
   return (
