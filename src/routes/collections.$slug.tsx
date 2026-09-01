@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { ProductFilters, useProductFilters } from "@/components/commerce/ProductFilters";
 import { productCollections, collectionByHandle, type Product, type ProductCollection } from "@/data/products";
 import { seoFor, type CollectionSeo } from "@/data/collection-seo";
 import { artFor } from "@/data/category-art";
