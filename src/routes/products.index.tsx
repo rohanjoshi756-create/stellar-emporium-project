@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/commerce/ProductCard";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
+import { ProductFilters, useProductFilters } from "@/components/commerce/ProductFilters";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
