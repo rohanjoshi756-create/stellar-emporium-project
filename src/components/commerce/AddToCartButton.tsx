@@ -22,6 +22,8 @@ export type AddToCartButtonProps = {
   title?: string;
   image?: string;
   imageAlt?: string;
+  /** Optional leading icon rendered before the label. */
+  icon?: ReactNode;
   onAddToCart?: (payload: { variantId: string; quantity: number; price: number }) => void;
 };
 
