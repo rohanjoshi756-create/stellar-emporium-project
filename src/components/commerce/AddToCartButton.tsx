@@ -7,7 +7,7 @@
  * When no handler is passed it falls back to the local cart store so the
  * storefront is fully shoppable before migration.
  */
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { useCart } from "@/lib/cart";
 
