@@ -3,7 +3,7 @@
  * Client-side filtering over the typed product model; renders fully from data
  * so it can be replaced by Shopify's `templates/search.liquid` 1:1.
  */
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Search as SearchIcon } from "lucide-react";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
