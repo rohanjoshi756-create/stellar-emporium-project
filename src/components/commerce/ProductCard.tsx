@@ -5,7 +5,7 @@
 import { formatPrice, type Product } from "@/data/products";
 import { AddToCartButton } from "./AddToCartButton";
 import { Link } from "@tanstack/react-router";
-import { Star } from "lucide-react";
+import { Star, ShoppingBag } from "lucide-react";
 
 /** Deterministic display rating derived from the product id (no fake reviews shown as counts). */
 function trustSignal(product: Product) {
