@@ -142,17 +142,8 @@ function CollectionPage() {
   const { collection, seo } = Route.useLoaderData();
   const others = productCollections.filter((c) => c.handle !== collection.handle).slice(0, 6);
   const inStock = collection.products.filter((p: Product) => p.available).length;
-  const [sort, setSort] = useState<"featured" | "price-asc" | "price-desc" | "discount">("featured");
-  const [inStockOnly, setInStockOnly] = useState(false);
-
-  const visible = useMemo(() => {
-    const list = collection.products.filter((p: Product) => (inStockOnly ? p.available : true));
-    const sorted = [...list];
-    if (sort === "price-asc") sorted.sort((a, b) => a.price - b.price);
-    if (sort === "price-desc") sorted.sort((a, b) => b.price - a.price);
-    if (sort === "discount") sorted.sort((a, b) => b.discountPercent - a.discountPercent);
-    return sorted;
-  }, [collection.products, sort, inStockOnly]);
+  const filters = useProductFilters(collection.products);
+  const visible = filters.visible;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
