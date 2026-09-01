@@ -101,9 +101,15 @@ function SearchPage() {
         )}
 
         {results.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6">
-            {results.map((p) => <ProductCard key={p.id} product={p} />)}
-          </div>
+          <>
+            <ProductFilters state={filters} total={results.length} />
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 mt-6">
+              {filters.visible.map((p) => <ProductCard key={p.id} product={p} />)}
+            </div>
+            {filters.visible.length === 0 && (
+              <p className="mt-10 text-center text-sm text-muted-foreground">No results match these filters — try clearing them.</p>
+            )}
+          </>
         ) : (
           <div className="mt-8">
             {q && <p className="text-sm text-muted-foreground">No exact match. Browse a collection instead:</p>}
