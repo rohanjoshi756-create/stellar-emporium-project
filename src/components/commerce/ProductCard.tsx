@@ -56,7 +56,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
       </Link>
 
       <div className="px-1.5 pt-3 pb-1 flex flex-col flex-1">
-        <h3 className="font-display text-[15px] sm:text-[16px] font-semibold leading-tight truncate">
+        <h3 className="font-display text-[15px] sm:text-[16px] font-medium leading-snug line-clamp-1">
           <Link to="/products/$handle" params={{ handle: product.handle }} className="hover:text-primary transition">
             {product.title}
           </Link>
