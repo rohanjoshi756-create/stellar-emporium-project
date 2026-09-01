@@ -62,7 +62,18 @@ export function AddToCartButton({
       onClick={handleClick}
       className={`w-full text-xs font-semibold tracking-wide uppercase rounded-full border border-foreground py-2.5 hover:bg-foreground hover:text-background active:scale-[0.98] transition disabled:opacity-45 disabled:cursor-not-allowed ${className}`}
     >
-      {!available ? "Sold out" : added ? "Added ✓" : label}
+      {!available ? (
+        "Sold out"
+      ) : added ? (
+        "Added ✓"
+      ) : icon ? (
+        <span className="inline-flex items-center justify-center gap-1.5">
+          {icon}
+          {label}
+        </span>
+      ) : (
+        label
+      )}
     </button>
   );
 }
