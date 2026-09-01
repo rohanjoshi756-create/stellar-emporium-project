@@ -7,7 +7,7 @@
  * When no handler is passed it falls back to the local cart store so the
  * storefront is fully shoppable before migration.
  */
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
 import { useCart } from "@/lib/cart";
 
@@ -22,6 +22,8 @@ export type AddToCartButtonProps = {
   title?: string;
   image?: string;
   imageAlt?: string;
+  /** Optional leading icon rendered before the label. */
+  icon?: ReactNode;
   onAddToCart?: (payload: { variantId: string; quantity: number; price: number }) => void;
 };
 
@@ -35,6 +37,7 @@ export function AddToCartButton({
   title = "",
   image = "",
   imageAlt = "",
+  icon,
   onAddToCart,
 }: AddToCartButtonProps) {
   const { addByPayload } = useCart();
@@ -59,7 +62,18 @@ export function AddToCartButton({
       onClick={handleClick}
       className={`w-full text-xs font-semibold tracking-wide uppercase rounded-full border border-foreground py-2.5 hover:bg-foreground hover:text-background active:scale-[0.98] transition disabled:opacity-45 disabled:cursor-not-allowed ${className}`}
     >
-      {!available ? "Sold out" : added ? "Added ✓" : label}
+      {!available ? (
+        "Sold out"
+      ) : added ? (
+        "Added ✓"
+      ) : icon ? (
+        <span className="inline-flex items-center justify-center gap-1.5">
+          {icon}
+          {label}
+        </span>
+      ) : (
+        label
+      )}
     </button>
   );
 }
