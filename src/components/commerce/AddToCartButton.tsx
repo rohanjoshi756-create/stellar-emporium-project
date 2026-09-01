@@ -37,6 +37,7 @@ export function AddToCartButton({
   title = "",
   image = "",
   imageAlt = "",
+  icon,
   onAddToCart,
 }: AddToCartButtonProps) {
   const { addByPayload } = useCart();
