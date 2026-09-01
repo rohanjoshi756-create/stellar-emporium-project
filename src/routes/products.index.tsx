@@ -27,6 +27,7 @@ export const Route = createFileRoute("/products/")({
 });
 
 function ProductsIndex() {
+  const filters = useProductFilters(products);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <><AnnouncementBar /><Header /></>
