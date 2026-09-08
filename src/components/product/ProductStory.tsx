@@ -23,7 +23,7 @@ export function ProductStory({
     ...copy.specs,
     ...derivedSpecs(product.title),
     ...c.specs,
-  ].filter(([k]) => (seen.has(k) ? false : (seen.add(k), true)));
+  ].filter((row): row is [string, string] => (seen.has(row[0]) ? false : (seen.add(row[0]), true)));
 
   return (
     <>
