@@ -1,38 +1,38 @@
 /**
- * BrandStatement — quiet editorial band that sets the brand tone between the
- * hero and the shopping sections. Pure presentation; maps to a Liquid
+ * BrandStatement — compact, factual brand band. Maps to a Liquid
  * `sections/brand-statement.liquid` rich-text section on migration.
  */
-const pillars = [
-  { n: "01", t: "Sourced at origin", d: "Nepali Rudraksha, South Indian karungali and mine-verified crystals — bought directly, never through resellers." },
-  { n: "02", t: "Verified, then blessed", d: "Every piece is lab tested for authenticity, then energised with its own mantra in our puja room." },
-  { n: "03", t: "Delivered like a gift", d: "Certificate, mantra card and wooden box — packed so it is ready to place or gift the moment it arrives." },
+const facts = [
+  { k: "Sourced from", v: "Nepal & South India" },
+  { k: "Lab certified", v: "Every order" },
+  { k: "Energised", v: "Before dispatch" },
+  { k: "Customers served", v: "50,000+" },
 ];
 
 export function BrandStatement() {
   return (
-    <section className="cv-auto paper border-y border-border bg-secondary/30">
-      <div className="container-x py-14 sm:py-20">
-        <div className="section-head max-w-3xl mx-auto">
-          <p className="eyebrow">The Nakshatra standard</p>
-          <h2 className="font-display text-[1.9rem] leading-[1.15] sm:text-[2.9rem]">
-            Sacred objects, made with <em>the patience they deserve</em>
-          </h2>
-          <p className="mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground">
-            We keep our catalogue small on purpose. Each piece is chosen at source, verified in a
-            government-approved lab and energised by our priests before it is allowed to carry our name.
-          </p>
-        </div>
+    <section className="cv-auto border-y border-border bg-background">
+      <div className="container-x py-10 sm:py-14">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-14">
+          <div>
+            <h2 className="font-display text-[1.6rem] leading-[1.2] sm:text-[2.1rem]">
+              Real Rudraksha, real certificates.
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-[0.95rem]">
+              We buy directly from growers in Nepal and artisans in South India, get each batch tested
+              at a government-approved lab, and send the certificate along with your order.
+            </p>
+          </div>
 
-        <ol className="mt-10 grid gap-6 sm:grid-cols-3 sm:gap-8">
-          {pillars.map((p) => (
-            <li key={p.n} className="border-t border-[color:var(--gold-deep)]/35 pt-5">
-              <span className="font-display text-sm tracking-[0.2em] text-[color:var(--gold-deep)]">{p.n}</span>
-              <h3 className="mt-2 font-display text-xl sm:text-2xl">{p.t}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
-            </li>
-          ))}
-        </ol>
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4 lg:gap-x-4">
+            {facts.map((f) => (
+              <div key={f.k} className="border-t border-border pt-3">
+                <dt className="text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">{f.k}</dt>
+                <dd className="mt-1 font-display text-base sm:text-lg">{f.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );
