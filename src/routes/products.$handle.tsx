@@ -39,19 +39,23 @@ export const Route = createFileRoute("/products/$handle")({
       return { meta: [{ title: "Product not found — Nakshatra Store" }, { name: "robots", content: "noindex" }] };
     }
     const p = loaderData.product;
+    const copy = productCopy(p);
     const url = `${SITE}/products/${params.handle}`;
-    const title = `${p.title} — Buy Online | Nakshatra Store`;
-    const description = `Buy ${p.title} at ${formatPrice(p.price)}. Govt. lab certified and energised by top astrologers before dispatch. Free shipping on prepaid orders, 7-day returns.`;
+    const title = copy.seoTitle;
+    const description = copy.seoDescription;
     return {
       meta: [
         { title },
         { name: "description", content: description },
+        { name: "keywords", content: copy.keywords },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "product" },
         { property: "og:url", content: url },
         { property: "og:site_name", content: "Nakshatra Store" },
         { property: "og:image", content: p.image },
+        { property: "product:price:amount", content: String(p.price) },
+        { property: "product:price:currency", content: "INR" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:image", content: p.image },
         { name: "robots", content: "index, follow, max-image-preview:large" },
@@ -68,15 +72,23 @@ export const Route = createFileRoute("/products/$handle")({
                 "@id": url,
                 name: p.title,
                 image: p.images,
-                description,
+                description: copy.intro.join(" "),
                 sku: p.id,
+                material: copy.material,
+                category: copy.form,
                 brand: { "@type": "Brand", name: "Nakshatra Store" },
                 offers: {
                   "@type": "Offer",
                   url,
                   price: String(p.price),
                   priceCurrency: "INR",
+                  itemCondition: "https://schema.org/NewCondition",
                   availability: p.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                  shippingDetails: {
+                    "@type": "OfferShippingDetails",
+                    shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "INR" },
+                    shippingDestination: { "@type": "DefinedRegion", addressCountry: "IN" },
+                  },
                 },
               },
               {
@@ -93,6 +105,7 @@ export const Route = createFileRoute("/products/$handle")({
       ],
     };
   },
+
   notFoundComponent: ProductNotFound,
   errorComponent: ProductNotFound,
   component: ProductPage,
