@@ -24,7 +24,8 @@ import { ProductCard } from "@/components/commerce/ProductCard";
 import { ReviewsSummary } from "@/components/sections/ReviewsSummary";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import { FAQ } from "@/components/sections/FAQ";
-import { homeFaqs } from "@/data/site-content";
+import { productCopy } from "@/data/product-copy";
+import { contentForCollection } from "@/data/product-content";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
@@ -39,19 +40,23 @@ export const Route = createFileRoute("/products/$handle")({
       return { meta: [{ title: "Product not found — Nakshatra Store" }, { name: "robots", content: "noindex" }] };
     }
     const p = loaderData.product;
+    const copy = productCopy(p);
     const url = `${SITE}/products/${params.handle}`;
-    const title = `${p.title} — Buy Online | Nakshatra Store`;
-    const description = `Buy ${p.title} at ${formatPrice(p.price)}. Govt. lab certified and energised by top astrologers before dispatch. Free shipping on prepaid orders, 7-day returns.`;
+    const title = copy.seoTitle;
+    const description = copy.seoDescription;
     return {
       meta: [
         { title },
         { name: "description", content: description },
+        { name: "keywords", content: copy.keywords },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:type", content: "product" },
         { property: "og:url", content: url },
         { property: "og:site_name", content: "Nakshatra Store" },
         { property: "og:image", content: p.image },
+        { property: "product:price:amount", content: String(p.price) },
+        { property: "product:price:currency", content: "INR" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:image", content: p.image },
         { name: "robots", content: "index, follow, max-image-preview:large" },
@@ -68,15 +73,23 @@ export const Route = createFileRoute("/products/$handle")({
                 "@id": url,
                 name: p.title,
                 image: p.images,
-                description,
+                description: copy.intro.join(" "),
                 sku: p.id,
+                material: copy.material,
+                category: copy.form,
                 brand: { "@type": "Brand", name: "Nakshatra Store" },
                 offers: {
                   "@type": "Offer",
                   url,
                   price: String(p.price),
                   priceCurrency: "INR",
+                  itemCondition: "https://schema.org/NewCondition",
                   availability: p.available ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                  shippingDetails: {
+                    "@type": "OfferShippingDetails",
+                    shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "INR" },
+                    shippingDestination: { "@type": "DefinedRegion", addressCountry: "IN" },
+                  },
                 },
               },
               {
@@ -93,6 +106,7 @@ export const Route = createFileRoute("/products/$handle")({
       ],
     };
   },
+
   notFoundComponent: ProductNotFound,
   errorComponent: ProductNotFound,
   component: ProductPage,
@@ -117,6 +131,11 @@ function ProductPage() {
   const variant = product.variants[0];
   const [quantity, setQuantity] = useState(1);
   const collection = collectionByHandle(product.collectionHandle);
+  const copy = productCopy(product);
+  const productFaqs = [...copy.faqs, ...contentForCollection(product.collectionHandle).faqs.slice(0, 3)].map((f) => ({
+    question: f.question,
+    answer: f.answer,
+  }));
   const related = products
     .filter((p) => p.collectionHandle === product.collectionHandle && p.id !== product.id)
     .slice(0, 6);
@@ -184,12 +203,7 @@ function ProductPage() {
             )}
 
             <ul className="mt-5 grid gap-2 text-sm text-muted-foreground sm:grid-cols-2">
-              {[
-                "Hand-selected and lab-verified for authenticity",
-                "Energised with Vedic mantras before dispatch",
-                "Original certificate inside every parcel",
-                "Lifetime authenticity guarantee",
-              ].map((line) => (
+              {copy.highlights.map((line) => (
                 <li key={line} className="flex gap-2 leading-snug">
                   <span aria-hidden="true" className="mt-0.5 text-[color:var(--gold-deep)]">✓</span>
                   <span>{line}</span>
@@ -245,19 +259,17 @@ function ProductPage() {
             <TrustBadgeGrid />
 
             <div className="mt-7 rounded-2xl border border-border bg-secondary/40 p-5 text-sm leading-relaxed text-muted-foreground">
-              <h2 className="font-display text-lg text-foreground mb-2">Product details</h2>
-              <p>
-                {product.title} is part of our {collection?.title ?? "Nakshatra"} range. Each piece is sourced from
-                trusted artisans and mines, verified in a government-certified gemology lab, and energised by our
-                astrologers with Vedic mantras before it reaches you.
-              </p>
+              <h2 className="font-display text-lg text-foreground mb-2">About the {product.title}</h2>
+              {copy.intro.map((para) => (
+                <p key={para.slice(0, 32)} className="mt-2 first:mt-0">{para}</p>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       <FrequentlyBoughtTogether main={product} addons={related.slice(0, 2)} />
-      <ProductStory product={product} collectionTitle={collection?.title ?? "Nakshatra"} />
+      <ProductStory product={product} collectionTitle={collection?.title ?? "Nakshatra"} copy={copy} />
 
       {related.length > 0 && (
         <section className="container-x py-10 sm:py-14 border-t border-border">
@@ -271,7 +283,7 @@ function ProductPage() {
       {/* Social proof + objection handling — the highest-impact PDP blocks. */}
       <div id="reviews"><ReviewsSummary /></div>
       <RecentlyViewed currentHandle={product.handle} />
-      <FAQ title="Frequently asked questions" items={homeFaqs.slice(0, 5)} />
+      <FAQ title={`${product.title} — frequently asked questions`} items={productFaqs} />
       </main>
 
       {/* Persistent mobile purchase bar */}

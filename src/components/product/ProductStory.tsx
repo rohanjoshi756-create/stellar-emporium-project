@@ -5,14 +5,25 @@
  */
 import type { Product } from "@/data/products";
 import { contentForCollection, derivedSpecs } from "@/data/product-content";
+import type { ProductCopy } from "@/data/product-copy";
 
-export function ProductStory({ product, collectionTitle }: { product: Product; collectionTitle: string }) {
+export function ProductStory({
+  product,
+  collectionTitle,
+  copy,
+}: {
+  product: Product;
+  collectionTitle: string;
+  copy: ProductCopy;
+}) {
   const c = contentForCollection(product.collectionHandle);
+  const seen = new Set<string>();
   const specs: Array<[string, string]> = [
     ["Category", collectionTitle],
+    ...copy.specs,
     ...derivedSpecs(product.title),
     ...c.specs,
-  ];
+  ].filter((row): row is [string, string] => (seen.has(row[0]) ? false : (seen.add(row[0]), true)));
 
   return (
     <>
@@ -40,6 +51,9 @@ export function ProductStory({ product, collectionTitle }: { product: Product; c
       <section className="cv-auto container-x py-10 sm:py-14 border-t border-border">
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--gold-deep)]">Benefits</p>
         <h2 className="mt-2 rule-gold text-center font-display text-2xl sm:text-3xl">Why devotees choose the {product.title}</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+          {copy.material} is traditionally chosen for {copy.intent}. Here is what this particular piece is worn for.
+        </p>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {c.benefits.map((b) => (
             <li key={b.title} className="card-lux rounded-2xl p-5">
@@ -67,7 +81,7 @@ export function ProductStory({ product, collectionTitle }: { product: Product; c
         <div>
           <h2 className="font-display text-2xl sm:text-3xl">{c.howToTitle}</h2>
           <ol className="mt-5 space-y-3 text-sm text-muted-foreground">
-            {c.howTo.map((step, i) => (
+            {[copy.usage, copy.care, ...c.howTo].map((step, i) => (
               <li key={step}><span className="mr-2 font-semibold text-foreground">{i + 1}.</span>{step}</li>
             ))}
           </ol>
