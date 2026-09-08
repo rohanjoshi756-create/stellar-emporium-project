@@ -218,12 +218,17 @@ export function productCopy(p: Product): ProductCopy {
     },
   ];
 
-  const seoTitle = `${p.title} — Original & Energised | Nakshatra Store`.slice(0, 68);
-  const seoDescription =
-    `Buy ${p.title} online at ${formatPrice(p.price)}. ${material.label} for ${material.intent}. Lab certified, energised by astrologers, free prepaid shipping & 7-day returns.`.slice(
-      0,
-      158,
-    );
+  const clip = (text: string, max: number) =>
+    text.length <= max ? text : `${text.slice(0, text.lastIndexOf(" ", max - 1)).replace(/[\s,.–—-]+$/, "")}…`;
+
+  const seoTitle =
+    p.title.length > 44
+      ? clip(`${p.title} | Nakshatra Store`, 62)
+      : `${p.title} — Original & Energised | Nakshatra Store`;
+  const seoDescription = clip(
+    `Buy ${p.title} online at ${formatPrice(p.price)}. ${material.label} for ${material.intent}. Lab certified, energised by astrologers, free prepaid shipping & 7-day returns.`,
+    157,
+  );
 
   const keywords = [
     p.title.toLowerCase(),
