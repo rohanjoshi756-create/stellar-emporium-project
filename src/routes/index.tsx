@@ -21,7 +21,6 @@ import {
   FAQ,
   Footer,
   TrustBlock,
-  BrandStatement,
 } from "@/components/sections";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import {
@@ -88,8 +87,6 @@ function Index() {
       <PromoBanner />
       {/* 05 Press / trust bar */}
       <PressBar />
-      {/* 05b Brand statement — editorial tone-setter */}
-      <BrandStatement />
       {/* 06 Category grid */}
       <CategoryGrid />
       {/* 07 Bestsellers */}
