@@ -16,8 +16,10 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
+import { Route as BlogsIndexRouteImport } from './routes/blogs.index'
 import { Route as ProductsHandleRouteImport } from './routes/products.$handle'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
+import { Route as BlogsSlugRouteImport } from './routes/blogs.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -54,6 +56,11 @@ const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
   path: '/collections/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogsIndexRoute = BlogsIndexRouteImport.update({
+  id: '/blogs/',
+  path: '/blogs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsHandleRoute = ProductsHandleRouteImport.update({
   id: '/products/$handle',
   path: '/products/$handle',
@@ -64,6 +71,11 @@ const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
   path: '/collections/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogsSlugRoute = BlogsSlugRouteImport.update({
+  id: '/blogs/$slug',
+  path: '/blogs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,8 +83,10 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$handle': typeof ProductsHandleRoute
+  '/blogs/': typeof BlogsIndexRoute
   '/collections/': typeof CollectionsIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
@@ -82,8 +96,10 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$handle': typeof ProductsHandleRoute
+  '/blogs': typeof BlogsIndexRoute
   '/collections': typeof CollectionsIndexRoute
   '/products': typeof ProductsIndexRoute
 }
@@ -94,8 +110,10 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blogs/$slug': typeof BlogsSlugRoute
   '/collections/$slug': typeof CollectionsSlugRoute
   '/products/$handle': typeof ProductsHandleRoute
+  '/blogs/': typeof BlogsIndexRoute
   '/collections/': typeof CollectionsIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
@@ -107,8 +125,10 @@ export interface FileRouteTypes {
     | '/cart'
     | '/search'
     | '/sitemap.xml'
+    | '/blogs/$slug'
     | '/collections/$slug'
     | '/products/$handle'
+    | '/blogs/'
     | '/collections/'
     | '/products/'
   fileRoutesByTo: FileRoutesByTo
@@ -118,8 +138,10 @@ export interface FileRouteTypes {
     | '/cart'
     | '/search'
     | '/sitemap.xml'
+    | '/blogs/$slug'
     | '/collections/$slug'
     | '/products/$handle'
+    | '/blogs'
     | '/collections'
     | '/products'
   id:
@@ -129,8 +151,10 @@ export interface FileRouteTypes {
     | '/cart'
     | '/search'
     | '/sitemap.xml'
+    | '/blogs/$slug'
     | '/collections/$slug'
     | '/products/$handle'
+    | '/blogs/'
     | '/collections/'
     | '/products/'
   fileRoutesById: FileRoutesById
@@ -141,8 +165,10 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogsSlugRoute: typeof BlogsSlugRoute
   CollectionsSlugRoute: typeof CollectionsSlugRoute
   ProductsHandleRoute: typeof ProductsHandleRoute
+  BlogsIndexRoute: typeof BlogsIndexRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
@@ -198,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blogs/': {
+      id: '/blogs/'
+      path: '/blogs'
+      fullPath: '/blogs/'
+      preLoaderRoute: typeof BlogsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/$handle': {
       id: '/products/$handle'
       path: '/products/$handle'
@@ -212,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blogs/$slug': {
+      id: '/blogs/$slug'
+      path: '/blogs/$slug'
+      fullPath: '/blogs/$slug'
+      preLoaderRoute: typeof BlogsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -221,8 +261,10 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogsSlugRoute: BlogsSlugRoute,
   CollectionsSlugRoute: CollectionsSlugRoute,
   ProductsHandleRoute: ProductsHandleRoute,
+  BlogsIndexRoute: BlogsIndexRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }
