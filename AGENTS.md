@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep blog content centralized in `src/data/blogs.ts` so React pages can map cleanly to Shopify articles later.

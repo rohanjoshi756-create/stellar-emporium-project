@@ -137,6 +137,7 @@ export function Header() {
             </Link>
           ))}
           <Link to="/products" className="hover:text-primary transition-colors">All Products</Link>
+          <Link to="/blogs" className="hover:text-primary transition-colors" activeProps={{ className: "text-primary font-medium" }}>Blogs</Link>
         </div>
       </nav>
 
@@ -175,6 +176,7 @@ export function Header() {
               </Link>
             ))}
             <Link to="/products" onClick={() => setMenuOpen(false)} className="py-3 border-b border-border">All Products</Link>
+            <Link to="/blogs" onClick={() => setMenuOpen(false)} className="py-3 border-b border-border">Blogs</Link>
             <a href={storeInfo.whatsappUrl} target="_blank" rel="noreferrer" className="py-3 flex items-center gap-2">
               <Phone className="h-4 w-4" aria-hidden="true" /> Talk to an astrologer
             </a>

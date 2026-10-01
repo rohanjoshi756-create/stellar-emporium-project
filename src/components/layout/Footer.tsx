@@ -94,6 +94,7 @@ export function Footer() {
                   <a href={storeInfo.whatsappUrl} target="_blank" rel="noreferrer" className="hover:text-primary">{l}</a>
                 </li>
               ))}
+              <li><Link to="/blogs" className="hover:text-primary">Nakshatra Journal</Link></li>
             </ul>
             <div className="mt-5">
               <div className="font-medium mb-2 text-[13px]">We accept</div>
