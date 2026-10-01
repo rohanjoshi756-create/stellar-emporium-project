@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { collections } from "@/data/catalog";
 import { products } from "@/data/products";
+import { blogPosts } from "@/data/blogs";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
@@ -18,6 +19,8 @@ export const Route = createFileRoute("/sitemap.xml")({
             loc: `${SITE}/products/${h}`,
             priority: "0.7",
           })),
+          { loc: `${SITE}/blogs`, priority: "0.8" },
+          ...blogPosts.map((post) => ({ loc: `${SITE}/blogs/${post.slug}`, priority: "0.7" })),
         ];
         const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
           .map(
