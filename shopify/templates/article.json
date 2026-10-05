@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {
+        "show_author": true,
+        "show_related": true,
+        "explore_text": "Discover authentic, carefully selected products related to this guide.",
+        "explore_label": "Shop the collection"
+      }
+    }
+  },
+  "order": ["main"]
+}

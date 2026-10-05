@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "eyebrow": "Wisdom for intentional living",
+        "heading": "The Nakshatra Journal",
+        "intro": "Clear, thoughtful guidance on sacred beads, crystals, Vastu and everyday spiritual practice.",
+        "show_featured": true,
+        "posts_per_page": 12
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,29 @@
+{%- comment -%} Optional homepage journal section. Select a Shopify blog in the editor. {%- endcomment -%}
+{%- assign selected_blog = section.settings.blog -%}
+{%- if selected_blog != blank -%}
+  <section class="section section--tint home-journal reveal">
+    <div class="container-x">
+      <div class="journal-section-head">
+        <div><p class="journal-eyebrow">{{ section.settings.eyebrow }}</p><h2>{{ section.settings.heading }}</h2></div>
+        <a href="{{ selected_blog.url }}">View all blogs →</a>
+      </div>
+      <div class="journal-grid">
+        {%- for home_article in selected_blog.articles limit: 3 -%}
+          {% render 'article-card', card_article: home_article %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Latest blogs",
+  "settings": [
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Wisdom & guidance" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From the Nakshatra Journal" }
+  ],
+  "presets": [{ "name": "Latest blogs" }]
+}
+{% endschema %}

@@ -5,3 +5,5 @@
 - [x] Keep blog publishing easy through one documented content file.
 - [x] Verify home, blog listing, and article pages on desktop and mobile.
 - [ ] Import blogs from the custom-built old website — blocked until its blog URL or export is available.
+- [x] Add blog listing, article, recent-blog sidebar, and homepage journal sections to the Shopify theme handoff.
+- [x] Package the Shopify blog-only update with upload instructions.
