@@ -21,6 +21,7 @@ import {
   FAQ,
   Footer,
   TrustBlock,
+  HomeBlogs,
 } from "@/components/sections";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
 import {
@@ -117,6 +118,8 @@ function Index() {
       <RecentlyViewed />
       {/* 12 About the store */}
       <AboutStore />
+      {/* 12a Latest editorial guides */}
+      <HomeBlogs />
       {/* 13 Foundation CTA */}
       <AstrologerCTA />
       {/* 14 Service FAQ — shipping, returns, authenticity, delivery */}

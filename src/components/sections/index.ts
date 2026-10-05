@@ -23,3 +23,4 @@ export { NewsletterSection } from "./Newsletter";
 export { RecentlyViewed } from "./RecentlyViewed";
 export { ReviewsSummary } from "./ReviewsSummary";
 export { TrustBlock } from "./TrustBlock";
+export { HomeBlogs } from "./HomeBlogs";
