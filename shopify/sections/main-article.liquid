@@ -1,0 +1,104 @@
+{%- comment -%} Shared article design. Existing Shopify article HTML flows through article.content. {%- endcomment -%}
+{%- liquid
+  assign reading_words = article.content | strip_html | split: ' ' | size
+  assign reading_minutes = reading_words | divided_by: 200
+  if reading_minutes < 1
+    assign reading_minutes = 1
+  endif
+-%}
+<article class="journal-article" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="journal-article__head container-x">
+    <nav class="journal-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a><span>/</span><a href="{{ blog.url }}">{{ blog.title }}</a><span>/</span><span>{{ article.tags.first | default: 'Article' }}</span>
+    </nav>
+    <div class="journal-article__intro center">
+      <p class="journal-eyebrow">{{ article.tags.first | default: blog.title }}</p>
+      <h1 itemprop="headline">{{ article.title }}</h1>
+      {%- if article.excerpt != blank -%}<div class="journal-article__excerpt" itemprop="description">{{ article.excerpt }}</div>{%- endif -%}
+      <div class="journal-article__meta">
+        {%- if section.settings.show_author -%}<span itemprop="author">{{ article.author }}</span><span aria-hidden="true">·</span>{%- endif -%}
+        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" itemprop="datePublished">{{ article.published_at | date: '%d %B %Y' }}</time>
+        <span aria-hidden="true">·</span><span>{{ reading_minutes }} min read</span>
+      </div>
+    </div>
+  </header>
+
+  {%- if article.image != blank -%}
+    <div class="journal-article__cover container-x">
+      {{ article.image | image_url: width: 1800 | image_tag:
+        widths: '640, 900, 1200, 1500, 1800',
+        sizes: '(min-width: 1440px) 1400px, 100vw',
+        loading: 'eager',
+        fetchpriority: 'high',
+        alt: article.image.alt | default: article.title
+      }}
+    </div>
+  {%- endif -%}
+
+  <div class="journal-article__layout container-x">
+    <aside class="journal-recent" aria-label="Recent blogs">
+      <div class="journal-aside-head">
+        <div><p class="journal-eyebrow">Latest reads</p><h2>Recent blogs</h2></div>
+        <a href="{{ blog.url }}">View all</a>
+      </div>
+      <div class="journal-recent__list no-scrollbar">
+        {%- assign recent_shown = 0 -%}
+        {%- for recent_article in blog.articles -%}
+          {%- if recent_article.id != article.id and recent_shown < 4 -%}
+            <a class="journal-recent__item" href="{{ recent_article.url }}">
+              <span class="journal-recent__media">
+                {%- if recent_article.image != blank -%}
+                  {{ recent_article.image | image_url: width: 180 | image_tag: loading: 'lazy', alt: '' }}
+                {%- endif -%}
+              </span>
+              <span class="journal-recent__copy"><small>{{ recent_article.tags.first | default: blog.title }}</small><strong>{{ recent_article.title }}</strong></span>
+            </a>
+            {%- assign recent_shown = recent_shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </aside>
+
+    <div class="journal-rte rte" itemprop="articleBody">{{ article.content }}</div>
+
+    <aside class="journal-explore">
+      <div>
+        <p class="journal-eyebrow">Continue exploring</p>
+        <p>{{ section.settings.explore_text }}</p>
+        {%- if section.settings.explore_collection != blank -%}
+          <a class="btn btn-ink btn--block" href="{{ section.settings.explore_collection.url }}">{{ section.settings.explore_label }} <span aria-hidden="true">→</span></a>
+        {%- endif -%}
+      </div>
+    </aside>
+  </div>
+</article>
+
+{%- if section.settings.show_related -%}
+  <section class="section section--tint journal-read-next">
+    <div class="container-x">
+      <div class="journal-section-head"><div><p class="journal-eyebrow">From the journal</p><h2>Read next</h2></div><a href="{{ blog.url }}">← All articles</a></div>
+      <div class="journal-grid">
+        {%- assign related_shown = 0 -%}
+        {%- for related_article in blog.articles -%}
+          {%- if related_article.id != article.id and related_shown < 3 -%}
+            {% render 'article-card', card_article: related_article %}
+            {%- assign related_shown = related_shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "checkbox", "id": "show_related", "label": "Show related articles", "default": true },
+    { "type": "textarea", "id": "explore_text", "label": "Explore text", "default": "Discover authentic, carefully selected products related to this guide." },
+    { "type": "collection", "id": "explore_collection", "label": "Related collection" },
+    { "type": "text", "id": "explore_label", "label": "Collection button label", "default": "Shop the collection" }
+  ]
+}
+{% endschema %}

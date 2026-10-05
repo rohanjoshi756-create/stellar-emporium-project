@@ -1,0 +1,57 @@
+{%- comment -%} Shopify blog listing. New posts appear automatically. {%- endcomment -%}
+<section class="journal-head">
+  <div class="container-x center">
+    <nav class="journal-breadcrumb" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a><span>/</span><span>{{ blog.title }}</span></nav>
+    <p class="journal-eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1>{{ section.settings.heading | default: blog.title }}</h1>
+    {%- if section.settings.intro != blank -%}<p class="journal-head__intro">{{ section.settings.intro }}</p>{%- endif -%}
+  </div>
+</section>
+
+{%- paginate blog.articles by section.settings.posts_per_page -%}
+  {%- assign featured_article = blog.articles.first -%}
+  {%- if featured_article != blank and paginate.current_page == 1 and section.settings.show_featured -%}
+    <section class="journal-featured" aria-label="Featured article">
+      {% render 'article-card', card_article: featured_article, featured: true %}
+    </section>
+  {%- endif -%}
+
+  <section class="section journal-listing">
+    <div class="container-x">
+      <div class="journal-section-head">
+        <div><p class="journal-eyebrow">Read &amp; discover</p><h2>Latest articles</h2></div>
+        <p>{{ blog.articles_count }} guides</p>
+      </div>
+      <div class="journal-grid">
+        {%- for item in blog.articles -%}
+          {%- if item.id != featured_article.id or paginate.current_page != 1 or section.settings.show_featured == false -%}
+            {% render 'article-card', card_article: item %}
+          {%- endif -%}
+        {%- else -%}
+          <p>No articles have been published yet.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="journal-pagination" aria-label="Blog pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">← Previous</a>{%- endif -%}
+          <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">Next →</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Blog journal",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Wisdom for intentional living" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Nakshatra Journal" },
+    { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Clear, thoughtful guidance on sacred beads, crystals, Vastu and everyday spiritual practice." },
+    { "type": "checkbox", "id": "show_featured", "label": "Feature the latest article", "default": true },
+    { "type": "range", "id": "posts_per_page", "min": 6, "max": 24, "step": 3, "default": 12, "label": "Articles per page" }
+  ]
+}
+{% endschema %}
