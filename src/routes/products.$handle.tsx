@@ -94,7 +94,7 @@ export const Route = createFileRoute("/products/$handle")({
     };
   },
   notFoundComponent: ProductNotFound,
-  errorComponent: ProductNotFound,
+  errorComponent: ProductError,
   component: ProductPage,
 });
 
@@ -105,6 +105,20 @@ function ProductNotFound() {
       <div className="mx-auto max-w-[900px] px-4 py-24 text-center">
         <h1 className="font-display text-4xl">Product not found</h1>
         <p className="mt-3 text-muted-foreground">This product may have sold out or moved.</p>
+        <Link to="/products" className="mt-8 inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-8 py-3 text-sm font-semibold">Browse all products</Link>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+function ProductError() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <><AnnouncementBar /><Header /></>
+      <div className="mx-auto max-w-[900px] px-4 py-24 text-center">
+        <h1 className="font-display text-4xl">Product unavailable</h1>
+        <p className="mt-3 text-muted-foreground">We couldn't load this product right now.</p>
         <Link to="/products" className="mt-8 inline-block rounded-full bg-[image:var(--gradient-gold)] text-primary-foreground px-8 py-3 text-sm font-semibold">Browse all products</Link>
       </div>
       <Footer />
