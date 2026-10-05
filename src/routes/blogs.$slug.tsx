@@ -45,6 +45,7 @@ function ArticleNotFound() {
 function BlogArticlePage() {
   const { post } = Route.useLoaderData();
   const related = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
+  const recent = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 4);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AnnouncementBar /><Header />
@@ -62,7 +63,32 @@ function BlogArticlePage() {
 
           <div className="mx-auto max-w-[1180px] px-4"><div className="aspect-[16/9] max-h-[630px] overflow-hidden rounded-lg bg-secondary"><img src={post.image} alt={post.imageAlt} width={1400} height={788} fetchPriority="high" className="h-full w-full object-cover" /></div></div>
 
-          <div className="mx-auto grid max-w-[1050px] gap-10 px-4 py-12 lg:grid-cols-[minmax(0,1fr)_240px] lg:py-16">
+          <div className="mx-auto grid max-w-[1240px] gap-10 px-4 py-12 lg:grid-cols-[220px_minmax(0,1fr)_220px] lg:py-16">
+            <aside aria-label="Recent blogs" className="min-w-0 lg:sticky lg:top-40 lg:self-start">
+              <div className="flex items-end justify-between border-b border-border pb-3 lg:block">
+                <div>
+                  <p className="eyebrow text-[color:var(--gold-deep)]">Latest reads</p>
+                  <h2 className="mt-1 font-display text-2xl">Recent blogs</h2>
+                </div>
+                <Link to="/blogs" className="text-xs font-semibold hover:text-primary lg:mt-3 lg:inline-block">View all</Link>
+              </div>
+              <div className="scrollbar-none -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pt-5 lg:mx-0 lg:block lg:space-y-5 lg:overflow-visible lg:px-0">
+                {recent.map((item) => (
+                  <article key={item.slug} className="w-[240px] shrink-0 snap-start lg:w-auto">
+                    <Link to="/blogs/$slug" params={{ slug: item.slug }} className="group grid grid-cols-[76px_1fr] gap-3">
+                      <div className="aspect-square overflow-hidden rounded-md bg-secondary">
+                        <img src={item.image} alt="" width={152} height={152} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-semibold uppercase text-[color:var(--gold-deep)]">{item.category}</p>
+                        <h3 className="mt-1 line-clamp-3 font-display text-sm leading-5 transition-colors group-hover:text-primary">{item.title}</h3>
+                      </div>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </aside>
+
             <div className="min-w-0">
               <p className="font-display text-2xl leading-relaxed text-foreground sm:text-3xl">{post.intro}</p>
               <div className="mt-10 space-y-10">

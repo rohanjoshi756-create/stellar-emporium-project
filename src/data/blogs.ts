@@ -5,6 +5,15 @@ import malaImage from "@/assets/cat-mala.jpg";
 import crystalImage from "@/assets/crystal-citrine.jpg";
 import vastuImage from "@/assets/cat-vastu.jpg";
 
+/**
+ * HOW TO PUBLISH A BLOG
+ * 1. Copy one complete object inside `blogPosts` and paste it at the top.
+ * 2. Give it a unique lowercase `slug`, update the text, date and image import.
+ * 3. Keep `sections` as an array; add or remove sections and bullet points freely.
+ * The home page, blog library, recent-blog sidebar, article page, SEO and sitemap
+ * all read this one list automatically, so no page code needs to be changed.
+ */
+
 export type BlogSection = {
   heading: string;
   paragraphs: string[];
