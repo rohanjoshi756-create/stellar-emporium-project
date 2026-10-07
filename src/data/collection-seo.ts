@@ -191,3 +191,97 @@ export const collectionSeo: Record<string, CollectionSeo> = {
 };
 
 export const seoFor = (slug: string): CollectionSeo | undefined => collectionSeo[slug];
+
+// Visible collection buying and care guidance.
+export const collectionGuides: Record<string, { heading: string; text: string }[]> = {
+  "best-sellers": [
+    {
+      "heading": "Choose by your daily routine",
+      "text": "Decide how you intend to use the item before choosing a popular design. A bracelet is compact for everyday wear, a mala can support mantra counting, and a decorative tree or idol needs a suitable display space. Compare the material, bead size or dimensions on the individual page. A popular item is not automatically the right choice for everyone."
+    },
+    {
+      "heading": "Compare before ordering",
+      "text": "Check current availability, price and the specifications provided for your chosen product. For jewellery, review the listed length and fit; for home accessories, measure the shelf or desk first. Ask about any missing material or verification details before ordering. Traditional spiritual associations do not guarantee health, financial or personal outcomes."
+    }
+  ],
+  "bracelets": [
+    {
+      "heading": "How to choose a crystal or Rudraksha bracelet",
+      "text": "Choose a material and colour you enjoy wearing, then compare bead size and fit on the product page. Pyrite, tiger eye, rose quartz and amethyst have different appearances, while Rudraksha and Karungali offer a natural texture. Check wrist measurements and fastening details rather than assuming every bracelet fits alike. Smaller beads may feel less bulky during daily tasks."
+    },
+    {
+      "heading": "Care for your bracelet",
+      "text": "Care depends on the stone, wood, thread and metal in the piece. Do not assume every crystal can be soaked in water or cleaned with chemicals. Avoid pulling hard on elastic or thread and store jewellery separately to limit scratches. Follow the specific product instructions and ask for guidance when a material is unclear. Spiritual associations are traditional beliefs, not medical or financial promises."
+    }
+  ],
+  "mala": [
+    {
+      "heading": "Japa mala or devotional necklace?",
+      "text": "A mantra-counting mala and a daily devotional necklace need not have the same construction. For japa, check the stated bead count and whether a guru bead is included; not every listing contains 108 beads. For a necklace or Kanthi, compare length and bead size with how you plan to wear it. Tulsi, Rudraksha, Karungali and crystal designs each have a different feel."
+    },
+    {
+      "heading": "Choosing and storing your mala",
+      "text": "Read the listing for thread, material and finishing details. Larger beads may be easier to handle for counting but can feel heavier when worn. Keep the mala in a clean, dry place and avoid perfume or harsh cleaners unless its care instructions permit them. For mantra practice, follow your own devotional tradition rather than expecting one ritual to apply to every mala."
+    }
+  ],
+  "crystal-trees": [
+    {
+      "heading": "Choose a crystal tree for your space",
+      "text": "Match the dimensions to the desk, shelf or display area where the tree will sit. Compare the stone colour, branch arrangement and base described in the listing: a close-up photograph may not convey actual scale. A compact design can suit a desk, while a larger piece needs more shelf space. Choose a style that fits your room rather than relying only on spiritual symbolism."
+    },
+    {
+      "heading": "Display and gifting considerations",
+      "text": "Use a stable surface where the tree is unlikely to be knocked over. Follow the care guidance for its stones, wire and base. For gifting, check the dimensions and the recipient’s available space before choosing. Crystal trees are decorative objects with spiritual meaning for some people; their placement does not guarantee changes to income, health or relationships."
+    }
+  ],
+  "vastu": [
+    {
+      "heading": "Selecting Vastu-inspired accessories",
+      "text": "Begin with the intended location: an entrance, desk, shelf or puja area. Compare dimensions, material and installation needs for pyramids, tortoise figurines, hangings and other accessories. A hanging item needs a suitable attachment point, while a tabletop piece needs a stable surface. Check what is included on the individual product page before ordering."
+    },
+    {
+      "heading": "Placement without unrealistic expectations",
+      "text": "Placement guidance varies with the object and tradition. Read instructions for the specific item rather than applying one direction to the entire collection. Keep walkways clear and decorative pieces away from shelf edges. These accessories can complement a meaningful home arrangement but should not replace practical decisions about safety, finances, wellbeing or building maintenance."
+    }
+  ],
+  "rudraksha": [
+    {
+      "heading": "Compare Rudraksha by type and origin",
+      "text": "Decide whether you want a single bead, bracelet or mala, then compare the stated mukhi count, origin and bead dimensions. The collection includes Nepali and Indonesian designs, so check each listing instead of treating all beads alike. Silver-capped options also need a review of their finishing and wearing details. Price alone is not proof of origin or authenticity."
+    },
+    {
+      "heading": "What to check before buying Rudraksha",
+      "text": "Look for clear specifications and any verification information available for the individual piece. Ask the team if origin, capping material or certification details are unclear. Follow care instructions for both the bead and its fittings, and avoid improvised tests that could cause damage. Mukhi associations are part of spiritual tradition, not guaranteed health, academic or financial results."
+    }
+  ],
+  "statues": [
+    {
+      "heading": "Choose an idol for your home temple",
+      "text": "Measure the available height, width and depth before selecting a statue. Compare the deity, pose, material and finish to suit your devotional practice or display. A close-up photograph may not convey the real scale. A small desk idol and a larger home-temple statue need different amounts of space even when they depict the same deity."
+    },
+    {
+      "heading": "Handling and caring for statues",
+      "text": "Use a stable surface and keep the idol away from shelf edges. Cleaning depends on material and coating, so avoid abrasive polish or soaking unless the product guidance allows it. Follow your family’s or tradition’s practice for any installation ceremony. Check the listing for included accessories rather than assuming a stand or puja items come with every statue."
+    }
+  ],
+  "karungali": [
+    {
+      "heading": "Choose a Karungali mala or bracelet",
+      "text": "Compare bead size, length and finishing before choosing. A bracelet and longer mala feel different in daily use, while pendant or capped designs may contain additional materials with their own care needs. Review information for the specific piece and ask about sourcing or verification if it is unclear. Colour or price on its own is not a reliable authenticity test."
+    },
+    {
+      "heading": "Looking after wood jewellery",
+      "text": "Protect wood jewellery from prolonged moisture, harsh soap and perfume, and store it in a dry place. Do not soak a piece to test authenticity: household tests can damage wood or its fittings and do not establish origin. Follow the care guidance supplied with your purchase. Protective or grounding associations reflect traditional beliefs rather than a guaranteed result."
+    }
+  ],
+  "yantras": [
+    {
+      "heading": "Selecting a yantra for devotional use",
+      "text": "Compare Shree, Kuber, Vastu and planetary designs by traditional purpose and your display space. Check actual material, dimensions and whether the item is a plate or framed piece. Measure your puja area or shelf before ordering. Different formats need different display arrangements, so do not judge size from a close-up photograph alone."
+    },
+    {
+      "heading": "Placement and care for your yantra",
+      "text": "Use product guidance and your devotional tradition when deciding on placement or rituals. Keep the piece on a stable, clean surface and follow material-specific cleaning instructions. Avoid abrasive products that could affect printing, engraving or finish. Yantras carry spiritual meaning for practitioners, but buying or placing one does not guarantee prosperity or resolve practical financial, health or personal problems."
+    }
+  ]
+};
