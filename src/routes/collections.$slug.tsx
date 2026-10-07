@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ProductFilters, useProductFilters } from "@/components/commerce/ProductFilters";
 import { productCollections, collectionByHandle, type Product, type ProductCollection } from "@/data/products";
-import { seoFor, type CollectionSeo } from "@/data/collection-seo";
+import { seoFor, collectionGuides, type CollectionSeo } from "@/data/collection-seo";
 import { artFor } from "@/data/category-art";
 import { Header } from "@/components/layout/Header";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
@@ -163,7 +163,14 @@ function CollectionPage() {
       <section className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
         <h2 className="font-display text-2xl sm:text-3xl mb-3 sm:mb-4">About the {collection.title}</h2>
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">{seo?.about ?? collection.description}</p>
-        <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl mt-4">Every product in this collection is sourced from trusted mines and artisans, verified in government-certified gemology labs, and energised with Vedic mantras by our astrologers before it reaches you. Prepaid orders ship free anywhere in India and every item is covered by our 7-day return policy.</p>
+        <div className="max-w-4xl space-y-6 mt-6">
+          {collectionGuides[collection.handle]?.map((guide) => (
+            <div key={guide.heading}>
+              <h3 className="font-display text-xl mb-2">{guide.heading}</h3>
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{guide.text}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {seo && (

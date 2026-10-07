@@ -9,3 +9,5 @@
 - [x] Package the Shopify blog-only update with upload instructions.
 - [x] Improve collection SEO metadata, category-specific copy, and structured data in the website and Shopify theme; verify all collection URLs.
 - [ ] Merge collection SEO changes into the already-uploaded Shopify theme and enter collection search settings — requires Shopify admin access.
+
+- [x] Add visible category-specific buying and care guidance to all nine collection pages without redesigning them.
