@@ -11,3 +11,4 @@
 
 - Keep blog content centralized in `src/data/blogs.ts` so React pages can map cleanly to Shopify articles later.
 - Keep Shopify blog presentation data-driven from native `blog` and `article` objects so publishing requires no theme edits.
+- Keep collection metadata and category guidance centralized in collection-seo data, with collection list schema linking to product URLs; this keeps SEO consistent without duplicating product offers.

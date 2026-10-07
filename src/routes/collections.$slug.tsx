@@ -8,6 +8,7 @@ import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/commerce/ProductCard";
 import { RecentlyViewed } from "@/components/sections/RecentlyViewed";
+import { collectionSchema } from "@/lib/collection-schema";
 
 const SITE = "https://stellar-emporium-project.lovable.app";
 
@@ -25,10 +26,8 @@ export const Route = createFileRoute("/collections/$slug")({
     const url = `${SITE}/collections/${params.slug}`;
     const title = seo?.seoTitle ?? `${collection.title} — Nakshatra Store`;
     const description = seo?.seoDescription ?? collection.description;
-    const image = collection.image;
-    const priceValues = collection.products
-      .map((p) => p.price)
-      .filter((n) => Number.isFinite(n) && n > 0);
+    const image = artFor(collection.handle, collection.image);
+    const shareImage = image.startsWith("https://") ? image : undefined;
 
     return {
       meta: [
@@ -39,9 +38,11 @@ export const Route = createFileRoute("/collections/$slug")({
         { property: "og:type", content: "website" },
         { property: "og:url", content: url },
         { property: "og:site_name", content: "Nakshatra Store" },
-        { property: "og:image", content: image },
+        ...(shareImage ? [{ property: "og:image", content: shareImage }] : []),
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: image },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        ...(shareImage ? [{ name: "twitter:image", content: shareImage }] : []),
         { name: "robots", content: "index, follow, max-image-preview:large" },
       ],
       links: [{ rel: "canonical", href: url }],
@@ -49,59 +50,9 @@ export const Route = createFileRoute("/collections/$slug")({
         {
           type: "application/ld+json",
           children: JSON.stringify({
-            "@context": "https://schema.org",
+            ...collectionSchema(collection, SITE, title, description),
             "@graph": [
-              {
-                "@type": "CollectionPage",
-                "@id": url,
-                url,
-                name: title,
-                description,
-                isPartOf: { "@type": "WebSite", name: "Nakshatra Store", url: SITE },
-                primaryImageOfPage: image,
-              },
-              {
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-                  { "@type": "ListItem", position: 2, name: "Collections", item: `${SITE}/collections` },
-                  { "@type": "ListItem", position: 3, name: collection.title, item: url },
-                ],
-              },
-              {
-                "@type": "ItemList",
-                name: collection.title,
-                numberOfItems: collection.products.length,
-                itemListElement: collection.products.slice(0, 30).map((p, i) => ({
-                  "@type": "ListItem",
-                  position: i + 1,
-                  item: {
-                    "@type": "Product",
-                    name: p.title,
-                    image: p.image,
-                    offers: {
-                      "@type": "Offer",
-                      price: String(p.price),
-                      priceCurrency: "INR",
-                      availability:
-                        !p.available
-                          ? "https://schema.org/OutOfStock"
-                          : "https://schema.org/InStock",
-                    },
-                  },
-                })),
-              },
-              ...(priceValues.length
-                ? [
-                    {
-                      "@type": "AggregateOffer",
-                      priceCurrency: "INR",
-                      offerCount: priceValues.length,
-                      lowPrice: Math.min(...priceValues),
-                      highPrice: Math.max(...priceValues),
-                    },
-                  ]
-                : []),
+              ...collectionSchema(collection, SITE, title, description)["@graph"],
               ...(seo
                 ? [
                     {
@@ -211,7 +162,7 @@ function CollectionPage() {
 
       <section className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14">
         <h2 className="font-display text-2xl sm:text-3xl mb-3 sm:mb-4">About the {collection.title}</h2>
-        <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">{collection.description}</p>
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">{seo?.about ?? collection.description}</p>
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl mt-4">Every product in this collection is sourced from trusted mines and artisans, verified in government-certified gemology labs, and energised with Vedic mantras by our astrologers before it reaches you. Prepaid orders ship free anywhere in India and every item is covered by our 7-day return policy.</p>
       </section>
 

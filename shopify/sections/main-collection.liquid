@@ -1,7 +1,7 @@
 {%- comment -%} Collection page: SEO hero, product grid, pagination. {%- endcomment -%}
 <section class="hero">
   <div class="hero__media">
-    {%- if collection.image -%}<img src="{{ collection.image | image_url: width: 1800 }}" alt="{{ collection.title | escape }} collection" width="1800" height="640" fetchpriority="high" decoding="async">{%- endif -%}
+    {%- if collection.image -%}<img src="{{ collection.image | image_url: width: 1800 }}" alt="{{ collection.image.alt | default: collection.title | escape }}" width="1800" height="640" fetchpriority="high" decoding="async">{%- endif -%}
   </div>
   <div class="hero__scrim"></div>
   <div class="container-x hero__inner" style="min-height:280px">
