@@ -11,3 +11,4 @@
 - [ ] Merge collection SEO changes into the already-uploaded Shopify theme and enter collection search settings — requires Shopify admin access.
 
 - [x] Add visible category-specific buying and care guidance to all nine collection pages without redesigning them.
+- [ ] Expand all nine collection guides and FAQs around researched buying queries, link relevant existing blogs, and provide matching Shopify content without redesigning the store.
