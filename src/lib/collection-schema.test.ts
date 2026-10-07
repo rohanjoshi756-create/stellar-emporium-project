@@ -1,4 +1,5 @@
-import { describe, expect, test } from "bun:test";
+import { describe, test } from "node:test";
+import assert from "node:assert/strict";
 import { collectionSchema } from "./collection-schema";
 import { productCollections } from "../data/products";
 import { seoFor } from "../data/collection-seo";
@@ -11,14 +12,14 @@ describe("collection SEO data", () => {
     const descriptions = new Set<string>();
     for (const collection of productCollections) {
       const seo = seoFor(collection.handle);
-      expect(seo).toBeDefined();
+      assert.ok(seo);
       if (!seo) throw new Error(`Missing SEO: ${collection.handle}`);
-      expect(seo.about.length).toBeGreaterThan(100);
+      assert.ok(seo.about.length > 100);
       titles.add(seo.seoTitle);
       descriptions.add(seo.seoDescription);
     }
-    expect(titles.size).toBe(productCollections.length);
-    expect(descriptions.size).toBe(productCollections.length);
+    assert.equal(titles.size, productCollections.length);
+    assert.equal(descriptions.size, productCollections.length);
   });
 
   test("all listed products point to their own detail URLs with matching counts", () => {
@@ -26,11 +27,11 @@ describe("collection SEO data", () => {
       const schema = collectionSchema(collection, site, collection.title, collection.description);
       const list = schema["@graph"][2];
       if (!("numberOfItems" in list) || !("itemListElement" in list)) throw new Error("Missing product list");
-      expect(list.numberOfItems).toBe(collection.products.length);
+      assert.equal(list.numberOfItems, collection.products.length);
       const entries = list.itemListElement;
-      expect(entries?.length).toBe(collection.products.length);
+      assert.equal(entries?.length, collection.products.length);
       collection.products.forEach((product, index) => {
-        expect(entries?.[index]).toEqual({
+        assert.deepEqual(entries?.[index], {
           "@type": "ListItem", position: index + 1, name: product.title,
           url: `${site}/products/${product.handle}`,
         });
