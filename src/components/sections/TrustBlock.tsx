@@ -1,4 +1,4 @@
-/** TrustBlock — prominent service promise cards (shipping, returns, authenticity, delivery). */
+/** TrustBlock — unframed service promises (shipping, returns, authenticity, delivery). */
 import { Truck, RotateCcw, BadgeCheck, Clock } from "lucide-react";
 
 const promises = [
@@ -26,19 +26,22 @@ const promises = [
 
 export function TrustBlock() {
   return (
-    <section className="cv-auto bg-secondary/30 border-y border-border">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:py-14">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section aria-label="Shopping assurances" className="border-y border-border bg-card text-card-foreground">
+      <div className="container-x py-7 sm:py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {promises.map(({ Icon, title, description }) => (
             <div
               key={title}
-              className="group flex flex-col items-start rounded-2xl border border-border bg-background p-5 transition-all duration-300 hover:border-primary/30 hover:shadow-sm"
+              className="flex items-start gap-4 border-b border-border py-6 last:border-b-0 first:pt-0 sm:px-6 sm:py-4 sm:first:pt-4 sm:odd:border-r sm:[&:nth-last-child(-n+2)]:border-b-0 lg:border-b-0 lg:border-r lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
             >
-              <div className="mb-3.5 inline-flex rounded-xl bg-primary/10 p-2.5 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <Icon className="h-5 w-5" aria-hidden="true" />
+              <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-primary/10 bg-secondary/60 text-primary">
+                <Icon className="h-6 w-6" strokeWidth={1.5} aria-hidden="true" />
               </div>
-              <h3 className="font-display text-base">{title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{description}</p>
+              <div className="min-w-0">
+                <h3 className="font-ui text-sm font-semibold leading-snug tracking-normal sm:text-[15px]">{title}</h3>
+                <span aria-hidden="true" className="mt-2.5 block h-0.5 w-6 bg-accent" />
+                <p className="mt-2.5 text-xs leading-6 text-muted-foreground sm:text-[13px]">{description}</p>
+              </div>
             </div>
           ))}
         </div>
