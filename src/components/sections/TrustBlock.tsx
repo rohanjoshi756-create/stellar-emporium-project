@@ -26,21 +26,25 @@ const promises = [
 
 export function TrustBlock() {
   return (
-    <section aria-label="Shopping assurances" className="border-y border-border bg-card text-card-foreground">
-      <div className="container-x py-7 sm:py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+    <section aria-label="Shopping assurances" className="bg-primary text-primary-foreground">
+      <div className="container-x py-8 sm:py-11">
+        <div className="mb-7 flex items-center gap-4 sm:mb-9">
+          <span aria-hidden="true" className="h-px flex-1 bg-primary-foreground/20" />
+          <h2 className="font-ui text-base font-medium leading-snug tracking-normal sm:text-xl">The Nakshatra promise</h2>
+          <span aria-hidden="true" className="h-px flex-1 bg-primary-foreground/20" />
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4">
           {promises.map(({ Icon, title, description }) => (
             <div
               key={title}
-              className="flex items-start gap-4 border-b border-border py-6 last:border-b-0 first:pt-0 sm:px-6 sm:py-4 sm:first:pt-4 sm:odd:border-r sm:[&:nth-last-child(-n+2)]:border-b-0 lg:border-b-0 lg:border-r lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
+              className="flex min-w-0 flex-col items-center border-primary-foreground/20 px-3 py-5 text-center odd:border-r [&:nth-child(-n+2)]:border-b sm:px-7 sm:py-6 lg:border-r lg:py-0 lg:[&:nth-child(-n+2)]:border-b-0 lg:last:border-r-0"
             >
-              <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-primary/10 bg-secondary/60 text-primary">
-                <Icon className="h-6 w-6" strokeWidth={1.5} aria-hidden="true" />
+              <div className="mb-4 inline-flex h-10 w-10 shrink-0 items-center justify-center text-accent">
+                <Icon className="h-8 w-8" strokeWidth={1.25} aria-hidden="true" />
               </div>
               <div className="min-w-0">
-                <h3 className="font-ui text-sm font-semibold leading-snug tracking-normal sm:text-[15px]">{title}</h3>
-                <span aria-hidden="true" className="mt-2.5 block h-0.5 w-6 bg-accent" />
-                <p className="mt-2.5 text-xs leading-6 text-muted-foreground sm:text-[13px]">{description}</p>
+                <h3 className="font-ui text-[13px] font-medium leading-snug tracking-normal sm:text-[15px]">{title}</h3>
+                <p className="mx-auto mt-2.5 max-w-[29ch] text-xs leading-5 tracking-normal text-primary-foreground/75 sm:text-[13px] sm:leading-6">{description}</p>
               </div>
             </div>
           ))}
